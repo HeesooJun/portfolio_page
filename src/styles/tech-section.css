@@ -1,0 +1,43 @@
+﻿@layer components {
+  .tech-section {
+    @apply mx-auto max-w-5xl space-y-6 py-24;
+  }
+
+  .tech-section__heading {
+    @apply inline-flex flex-col gap-3 font-semibold text-slate-900;
+    font-size: clamp(2rem, 3vw, 3.25rem);
+  }
+
+  .tech-section__heading::after {
+    content: "";
+    @apply h-1 w-16 bg-[var(--accent)];
+  }
+
+  .tech-section__intro {
+    @apply max-w-2xl text-sm leading-relaxed text-slate-600;
+  }
+
+  .tech-section__grid {
+    @apply grid gap-6 md:grid-cols-3;
+  }
+
+  .tech-section__card {
+    @apply flex h-full flex-col gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600;
+  }
+
+  .tech-section__card-title {
+    @apply text-lg font-semibold text-slate-900;
+  }
+
+  .tech-section__card-desc {
+    @apply text-xs uppercase tracking-[0.2em] text-slate-400;
+  }
+
+  .tech-section__list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .tech-section__list-item {
+    @apply rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600;
+  }
+}

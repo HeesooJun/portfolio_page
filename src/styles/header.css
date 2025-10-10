@@ -1,0 +1,21 @@
+﻿@layer components {
+  .site-header {
+    @apply sticky top-0 z-40 border-b border-slate-200 bg-white/85 backdrop-blur;
+  }
+
+  .site-header__nav {
+    @apply mx-auto flex max-w-5xl items-center justify-between px-4 py-5 text-sm uppercase tracking-wide text-slate-600;
+  }
+
+  .site-header__brand {
+    @apply text-base font-semibold text-slate-900 transition-colors hover:text-[var(--accent)];
+  }
+
+  .site-header__links {
+    @apply flex items-center gap-6;
+  }
+
+  .site-header__link {
+    @apply transition-colors hover:text-[var(--accent)];
+  }
+}

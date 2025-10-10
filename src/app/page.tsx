@@ -10,8 +10,8 @@ export default function Page() {
   return (
     <>
       <Header />
+      <HeroSection />
       <main className="mx-auto max-w-5xl space-y-24 px-4 pb-24 pt-12">
-        <HeroSection />
         <ProjectSection />
         <AboutSection />
         <TechSection />

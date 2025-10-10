@@ -9,20 +9,20 @@ interface ProjectCard {
 
 const PROJECTS: ProjectCard[] = [
   {
-    title: "Fienmee – 행사/축제 커뮤니티",
-    description: "전국 행사 정보를 한 곳에 모으고 타임테이블로 관리할 수 있는 플랫폼의 화면 일부입니다.",
+    title: "Fienmee · 대여/예약 커뮤니티",
+    description: "중고 물품 대여와 공간 예약을 한 번에 처리할 수 있는 플랫폼의 화면 일부입니다.",
     image: "/exPage/1.png",
     tags: ["Next.js", "TypeScript"],
   },
   {
-    title: "Helper – 여행 추천",
-    description: "OpenAI와 공공데이터를 활용해 맞춤 일정을 제안하는 서비스 프로토타입.",
+    title: "Helper · 일정 추천",
+    description: "OpenAI의 추천모델을 활용해 일정을 제안하는 웹 애플리케이션입니다.",
     image: "/exPage/2.png",
     tags: ["React", "Firebase"],
   },
   {
     title: "Beyond Imagination",
-    description: "동아리 웹사이트 개선 작업과 실험 중인 UI 스냅샷.",
+    description: "이미지 생성 프로젝트 홍보를 위한 랜딩 페이지 작업물입니다.",
     image: "/exPage/3.png",
     tags: ["Next.js", "Contentful"],
   },
@@ -30,25 +30,25 @@ const PROJECTS: ProjectCard[] = [
 
 export default function ProjectSection() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl space-y-10 py-24">
-      <h2 className="section-heading">Projects</h2>
-      <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
-        디자인 배치.
+    <section id="experience" className="projects-section">
+      <h2 className="projects-section__heading">Projects</h2>
+      <p className="projects-section__intro">
+        최근에 참여했던 작업입니다.
       </p>
-      <div className="project-grid">
+      <div className="projects-section__grid">
         {PROJECTS.map((project) => (
-          <article key={project.title} className="project-card">
+          <article key={project.title} className="projects-section__card">
             <Image
               src={project.image}
               alt={project.title}
               width={960}
               height={600}
-              className="h-full w-full object-cover"
+              className="projects-section__image"
             />
-            <div className="project-meta">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <span>{project.tags.join(" · ")}</span>
+            <div className="projects-section__meta">
+              <h3 className="projects-section__meta-title">{project.title}</h3>
+              <p className="projects-section__meta-desc">{project.description}</p>
+              <span className="projects-section__meta-tags">{project.tags.join(" · ")}</span>
             </div>
           </article>
         ))}
