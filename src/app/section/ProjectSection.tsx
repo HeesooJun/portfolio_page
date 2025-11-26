@@ -30,25 +30,25 @@ const PROJECTS: ProjectCard[] = [
 
 export default function ProjectSection() {
   return (
-    <section id="experience" className="projects-section">
-      <h2 className="projects-section__heading">Projects</h2>
-      <p className="projects-section__intro">
+    <section id="experience" className="projects_section">
+      <h2 className="projects_section__heading">Projects</h2>
+      <p className="projects_section__introduction">
         최근에 참여했던 작업입니다.
       </p>
-      <div className="projects-section__grid">
+      <div className="projects_section__grid">
         {PROJECTS.map((project) => (
-          <article key={project.title} className="projects-section__card">
+          <article key={project.title} className="projects_section__card">
             <Image
               src={project.image}
               alt={project.title}
               width={960}
               height={600}
-              className="projects-section__image"
+              className="projects_section__image"
             />
-            <div className="projects-section__meta">
-              <h3 className="projects-section__meta-title">{project.title}</h3>
-              <p className="projects-section__meta-desc">{project.description}</p>
-              <span className="projects-section__meta-tags">{project.tags.join(" · ")}</span>
+            <div className="projects_section__details">
+              <h3 className="projects_section__details_title">{project.title}</h3>
+              <p className="projects_section__details_description">{project.description}</p>
+              <span className="projects_section__details_tags">{project.tags.join(" · ")}</span>
             </div>
           </article>
         ))}

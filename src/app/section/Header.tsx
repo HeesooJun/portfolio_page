@@ -11,14 +11,14 @@ const EXTERNAL_LINKS = [
 
 export default function Header() {
   return (
-    <header className="site-header">
-      <nav className="site-header__nav">
-        <a href="#home" className="site-header__brand">
+    <header className="site_header">
+      <nav className="site_header__navigation">
+        <a href="#home" className="site_header__brand">
           Heesoo Jun
         </a>
-        <div className="site-header__links">
+        <div className="site_header__links">
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="site-header__link">
+            <a key={link.href} href={link.href} className="site_header__link">
               {link.label}
             </a>
           ))}
@@ -28,13 +28,13 @@ export default function Header() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="site-header__link"
+              className="site_header__link"
             >
               {link.label}
             </a>
           ))}
           <a
-            className="site-header__link"
+            className="site_header__link"
             href="https://github.com/HeesooJun"
             target="_blank"
             rel="noreferrer"

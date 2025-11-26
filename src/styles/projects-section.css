@@ -1,67 +1,67 @@
 ﻿@layer components {
-  .projects-section {
+  .projects_section {
     @apply mx-auto max-w-6xl space-y-10 py-24;
   }
 
-  .projects-section__heading {
+  .projects_section__heading {
     @apply inline-flex flex-col gap-3 font-semibold text-slate-900;
     font-size: clamp(2rem, 3vw, 3.25rem);
   }
 
-  .projects-section__heading::after {
+  .projects_section__heading::after {
     content: "";
     @apply h-1 w-16 bg-[var(--accent)];
   }
 
-  .projects-section__intro {
+  .projects_section__introduction {
     @apply max-w-2xl text-sm leading-relaxed text-slate-600;
   }
 
-  .projects-section__grid {
+  .projects_section__grid {
     @apply grid gap-6 md:grid-cols-2;
   }
 
-  .projects-section__card {
+  .projects_section__card {
     @apply relative isolate overflow-hidden rounded-3xl bg-black;
   }
 
-  .projects-section__card::after {
+  .projects_section__card::after {
     content: "";
     @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(15,23,42,0.85)] transition-opacity duration-300;
     opacity: 0;
   }
 
-  .projects-section__card:hover::after {
+  .projects_section__card:hover::after {
     opacity: 1;
   }
 
-  .projects-section__image {
+  .projects_section__image {
     @apply h-full w-full object-cover transition-transform duration-300;
   }
 
-  .projects-section__card:hover .projects-section__image {
+  .projects_section__card:hover .projects_section__image {
     @apply scale-105;
   }
 
-  .projects-section__meta {
+  .projects_section__details {
     @apply absolute inset-x-6 bottom-6 z-10 text-slate-200 opacity-0 transition-all duration-300;
     transform: translateY(8px);
   }
 
-  .projects-section__card:hover .projects-section__meta {
+  .projects_section__card:hover .projects_section__details {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .projects-section__meta-title {
+  .projects_section__details_title {
     @apply m-0 text-xl font-semibold;
   }
 
-  .projects-section__meta-desc {
+  .projects_section__details_description {
     @apply mt-2 text-sm leading-relaxed;
   }
 
-  .projects-section__meta-tags {
+  .projects_section__details_tags {
     @apply mt-3 inline-flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-slate-100/90;
   }
 }
