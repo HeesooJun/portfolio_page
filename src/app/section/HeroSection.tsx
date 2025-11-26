@@ -23,7 +23,7 @@ export default function HeroSection() {
             A developer who enjoys crafting visible results on the web
           </p>
           <p className="hero_section__description">
-            내 자기소개 한줄 멘트
+            React와 TypeScript로 사용자 경험을 설계하고 구현하는 일을 좋아합니다.
           </p>
           <div className="hero_section__links">
             <span className="hero_section__details">
