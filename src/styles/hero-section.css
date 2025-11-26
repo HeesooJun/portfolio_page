@@ -1,53 +1,53 @@
 ﻿@layer components {
-  .hero-section {
+  .hero_section {
     @apply relative isolate min-h-[640px] w-full overflow-hidden text-slate-50;
   }
 
-  .hero-section__background {
+  .hero_section__background {
     @apply object-cover;
   }
 
-  .hero-section__overlay {
+  .hero_section__overlay {
     @apply absolute inset-0 bg-slate-900/35;
   }
 
-  .hero-section__container {
+  .hero_section__container {
     @apply relative mx-auto flex min-h-[inherit] w-full max-w-5xl items-center px-4 py-24 sm:px-6 lg:px-8;
   }
 
-  .hero-section__content {
+  .hero_section__content {
     @apply flex max-w-2xl flex-col gap-6;
   }
 
-  .hero-section__intro {
+  .hero_section__introduction {
     @apply text-sm uppercase tracking-[0.3em] text-slate-200;
   }
 
-  .hero-section__title {
+  .hero_section__title {
     @apply text-5xl font-semibold tracking-tight text-white sm:text-6xl;
   }
 
-  .hero-section__subtitle {
+  .hero_section__subtitle {
     @apply text-2xl text-slate-100;
   }
 
-  .hero-section__description {
+  .hero_section__description {
     @apply text-sm font-medium leading-relaxed text-slate-200;
   }
 
-  .hero-section__links {
+  .hero_section__links {
     @apply mt-4 flex flex-wrap items-center gap-4 text-sm font-medium text-slate-200;
   }
 
-  .hero-section__meta {
+  .hero_section__details {
     @apply inline-flex items-center gap-2;
   }
 
-  .hero-section__dot {
+  .hero_section__dot {
     @apply inline-flex h-2 w-2 rounded-full bg-[var(--accent)];
   }
 
-  .hero-section__link {
+  .hero_section__link {
     @apply transition-colors hover:text-[var(--accent)];
   }
 }
