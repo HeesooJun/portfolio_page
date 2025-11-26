@@ -7,7 +7,7 @@
 
 ## 주요 구조
 - `src/app/layout.tsx`: 글로벌 폰트, 배경/텍스트 컬러, 기본 래퍼
-- `src/app/page.tsx`: Header → Hero → Projects → About → Skills → Footer 순서로 조합
+- `src/app/page.tsx`: Header → Hero → Projects → About → Tech → Footer 순서로 조합
 - 섹션 컴포넌트(`src/app/section/*`): 정적 배열 데이터로 카드/리스트 렌더링
 - 스타일(`src/styles/*.css`): Tailwind `@layer components`로 정의, 공통 포인트 컬러 `--accent: #f43f5e`와 부드러운 스크롤 마진 설정(`globals.css`)
 
