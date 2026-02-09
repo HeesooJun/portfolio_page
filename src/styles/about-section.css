@@ -1,10 +1,15 @@
 ﻿@layer components {
   .about_section {
-    @apply mx-auto max-w-5xl space-y-6 py-24;
+    @apply w-full py-24;
+    background-color: #0f335e;
+  }
+
+  .about_section__container {
+    @apply mx-auto max-w-5xl space-y-6 px-4;
   }
 
   .about_section__heading {
-    @apply inline-flex flex-col gap-3 font-semibold text-slate-900;
+    @apply inline-flex flex-col gap-3 font-semibold text-slate-100;
     font-size: clamp(2rem, 3vw, 3.25rem);
   }
 
@@ -14,14 +19,14 @@
   }
 
   .about_section__introduction {
-    @apply max-w-2xl text-sm leading-relaxed text-slate-600;
+    @apply max-w-2xl text-sm leading-relaxed text-slate-200;
   }
 
   .about_section__list {
-    @apply grid gap-3 text-sm text-slate-600 md:grid-cols-3;
+    @apply grid gap-3 text-sm md:grid-cols-3;
   }
 
   .about_section__item {
-    @apply rounded-3xl border border-slate-200 bg-slate-50 p-5 leading-relaxed;
+    @apply rounded-3xl border border-slate-700 bg-slate-900/40 p-5 leading-relaxed text-slate-200;
   }
 }

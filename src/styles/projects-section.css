@@ -1,10 +1,15 @@
 ﻿@layer components {
   .projects_section {
-    @apply mx-auto max-w-6xl space-y-10 py-24;
+    @apply w-full py-24;
+    background-color: #0a172b;
+  }
+
+  .projects_section__container {
+    @apply mx-auto max-w-6xl space-y-10 px-4;
   }
 
   .projects_section__heading {
-    @apply inline-flex flex-col gap-3 font-semibold text-slate-900;
+    @apply inline-flex flex-col gap-3 font-semibold text-slate-100;
     font-size: clamp(2rem, 3vw, 3.25rem);
   }
 
@@ -14,7 +19,7 @@
   }
 
   .projects_section__introduction {
-    @apply max-w-2xl text-sm leading-relaxed text-slate-600;
+    @apply max-w-2xl text-sm leading-relaxed text-slate-200;
   }
 
   .projects_section__grid {

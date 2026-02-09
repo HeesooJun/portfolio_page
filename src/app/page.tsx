@@ -11,7 +11,7 @@ export default function Page() {
     <>
       <Header />
       <HeroSection />
-      <main className="mx-auto max-w-5xl space-y-24 px-4 pb-24 pt-12">
+      <main className="w-full">
         <ProjectSection />
         <AboutSection />
         <TechSection />

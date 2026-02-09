@@ -8,7 +8,7 @@
 
 
 :root {
-  --accent: #f43f5e;
+  --accent: #2563eb;
 }
 
 *,
@@ -39,7 +39,7 @@ html {
 }
 
 ::selection {
-  background: rgba(244, 63, 94, 0.25);
+  background: rgba(37, 99, 235, 0.25);
   color: #0f172a;
 }
 
