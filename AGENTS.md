@@ -17,7 +17,33 @@
 
 ## 명명 규칙
 
-- 컴포넌트 파일명은 PascalCase(=UpperCamelCase)로 통일합니다. 
-- CSS 클래스는 snake_case로 통일하고, CSS Modules에서는 styles.class_name 점 표기로 접근합니다. 
-- 약어/축약은 지양하고 의미 중심으로 명명하며, 동일 개념에는 동일 용어를 일관되게 사용합니다. 
+- 컴포넌트 파일명은 PascalCase(=UpperCamelCase)로 통일합니다.
+- CSS 클래스는 snake_case로 통일하고, CSS Modules에서는 styles.class_name 점 표기로 접근합니다.
+- 약어/축약은 지양하고 의미 중심으로 명명하며, 동일 개념에는 동일 용어를 일관되게 사용합니다.
 - 단, 재사용 하위 파트가 많으면 BEM을 사용합니다.
+
+## SKILLS 강제 사용 규칙
+
+- 디자인/인터랙션/UI 관련 작업은 반드시 스킬을 사용합니다.
+- 작업 유형별 기본 스킬은 다음과 같이 고정합니다.
+  1. 게임적 인터랙션/미니게임 구현: `develop-web-game`
+  2. 브라우저 동작 검증/E2E/회귀 확인: `playwright`
+  3. 비주얼 에셋 생성(배경/아이콘/오브젝트): `imagegen`
+- React/Next.js 코드 작성, 리팩터링, 성능 최적화 작업은 `vercel-react-best-practices`를 반드시 사용합니다.
+- 기본값은 배포 미수행입니다. (프리뷰 URL 생성 포함)
+- 사용자가 "배포해줘", "배포 테스트해줘"처럼 명시적으로 요청한 경우에만 `vercel-deploy`를 사용해 배포를 수행합니다.
+- 브라우저 상호작용 검증, 회귀 확인, 스냅샷 점검 작업은 `playwright`를 반드시 사용합니다.
+- `Vercel 배포 최적화 + 검증` 복합 요청은 기본적으로 아래 순서를 강제합니다.
+  1. `vercel-react-best-practices`
+  2. `playwright`
+- 단, 사용자가 배포/배포 테스트를 명시 요청한 경우에만 아래 순서를 사용합니다.
+  1. `vercel-react-best-practices`
+  2. `vercel-deploy`
+  3. `playwright`
+- 작업 시작 시 첫 줄에 `Using skill: <skill-name>`를 반드시 출력합니다.
+- 여러 스킬이 필요하면 최소 집합만 선택하고, 사용 순서를 먼저 1줄로 선언합니다.
+- 작업 종료 시 아래 3가지를 반드시 보고합니다.
+  1. 사용한 `SKILL.md` 경로
+  2. 수행한 단계 요약
+  3. 생략한 단계와 이유
+- 스킬이 로컬에 없거나 파일 접근이 불가하면, 해당 사실을 먼저 알리고 설치/대체 절차를 제시한 뒤 진행합니다.

@@ -1,32 +1,6 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 
-interface ProjectCard {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
-
-const PROJECTS: ProjectCard[] = [
-  {
-    title: "Fienmee · 대여/예약 커뮤니티",
-    description: "중고 물품 대여와 공간 예약을 한 번에 처리할 수 있는 플랫폼의 화면 일부입니다.",
-    image: "/exPage/1.png",
-    tags: ["Next.js", "TypeScript"],
-  },
-  {
-    title: "Helper · 일정 추천",
-    description: "OpenAI의 추천모델을 활용해 일정을 제안하는 웹 애플리케이션입니다.",
-    image: "/exPage/2.png",
-    tags: ["React", "Firebase"],
-  },
-  {
-    title: "Beyond Imagination",
-    description: "이미지 생성 프로젝트 홍보를 위한 랜딩 페이지 작업물입니다.",
-    image: "/exPage/3.png",
-    tags: ["Next.js", "Contentful"],
-  },
-];
+import { PROJECT_ITEMS } from "@/content/portfolio-content";
 
 export default function ProjectSection() {
   return (
@@ -37,19 +11,25 @@ export default function ProjectSection() {
           최근에 참여했던 작업입니다.
         </p>
         <div className="projects_section__grid">
-          {PROJECTS.map((project) => (
+          {PROJECT_ITEMS.map((project) => (
             <article key={project.title} className="projects_section__card">
               <Image
                 src={project.image}
                 alt={project.title}
-                width={960}
-                height={600}
+                sizes="(min-width: 768px) 48vw, 100vw"
+                loading="lazy"
                 className="projects_section__image"
               />
               <div className="projects_section__details">
-                <h3 className="projects_section__details_title">{project.title}</h3>
-                <p className="projects_section__details_description">{project.description}</p>
-                <span className="projects_section__details_tags">{project.tags.join(" · ")}</span>
+                <h3 className="projects_section__details_title">
+                  {project.title}
+                </h3>
+                <p className="projects_section__details_description">
+                  {project.description}
+                </p>
+                <span className="projects_section__details_tags">
+                  {project.tags.join(" · ")}
+                </span>
               </div>
             </article>
           ))}
