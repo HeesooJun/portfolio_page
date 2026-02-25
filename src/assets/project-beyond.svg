@@ -1,0 +1,12 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="project-beyond-gradient" x1="60" y1="0" x2="920" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C3AED" />
+      <stop offset="1" stop-color="#1E1B4B" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" rx="32" fill="url(#project-beyond-gradient)" />
+  <path d="M76 454C222 340 362 394 478 332C598 268 686 142 886 132V530H76V454Z" fill="rgba(15, 23, 42, 0.4)" />
+  <text x="112" y="174" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="600">Beyond Imagination</text>
+  <text x="112" y="220" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="20">Landing page for image generation project</text>
+</svg>

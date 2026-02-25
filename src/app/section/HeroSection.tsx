@@ -11,7 +11,6 @@ export default function HeroSection() {
         fill
         priority
         sizes="100vw"
-        quality={100}
         className="hero_section__background"
       />
       <div className="hero_section__overlay" aria-hidden="true" />

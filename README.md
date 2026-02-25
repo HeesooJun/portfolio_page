@@ -1,29 +1,32 @@
-﻿# Heesoo Jun Portfolio
+# Heesoo Jun Portfolio
 
-포트 폴리오 제작중
+Next.js 15(App Router) 기반 포트폴리오 웹사이트입니다.
 
-## 🛠️ 사용 기술
-- Next.js 15 (App Router)
-- React 19 + TypeScript 5
+## 기술 스택
+
+- Next.js 15 + React 19 + TypeScript 5
 - Tailwind CSS 4
 - next/font (Google Inter)
 
-## 📂 프로젝트 구조
-```
-├─ public/ # 사진
-├─ src/
-│  └─ app/
-│     ├─ layout.tsx  # 전역 폰트 및 배경
-│     ├─ page.tsx    # 섹션 조합
-│     └─ section/    # Hero, Projects, About, Tech, Footer 컴포넌트
-```
+## 실행
 
-## 🚀 실행 방법
 ```bash
 npm install
 npm run dev
 ```
 
-## 📌 다음 작업 메모
-- 프로젝트 내용 기입
+## 배포 전 검증
 
+```bash
+npm run verify
+```
+
+`verify`는 `lint + typecheck + build`를 순서대로 수행합니다.
+
+## Vercel 배포
+
+```bash
+npx vercel deploy -y
+```
+
+도메인이 있는 경우 `NEXT_PUBLIC_SITE_URL` 환경변수를 설정하면 메타데이터 canonical/Open Graph URL에 반영됩니다.

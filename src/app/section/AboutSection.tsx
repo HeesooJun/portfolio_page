@@ -1,9 +1,5 @@
 ﻿// src/app/section/AboutSection.tsx
-const PRINCIPLES = [
-  "사용자의 문제를 이해하고 해결책을 빠르게 제시합니다.",
-  "협업 과정에서 열린 소통과 기록을 중요하게 생각합니다.",
-  "마감을 지키면서도 완성도를 높이는 방법을 찾아갑니다.",
-];
+import { ABOUT_PRINCIPLES } from "@/content/portfolio-content";
 
 export default function AboutSection() {
   return (
@@ -15,7 +11,7 @@ export default function AboutSection() {
           기획자와 디자이너와 함께 사용자 경험을 완성하는 과정을 즐깁니다.
         </p>
         <ul className="about_section__list">
-          {PRINCIPLES.map((item) => (
+          {ABOUT_PRINCIPLES.map((item) => (
             <li key={item} className="about_section__item">
               {item}
             </li>

@@ -1,13 +1,8 @@
 ﻿// src/app/section/Header.tsx
-const NAV_LINKS = [
-  { href: "#experience", label: "Projects" },
-  { href: "#about", label: "About" },
-  { href: "#tech", label: "Tech" },
-];
-
-const EXTERNAL_LINKS = [
-  { href: "https://acesk123.tistory.com/", label: "Blog" },
-];
+import {
+  HEADER_EXTERNAL_LINKS,
+  HEADER_SECTION_LINKS,
+} from "@/content/portfolio-content";
 
 export default function Header() {
   return (
@@ -17,12 +12,12 @@ export default function Header() {
           Heesoo Jun
         </a>
         <div className="site_header__links">
-          {NAV_LINKS.map((link) => (
+          {HEADER_SECTION_LINKS.map((link) => (
             <a key={link.href} href={link.href} className="site_header__link">
               {link.label}
             </a>
           ))}
-          {EXTERNAL_LINKS.map((link) => (
+          {HEADER_EXTERNAL_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -33,14 +28,6 @@ export default function Header() {
               {link.label}
             </a>
           ))}
-          <a
-            className="site_header__link"
-            href="https://github.com/HeesooJun"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
         </div>
       </nav>
     </header>
