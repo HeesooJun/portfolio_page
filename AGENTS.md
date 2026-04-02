@@ -15,12 +15,38 @@
   - 기존 코드 스타일과 패턴 준수, 불필요한 설정 변경 금지
   - 영향이 큰 변경은 사전 설명과 동의 후 진행
 
+## 현재 기술 방향
+
+- 현재 프로젝트의 기본 개발 환경은 `Vite + React + TypeScript`입니다.
+- 패키지 매니저는 `npm`을 사용합니다.
+- `package-lock.json`은 항상 커밋합니다.
+- 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
+
 ## 명명 규칙
 
 - 컴포넌트 파일명은 PascalCase(=UpperCamelCase)로 통일합니다.
 - CSS 클래스는 snake_case로 통일하고, CSS Modules에서는 styles.class_name 점 표기로 접근합니다.
 - 약어/축약은 지양하고 의미 중심으로 명명하며, 동일 개념에는 동일 용어를 일관되게 사용합니다.
 - 단, 재사용 하위 파트가 많으면 BEM을 사용합니다.
+
+## 주석 규칙
+
+- 새로 추가하거나 구조를 바꾸는 코드에는 한글 주석을 충분히 남깁니다.
+- 주석은 무엇을 하는지보다 왜 이렇게 구성했는지 설명하는 데 집중합니다.
+- 단순 대입이나 JSX 구조를 그대로 읽어주는 주석은 지양합니다.
+
+## 검증 규칙
+
+- 의미 있는 작업 단위가 끝날 때마다 검증 명령을 실행합니다.
+- 기본 검증 명령은 `npm run lint`, `npm run typecheck`, `npm run build`입니다.
+- 한 번에 검증할 때는 `npm run verify`를 사용합니다.
+- `pre-commit` 훅에는 staged 파일 기준의 가벼운 검사만 둡니다.
+
+## 커밋 규칙
+
+- 변경 범위가 크면 중간 커밋으로 나눕니다.
+- 커밋 메시지는 `feat: ...`, `refactor: ...`, `chore: ...`, `docs: ...` 형식을 우선 사용합니다.
+- 한 커밋에는 하나의 목적만 담기도록 유지합니다.
 
 ## SKILLS 사용 가이드
 
@@ -35,7 +61,7 @@
 
 - 웹디자인, UI 톤앤매너 정리, 레이아웃/인터랙션 방향 설계: `web-design-guidelines`
 - 2.5D 파랄랙스, 스크롤 기반 연출, 섹션 전환 모션: `scroll-experience`
-- React/Next.js 코드 작성, 리팩터링, 성능 최적화: `vercel-react-best-practices`
+- React/Vite 코드 작성, 리팩터링, 성능 최적화: `vercel-react-best-practices`
 - 브라우저 동작 검증, E2E, 회귀 확인, 스냅샷 점검: `playwright-cli`
 - 비주얼 에셋 생성(배경, 아이콘, 오브젝트): `imagegen`
 - 배포 또는 배포 테스트: `deploy-to-vercel`
