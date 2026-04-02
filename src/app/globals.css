@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  background: #ffffff;
+  background: #061120;
   color: #0f172a;
   font-family:
     'Inter',
@@ -44,7 +44,7 @@ html {
 
 #root {
   min-height: 100vh;
-  background: #ffffff;
+  background: #061120;
 }
 
 .w_full {
@@ -54,4 +54,10 @@ html {
 ::selection {
   background: rgba(37, 99, 235, 0.25);
   color: #0f172a;
+}
+
+@media (min-width: 1024px) {
+  section {
+    scroll-margin-top: 32px;
+  }
 }

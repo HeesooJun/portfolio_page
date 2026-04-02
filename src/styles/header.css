@@ -1,22 +1,60 @@
-﻿@layer components {
+@layer components {
   .site_header {
-    @apply border-b border-slate-700;
-    background-color: #15457a;
+    @apply fixed right-4 bottom-5 z-40;
+    pointer-events: none;
   }
 
   .site_header__navigation {
-    @apply mx-auto flex max-w-5xl items-center justify-between px-4 py-5 text-sm tracking-wide text-slate-200 uppercase;
-  }
-
-  .site_header__brand {
-    @apply text-base font-semibold text-white transition-colors hover:text-(--accent);
+    @apply inline-flex flex-col items-center gap-2 rounded-[1.75rem] border border-slate-200/12 px-2 py-2 shadow-2xl backdrop-blur-xl;
+    background: linear-gradient(180deg, rgba(10, 23, 43, 0.76) 0%, rgba(8, 15, 29, 0.9) 100%);
+    pointer-events: auto;
   }
 
   .site_header__links {
-    @apply flex items-center gap-6;
+    @apply flex flex-col items-center gap-2;
   }
 
+  .site_header__control {
+    @apply relative inline-flex h-11 w-11 items-center justify-center rounded-full text-slate-300 transition-all duration-200;
+  }
+
+  .site_header__home,
   .site_header__link {
-    @apply transition-colors hover:text-(--accent);
+    @apply border border-slate-200/6 bg-slate-50/[0.03] hover:border-slate-100/18 hover:bg-slate-50/[0.08] hover:text-white;
+  }
+
+  .site_header__control_active {
+    @apply border border-slate-100/20 bg-slate-50 text-slate-950;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
+  }
+
+  .site_header__control_active:hover,
+  .site_header__control_active:focus-visible {
+    @apply border border-slate-100/20 bg-slate-50 text-slate-950;
+  }
+
+  .site_header__icon {
+    @apply h-[1.05rem] w-[1.05rem];
+  }
+
+  .site_header__control::before {
+    content: attr(data-label);
+    @apply pointer-events-none absolute right-full mr-3 rounded-full border border-slate-200/10 px-3 py-2 text-[10px] font-semibold tracking-[0.16em] text-slate-100 uppercase opacity-0 transition-all duration-200;
+    background: rgba(8, 15, 29, 0.92);
+    transform: translateX(6px);
+  }
+
+  .site_header__control:hover::before,
+  .site_header__control:focus-visible::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  @layer components {
+    .site_header {
+      @apply top-1/2 right-6 bottom-auto block -translate-y-1/2;
+    }
   }
 }
