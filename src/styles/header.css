@@ -5,7 +5,7 @@
   }
 
   .site_header__navigation {
-    @apply inline-flex flex-col items-center gap-2 rounded-[1.75rem] border border-slate-200/12 px-2 py-2 shadow-2xl backdrop-blur-xl;
+    @apply inline-flex flex-col items-center gap-2 rounded-4xl border border-slate-200/12 px-2 py-2 shadow-2xl backdrop-blur-xl;
     background: linear-gradient(180deg, rgba(10, 23, 43, 0.76) 0%, rgba(8, 15, 29, 0.9) 100%);
     pointer-events: auto;
   }
@@ -20,7 +20,7 @@
 
   .site_header__home,
   .site_header__link {
-    @apply border border-slate-200/6 bg-slate-50/[0.03] hover:border-slate-100/18 hover:bg-slate-50/[0.08] hover:text-white;
+    @apply border border-slate-200/6 bg-slate-50/3 hover:border-slate-100/18 hover:bg-slate-50/8 hover:text-white;
   }
 
   .site_header__control_active {
@@ -34,7 +34,7 @@
   }
 
   .site_header__icon {
-    @apply h-[1.05rem] w-[1.05rem];
+    @apply size-4;
   }
 
   .site_header__control::before {

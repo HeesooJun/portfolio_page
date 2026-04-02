@@ -20,8 +20,10 @@
 
 - 현재 프로젝트의 기본 개발 환경은 `Vite + React + TypeScript`입니다.
 - 패키지 매니저는 `npm`을 사용합니다.
-- Tailwind 유틸리티 작성은 Tailwind CSS 4 문법을 기준으로 하며, 동등한 canonical 유틸리티가 있으면 arbitrary value보다 이를 우선 사용합니다.
+- Tailwind 유틸리티 작성은 Tailwind CSS 4 문법을 기준으로 하며, 동등한 canonical 유틸리티가 있으면 arbitrary value를 사용하지 않습니다.
 - Tailwind CSS 4를 사용할 때 CSS 변수 기반 유틸리티는 `text-(--token)`, `bg-(--token)`, `border-(--token)` 같은 canonical 문법을 우선 사용합니다.
+- Tailwind CSS를 사용하는 변경을 했으면 마무리 전에 Tailwind CSS 4 canonical 문법 준수 여부를 반드시 확인합니다.
+- canonical 유틸리티로 대체 가능한 arbitrary value 클래스는 수정 후 남기지 않습니다.
 - `package-lock.json`은 항상 커밋합니다.
 - 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
 
@@ -49,6 +51,7 @@
 - 의미 있는 작업 단위가 끝날 때마다 검증 명령을 실행합니다.
 - 기본 검증 명령은 `npm run lint`, `npm run typecheck`, `npm run build`입니다.
 - 한 번에 검증할 때는 `npm run verify`를 사용합니다.
+- Tailwind CSS를 건드린 작업은 검증 전에 canonical 유틸리티 적용 여부를 다시 확인합니다.
 - `pre-commit` 훅에는 staged 파일 기준의 가벼운 검사만 둡니다.
 
 ## 커밋 규칙
