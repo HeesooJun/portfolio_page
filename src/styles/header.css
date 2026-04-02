@@ -9,7 +9,7 @@
   }
 
   .site_header__brand {
-    @apply text-base font-semibold text-white transition-colors hover:text-[var(--accent)];
+    @apply text-base font-semibold text-white transition-colors hover:text-(--accent);
   }
 
   .site_header__links {
@@ -17,6 +17,6 @@
   }
 
   .site_header__link {
-    @apply transition-colors hover:text-[var(--accent)];
+    @apply transition-colors hover:text-(--accent);
   }
 }

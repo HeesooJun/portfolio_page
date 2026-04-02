@@ -17,7 +17,7 @@
   }
 
   .site_footer__link {
-    @apply transition-colors hover:text-[var(--accent)];
+    @apply transition-colors hover:text-(--accent);
   }
 
   .site_footer__copyright {

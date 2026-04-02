@@ -51,10 +51,10 @@
   }
 
   .hero_section__dot {
-    @apply inline-flex h-2 w-2 rounded-full bg-[var(--accent)];
+    @apply inline-flex h-2 w-2 rounded-full bg-(--accent);
   }
 
   .hero_section__link {
-    @apply transition-colors hover:text-[var(--accent)];
+    @apply transition-colors hover:text-(--accent);
   }
 }

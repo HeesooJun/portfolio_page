@@ -15,7 +15,7 @@
 
   .projects_section__heading::after {
     content: '';
-    @apply h-1 w-16 bg-[var(--accent)];
+    @apply h-1 w-16 bg-(--accent);
   }
 
   .projects_section__introduction {
