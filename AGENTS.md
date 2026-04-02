@@ -19,7 +19,8 @@
 
 - 현재 프로젝트의 기본 개발 환경은 `Vite + React + TypeScript`입니다.
 - 패키지 매니저는 `npm`을 사용합니다.
-- Tailwind CSS 4를 사용할 때 CSS 변수 기반 유틸리티는 `text-(--token)`, `bg-(--token)` 같은 canonical 문법을 우선 사용합니다.
+- Tailwind 유틸리티 작성은 Tailwind CSS 4 문법을 기준으로 하며, 동등한 canonical 유틸리티가 있으면 arbitrary value보다 이를 우선 사용합니다.
+- Tailwind CSS 4를 사용할 때 CSS 변수 기반 유틸리티는 `text-(--token)`, `bg-(--token)`, `border-(--token)` 같은 canonical 문법을 우선 사용합니다.
 - `package-lock.json`은 항상 커밋합니다.
 - 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
 

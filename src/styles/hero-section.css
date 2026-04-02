@@ -1,6 +1,6 @@
 @layer components {
   .hero_section {
-    @apply relative isolate min-h-[640px] w-full overflow-hidden text-slate-50;
+    @apply relative isolate min-h-160 w-full overflow-hidden text-slate-50;
     background-color: #113d6d;
   }
 
