@@ -1,12 +1,12 @@
 # Heesoo Jun Portfolio
 
-Next.js 15(App Router) 기반 포트폴리오 웹사이트입니다.
+Vite + React + TypeScript 기반 포트폴리오 웹사이트입니다.
 
 ## 기술 스택
 
-- Next.js 15 + React 19 + TypeScript 5
+- Vite + React 19 + TypeScript 5
 - Tailwind CSS 4
-- next/font (Google Inter)
+- ESLint + Prettier + Husky + lint-staged
 
 ## 실행
 
@@ -28,5 +28,3 @@ npm run verify
 ```bash
 npx vercel deploy -y
 ```
-
-도메인이 있는 경우 `NEXT_PUBLIC_SITE_URL` 환경변수를 설정하면 메타데이터 canonical/Open Graph URL에 반영됩니다.
