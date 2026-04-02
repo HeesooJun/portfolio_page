@@ -1,47 +1,119 @@
 @layer components {
   .projects_section {
-    @apply w-full py-24;
-    background-color: #0a172b;
+    @apply relative z-20 w-full py-28;
+    background: #08111f;
   }
 
   .projects_section__container {
-    @apply mx-auto max-w-6xl space-y-10 px-4;
+    @apply relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .projects_section__intro_panel {
+    @apply mx-auto mb-12 max-w-3xl rounded-[2rem] border border-slate-200/10 px-6 py-7 text-slate-100 backdrop-blur-2xl sm:px-8;
+    background: linear-gradient(180deg, rgba(15, 35, 63, 0.76) 0%, rgba(8, 17, 31, 0.9) 100%);
+    box-shadow:
+      0 22px 80px rgba(0, 0, 0, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .projects_section__eyebrow {
+    @apply mb-3 text-xs font-semibold tracking-[0.22em] text-slate-300 uppercase;
   }
 
   .projects_section__heading {
-    @apply inline-flex flex-col gap-3 font-semibold text-slate-100;
-    font-size: clamp(2rem, 3vw, 3.25rem);
-  }
-
-  .projects_section__heading::after {
-    content: '';
-    @apply h-1 w-16 bg-(--accent);
+    @apply m-0 text-4xl font-semibold text-slate-50 sm:text-5xl;
   }
 
   .projects_section__introduction {
-    @apply max-w-2xl text-sm leading-relaxed text-slate-200;
+    @apply mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base;
   }
 
-  .projects_section__grid {
-    @apply grid gap-6 md:grid-cols-2;
+  .projects_section__stage {
+    @apply grid gap-6 lg:grid-cols-12;
   }
 
   .projects_section__card {
-    @apply relative isolate overflow-hidden rounded-3xl bg-black;
+    @apply relative;
   }
 
-  .projects_section__card::after {
+  .projects_section__card--featured {
+    @apply lg:col-span-12;
+  }
+
+  .projects_section__card--left {
+    @apply lg:col-span-5 lg:mt-10;
+  }
+
+  .projects_section__card--right {
+    @apply lg:col-span-7;
+  }
+
+  .projects_section__panel {
+    @apply relative overflow-hidden rounded-[2rem] border border-slate-200/10 p-3 backdrop-blur-2xl;
+    background: linear-gradient(180deg, rgba(16, 39, 72, 0.76) 0%, rgba(8, 17, 31, 0.92) 100%);
+    box-shadow:
+      0 26px 90px rgba(0, 0, 0, 0.46),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+    transition:
+      border-color 320ms ease,
+      box-shadow 320ms ease;
+  }
+
+  .projects_section__card:hover .projects_section__panel {
+    border-color: rgba(226, 232, 240, 0.22);
+    box-shadow:
+      0 30px 110px rgba(0, 0, 0, 0.52),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .projects_section__panel_chrome {
+    @apply absolute inset-x-3 top-3 z-10 h-10 rounded-2xl border border-slate-100/8;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  }
+
+  .projects_section__panel_glint {
+    @apply absolute inset-y-0 left-6 w-24;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    filter: blur(12px);
+  }
+
+  .projects_section__panel_body {
+    @apply relative grid gap-6 p-4 pt-16;
+  }
+
+  .projects_section__card--featured .projects_section__panel_body {
+    @apply lg:grid-cols-[1.18fr_0.82fr] lg:items-center;
+  }
+
+  .projects_section__media_shell {
+    @apply relative overflow-hidden rounded-[1.5rem] border border-slate-100/8 bg-slate-950/50;
+    aspect-ratio: 16 / 10;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -18px 40px rgba(2, 6, 23, 0.42);
+  }
+
+  .projects_section__media_shell::after {
     content: '';
-    @apply absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-900/85 transition-opacity duration-300;
-    opacity: 0;
-  }
-
-  .projects_section__card:hover::after {
-    opacity: 1;
+    @apply pointer-events-none absolute inset-0;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 36%),
+      linear-gradient(180deg, rgba(148, 163, 184, 0) 0%, rgba(15, 23, 42, 0.22) 100%);
   }
 
   .projects_section__image {
-    @apply block h-full w-full object-cover transition-transform duration-300;
+    @apply block h-full w-full object-cover transition-transform duration-500;
   }
 
   .projects_section__card:hover .projects_section__image {
@@ -49,24 +121,31 @@
   }
 
   .projects_section__details {
-    @apply absolute inset-x-6 bottom-6 z-10 text-slate-200 opacity-0 transition-all duration-300;
-    transform: translateY(8px);
+    @apply relative z-10 text-slate-100;
   }
 
-  .projects_section__card:hover .projects_section__details {
-    opacity: 1;
-    transform: translateY(0);
+  .projects_section__details_index {
+    @apply mb-3 text-xs font-semibold tracking-[0.28em] text-slate-400 uppercase;
   }
 
   .projects_section__details_title {
-    @apply m-0 text-xl font-semibold;
+    @apply m-0 text-2xl font-semibold text-white;
   }
 
   .projects_section__details_description {
-    @apply mt-2 text-sm leading-relaxed;
+    @apply mt-3 text-sm leading-relaxed text-slate-200 sm:text-base;
   }
 
   .projects_section__details_tags {
-    @apply mt-3 inline-flex items-center gap-2 text-xs tracking-[0.08em] text-slate-100/90 uppercase;
+    @apply mt-5 inline-flex items-center gap-2 rounded-full border border-slate-200/10 px-4 py-2 text-xs tracking-[0.12em] text-slate-100/90 uppercase;
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+@media (max-width: 1023px) {
+  @layer components {
+    .projects_section {
+      @apply py-20;
+    }
   }
 }
