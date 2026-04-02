@@ -1,8 +1,8 @@
-import path from "node:path";
+import path from 'node:path'
 
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "vite";
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -13,7 +13,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // 기존 "@/..." 경로를 유지해 컴포넌트와 콘텐츠 파일의 수정 범위를 줄입니다.
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
-});
+})

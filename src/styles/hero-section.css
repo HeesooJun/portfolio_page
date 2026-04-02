@@ -27,7 +27,7 @@
   }
 
   .hero_section__introduction {
-    @apply text-sm uppercase tracking-[0.3em] text-slate-200;
+    @apply text-sm tracking-[0.3em] text-slate-200 uppercase;
   }
 
   .hero_section__title {
@@ -39,7 +39,7 @@
   }
 
   .hero_section__description {
-    @apply text-sm font-medium leading-relaxed text-slate-200;
+    @apply text-sm leading-relaxed font-medium text-slate-200;
   }
 
   .hero_section__links {

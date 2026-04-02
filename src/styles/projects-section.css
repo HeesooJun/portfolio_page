@@ -14,7 +14,7 @@
   }
 
   .projects_section__heading::after {
-    content: "";
+    content: '';
     @apply h-1 w-16 bg-[var(--accent)];
   }
 
@@ -31,7 +31,7 @@
   }
 
   .projects_section__card::after {
-    content: "";
+    content: '';
     @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(15,23,42,0.85)] transition-opacity duration-300;
     opacity: 0;
   }
@@ -67,6 +67,6 @@
   }
 
   .projects_section__details_tags {
-    @apply mt-3 inline-flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-slate-100/90;
+    @apply mt-3 inline-flex items-center gap-2 text-xs tracking-[0.08em] text-slate-100/90 uppercase;
   }
 }

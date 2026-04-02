@@ -1,9 +1,9 @@
-import AboutSection from "@/app/section/AboutSection";
-import Footer from "@/app/section/Footer";
-import Header from "@/app/section/Header";
-import HeroSection from "@/app/section/HeroSection";
-import ProjectSection from "@/app/section/ProjectSection";
-import TechSection from "@/app/section/TechSection";
+import AboutSection from '@/app/section/AboutSection'
+import Footer from '@/app/section/Footer'
+import Header from '@/app/section/Header'
+import HeroSection from '@/app/section/HeroSection'
+import ProjectSection from '@/app/section/ProjectSection'
+import TechSection from '@/app/section/TechSection'
 
 export default function App() {
   return (
@@ -18,5 +18,5 @@ export default function App() {
       </main>
       <Footer />
     </>
-  );
+  )
 }

@@ -14,7 +14,7 @@
   }
 
   .about_section__heading::after {
-    content: "";
+    content: '';
     @apply h-1 w-16 bg-[var(--accent)];
   }
 

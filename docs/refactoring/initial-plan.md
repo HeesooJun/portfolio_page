@@ -8,6 +8,7 @@
 - 패키지 매니저는 `npm`을 유지했습니다.
 - `package-lock.json`을 새 의존성 기준으로 갱신했습니다.
 - `ESLint`, `Prettier`, `Husky`, `lint-staged`를 연결했습니다.
+- `prettier-plugin-tailwindcss`를 연결해 Tailwind 유틸리티 클래스 순서를 자동 정리합니다.
 - 기본 검증 명령을 `npm run lint`, `npm run typecheck`, `npm run build`, `npm run verify` 기준으로 정리했습니다.
 
 ## 현재 개발 환경 방향
@@ -21,6 +22,7 @@
 
 - `ESLint`: React 훅 규칙과 Vite HMR 관련 규칙 포함
 - `Prettier`: 저장소 전반 포맷 정리
+- `prettier-plugin-tailwindcss`: Tailwind 유틸리티 클래스 자동 정렬
 - `Husky`: `pre-commit` 훅 진입점
 - `lint-staged`: staged 파일만 골라서 `eslint --fix`, `prettier --write` 실행
 - `TypeScript typecheck`: `tsc --noEmit`

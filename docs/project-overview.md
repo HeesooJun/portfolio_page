@@ -2,9 +2,10 @@
 
 ## 기술 스택
 
-- Vite + React 19 + TypeScript 5
+- Vite 8 + React 19 + TypeScript 6
 - Tailwind CSS 4: `@tailwindcss/vite` 플러그인과 `@import "tailwindcss"` 조합 사용
-- ESLint + Prettier + Husky + lint-staged
+- ESLint 9 + Prettier + Husky + lint-staged
+- `prettier-plugin-tailwindcss`: Tailwind 유틸리티 클래스 자동 정렬
 
 ## 주요 구조
 

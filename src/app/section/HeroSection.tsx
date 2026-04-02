@@ -1,4 +1,4 @@
-import heroBackground from "@/assets/HeroSection.png";
+import heroBackground from '@/assets/HeroSection.png'
 
 export default function HeroSection() {
   return (
@@ -18,8 +18,7 @@ export default function HeroSection() {
             A developer who enjoys crafting visible results on the web
           </p>
           <p className="hero_section__description">
-            React와 TypeScript로 사용자 경험을 설계하고 구현하는 일을
-            좋아합니다.
+            React와 TypeScript로 사용자 경험을 설계하고 구현하는 일을 좋아합니다.
           </p>
           <div className="hero_section__links">
             <span className="hero_section__details">
@@ -41,5 +40,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

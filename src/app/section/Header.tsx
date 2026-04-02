@@ -1,7 +1,4 @@
-import {
-  HEADER_EXTERNAL_LINKS,
-  HEADER_SECTION_LINKS,
-} from "@/content/portfolio-content";
+import { HEADER_EXTERNAL_LINKS, HEADER_SECTION_LINKS } from '@/content/portfolio-content'
 
 export default function Header() {
   return (
@@ -30,5 +27,5 @@ export default function Header() {
         </div>
       </nav>
     </header>
-  );
+  )
 }

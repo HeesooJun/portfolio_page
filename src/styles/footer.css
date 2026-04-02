@@ -13,7 +13,7 @@
   }
 
   .site_footer__links {
-    @apply flex flex-wrap gap-4 uppercase tracking-wide;
+    @apply flex flex-wrap gap-4 tracking-wide uppercase;
   }
 
   .site_footer__link {
@@ -21,6 +21,6 @@
   }
 
   .site_footer__copyright {
-    @apply text-xs uppercase tracking-[0.2em] text-slate-400;
+    @apply text-xs tracking-[0.2em] text-slate-400 uppercase;
   }
 }

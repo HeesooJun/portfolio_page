@@ -4,9 +4,9 @@ Vite + React + TypeScript 기반 포트폴리오 웹사이트입니다.
 
 ## 기술 스택
 
-- Vite + React 19 + TypeScript 5
-- Tailwind CSS 4
-- ESLint + Prettier + Husky + lint-staged
+- Vite 8 + React 19 + TypeScript 6
+- Tailwind CSS 4 + `prettier-plugin-tailwindcss`
+- ESLint 9 + Prettier + Husky + lint-staged
 
 ## 실행
 
@@ -35,6 +35,7 @@ npm run verify
 
 - `pre-commit`에서 `lint-staged`가 실행됩니다.
 - staged 된 파일에만 `prettier --write`와 `eslint --fix`가 적용됩니다.
+- Tailwind 유틸리티 클래스는 `prettier-plugin-tailwindcss`가 자동 정렬합니다.
 - 무거운 검사는 훅에 넣지 않고 수동 검증 명령으로 분리합니다.
 
 ## Vercel 배포

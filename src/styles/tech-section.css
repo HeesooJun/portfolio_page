@@ -14,7 +14,7 @@
   }
 
   .tech_section__heading::after {
-    content: "";
+    content: '';
     @apply h-1 w-16 bg-[var(--accent)];
   }
 
@@ -35,7 +35,7 @@
   }
 
   .tech_section__card_description {
-    @apply text-xs uppercase tracking-[0.2em] text-slate-400;
+    @apply text-xs tracking-[0.2em] text-slate-400 uppercase;
   }
 
   .tech_section__list {
