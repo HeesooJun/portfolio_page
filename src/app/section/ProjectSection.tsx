@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { PROJECT_ITEMS } from "@/content/portfolio-content";
 
 export default function ProjectSection() {
@@ -13,10 +11,10 @@ export default function ProjectSection() {
         <div className="projects_section__grid">
           {PROJECT_ITEMS.map((project) => (
             <article key={project.title} className="projects_section__card">
-              <Image
+              {/* 카드 이미지는 최적화 컴포넌트 대신 브라우저 기본 지연 로딩만 적용합니다. */}
+              <img
                 src={project.image}
                 alt={project.title}
-                sizes="(min-width: 768px) 48vw, 100vw"
                 loading="lazy"
                 className="projects_section__image"
               />

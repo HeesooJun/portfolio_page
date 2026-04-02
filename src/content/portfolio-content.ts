@@ -1,5 +1,3 @@
-import type { StaticImageData } from "next/image";
-
 import projectBeyondImage from "@/assets/project-beyond.svg";
 import projectFienmeeImage from "@/assets/project-fienmee.svg";
 import projectHelperImage from "@/assets/project-helper.svg";
@@ -17,7 +15,7 @@ export interface ExternalLink {
 export interface PortfolioProject {
   title: string;
   description: string;
-  image: StaticImageData;
+  image: string;
   tags: string[];
 }
 

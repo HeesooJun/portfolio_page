@@ -1,4 +1,3 @@
-﻿// src/app/section/Header.tsx
 import {
   HEADER_EXTERNAL_LINKS,
   HEADER_SECTION_LINKS,
@@ -22,7 +21,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="site_header__link"
             >
               {link.label}

@@ -1,16 +1,12 @@
-﻿// src/app/section/HeroSection.tsx
-import Image from "next/image";
 import heroBackground from "@/assets/HeroSection.png";
 
 export default function HeroSection() {
   return (
     <section id="home" className="hero_section">
-      <Image
+      {/* Vite에서는 이미지 import 결과가 URL 문자열이므로 일반 img 태그로 표시합니다. */}
+      <img
         src={heroBackground}
         alt="City skyline illustration"
-        fill
-        priority
-        sizes="100vw"
         className="hero_section__background"
       />
       <div className="hero_section__overlay" aria-hidden="true" />
@@ -22,7 +18,8 @@ export default function HeroSection() {
             A developer who enjoys crafting visible results on the web
           </p>
           <p className="hero_section__description">
-            React와 TypeScript로 사용자 경험을 설계하고 구현하는 일을 좋아합니다.
+            React와 TypeScript로 사용자 경험을 설계하고 구현하는 일을
+            좋아합니다.
           </p>
           <div className="hero_section__links">
             <span className="hero_section__details">
@@ -36,7 +33,7 @@ export default function HeroSection() {
               className="hero_section__link"
               href="https://github.com/HeesooJun"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               GitHub 링크
             </a>

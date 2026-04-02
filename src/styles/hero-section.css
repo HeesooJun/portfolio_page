@@ -1,11 +1,11 @@
-﻿@layer components {
+@layer components {
   .hero_section {
     @apply relative isolate min-h-[640px] w-full overflow-hidden text-slate-50;
     background-color: #113d6d;
   }
 
   .hero_section__background {
-    @apply object-cover;
+    @apply absolute inset-0 h-full w-full object-cover;
   }
 
   .hero_section__overlay {
