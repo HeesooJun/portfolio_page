@@ -32,7 +32,7 @@
 
   .projects_section__card::after {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/85 transition-opacity duration-300;
+    @apply absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-900/85 transition-opacity duration-300;
     opacity: 0;
   }
 
