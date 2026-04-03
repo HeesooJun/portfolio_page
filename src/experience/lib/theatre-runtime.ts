@@ -1,8 +1,7 @@
 import { getProject } from '@theatre/core'
 
 let isTheatreStudioInitialized = false
-
-export const experienceTheatreProject = getProject('portfolio-experience')
+let experienceTheatreProject: ReturnType<typeof getProject> | null = null
 
 export async function initializeTheatreStudio() {
   if (!import.meta.env.DEV || typeof window === 'undefined') {
@@ -24,4 +23,19 @@ export async function initializeTheatreStudio() {
   isTheatreStudioInitialized = true
 
   return true
+}
+
+export async function getExperienceTheatreProject() {
+  const isStudioReady = await initializeTheatreStudio()
+
+  // 현재 구조에선 Theatre state export가 아직 없으므로 Studio를 실제로 여는 경우에만 프로젝트를 만들고, 그 외에는 null로 둡니다.
+  if (!isStudioReady) {
+    return null
+  }
+
+  if (!experienceTheatreProject) {
+    experienceTheatreProject = getProject('portfolio-experience')
+  }
+
+  return experienceTheatreProject
 }
