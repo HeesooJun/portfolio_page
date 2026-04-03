@@ -45,4 +45,5 @@ next-env.d.ts
 # design reference assets
 exPage/
 public/exPage/
+tmp
 
