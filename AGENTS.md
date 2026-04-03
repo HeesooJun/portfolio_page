@@ -15,6 +15,8 @@
   - 기존 코드 스타일과 패턴 준수, 불필요한 설정 변경 금지
   - 영향이 큰 변경은 사전 설명과 동의 후 진행
   - 폴더 구조는 가능하면 역할과 책임 기준으로 구조화하며, 관련 파일은 한곳에 모아 관리
+  - 캡처, 스냅샷, 분석 메모, 임시 스크립트 같은 작업용 산출물은 저장소 루트에 두지 않고 반드시 `tmp/` 아래 목적별 하위 폴더에 정리
+  - 임시 파일명은 용도와 출처가 드러나게 작성하고, 예시는 `tmp/reference/...`, `tmp/captures/...`, `tmp/scratch/...` 구조를 우선 사용
 
 ## 현재 기술 방향
 
@@ -26,6 +28,18 @@
 - canonical 유틸리티로 대체 가능한 arbitrary value 클래스는 수정 후 남기지 않습니다.
 - `package-lock.json`은 항상 커밋합니다.
 - 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
+- 하이엔드 인터랙션/3D 작업의 기본 축은 아래 스택을 기준으로 검토합니다.
+  - 스크롤 제어: `gsap`, `ScrollTrigger`, `lenis`
+  - 3D 씬 렌더링: `three`, `@react-three/fiber`, `@react-three/drei`
+  - 연출 저작: `@theatre/core`, `@theatre/studio`
+  - 후처리: `postprocessing`, `@react-three/postprocessing`
+  - 상태 연결: `zustand`
+  - 성능 대응: `detect-gpu`, `@react-three/offscreen`
+  - 자산 파이프라인: `gltfjsx`, `@gltf-transform/cli`, `meshoptimizer`, `draco3d`, `KTX2/Basis`
+  - 셰이더 개발: `vite-plugin-glsl`
+  - 개발 튜닝: `leva`
+- `@theatre/r3f`는 현재 저장소의 `React 19` + `@react-three/fiber 9` 조합과 peer dependency가 맞지 않아 즉시 도입하지 않고, 호환 버전이 확인되기 전까지는 보류합니다.
+- KTX2/Basis는 별도 런타임 패키지보다 `three/examples` 로더와 트랜스코더 경로 설정을 우선 사용합니다.
 
 ## 비주얼 개발 방향
 
