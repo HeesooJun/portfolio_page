@@ -11,10 +11,10 @@ export default function App() {
       {/* 네비게이션은 화면 위에 얹히는 보조 컨트롤러 역할만 맡기고, 본문 흐름은 단일 컬럼으로 유지합니다. */}
       <Header />
       <HeroSection />
-      <main className="w_full">
-        <ProjectSection />
+      <main className="page_archive">
         <AboutSection />
         <TechSection />
+        <ProjectSection />
       </main>
       <Footer />
     </>

@@ -5,9 +5,20 @@
   }
 
   .site_header__navigation {
-    @apply inline-flex flex-col items-center gap-2 rounded-4xl border border-slate-200/12 px-2 py-2 shadow-2xl backdrop-blur-xl;
-    background: linear-gradient(180deg, rgba(10, 23, 43, 0.76) 0%, rgba(8, 15, 29, 0.9) 100%);
+    @apply inline-flex flex-col items-center gap-2 rounded-4xl border border-white/12 px-2 py-2 shadow-2xl backdrop-blur-2xl transition-all duration-500;
+    background: linear-gradient(180deg, rgba(10, 23, 43, 0.82) 0%, rgba(8, 15, 29, 0.94) 100%);
+    box-shadow:
+      0 18px 60px rgba(0, 0, 0, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
     pointer-events: auto;
+  }
+
+  .site_header--hero_active .site_header__navigation {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(10, 23, 43, 0.48) 0%, rgba(8, 15, 29, 0.76) 100%);
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .site_header__links {
@@ -20,17 +31,17 @@
 
   .site_header__home,
   .site_header__link {
-    @apply border border-slate-200/6 bg-slate-50/3 hover:border-slate-100/18 hover:bg-slate-50/8 hover:text-white;
+    @apply border border-white/6 bg-white/4 hover:border-white/18 hover:bg-white/10 hover:text-white;
   }
 
   .site_header__control_active {
-    @apply border border-slate-100/20 bg-slate-50 text-slate-950;
+    @apply border border-white/16 bg-slate-50 text-slate-950;
     box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
   }
 
   .site_header__control_active:hover,
   .site_header__control_active:focus-visible {
-    @apply border border-slate-100/20 bg-slate-50 text-slate-950;
+    @apply border border-white/16 bg-slate-50 text-slate-950;
   }
 
   .site_header__icon {
@@ -39,7 +50,7 @@
 
   .site_header__control::before {
     content: attr(data-label);
-    @apply pointer-events-none absolute right-full mr-3 rounded-full border border-slate-200/10 px-3 py-2 text-[10px] font-semibold tracking-[0.16em] text-slate-100 uppercase opacity-0 transition-all duration-200;
+    @apply pointer-events-none absolute right-full mr-3 rounded-full border border-white/10 px-3 py-2 text-[10px] font-semibold tracking-[0.16em] text-slate-100 uppercase opacity-0 transition-all duration-200;
     background: rgba(8, 15, 29, 0.92);
     transform: translateX(6px);
   }

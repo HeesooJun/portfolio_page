@@ -1,48 +1,74 @@
-﻿@layer components {
+@layer components {
   .tech_section {
-    @apply w-full py-24;
-    background-color: #0a172b;
+    @apply relative z-20 w-full py-28;
   }
 
   .tech_section__container {
-    @apply mx-auto max-w-5xl space-y-6 px-4;
+    @apply relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .tech_section__header {
+    @apply max-w-3xl;
+  }
+
+  .tech_section__eyebrow {
+    @apply text-[11px] font-semibold tracking-[0.24em] text-slate-400 uppercase;
   }
 
   .tech_section__heading {
-    @apply inline-flex flex-col gap-3 font-semibold text-slate-100;
-    font-size: clamp(2rem, 3vw, 3.25rem);
-  }
-
-  .tech_section__heading::after {
-    content: '';
-    @apply h-1 w-16 bg-(--accent);
+    margin-top: 0.75rem;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
   }
 
   .tech_section__introduction {
-    @apply max-w-2xl text-sm leading-relaxed text-slate-200;
+    @apply mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base;
   }
 
   .tech_section__grid {
-    @apply grid gap-6 md:grid-cols-3;
+    @apply mt-10 grid gap-6 lg:grid-cols-3;
   }
 
   .tech_section__card {
-    @apply flex h-full flex-col gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600;
+    @apply flex h-full flex-col gap-4 rounded-4xl border border-white/10 p-5 text-sm backdrop-blur-2xl;
+    background:
+      linear-gradient(180deg, rgba(18, 39, 69, 0.74) 0%, rgba(8, 16, 29, 0.88) 100%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 44%);
+    box-shadow:
+      0 20px 70px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .tech_section__card_index {
+    @apply text-[10px] font-semibold tracking-[0.22em] text-slate-500 uppercase;
   }
 
   .tech_section__card_title {
-    @apply text-lg font-semibold text-slate-900;
+    @apply text-2xl font-semibold text-slate-50;
   }
 
   .tech_section__card_description {
-    @apply text-xs tracking-[0.2em] text-slate-400 uppercase;
+    @apply min-h-12 text-sm leading-relaxed text-slate-300;
   }
 
   .tech_section__list {
-    @apply flex flex-wrap gap-2;
+    @apply mt-auto flex flex-wrap gap-2;
+    list-style: none;
   }
 
   .tech_section__list_item {
-    @apply rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600;
+    @apply rounded-full border border-white/10 px-3 py-2 text-xs font-semibold text-slate-100;
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+@media (max-width: 767px) {
+  @layer components {
+    .tech_section {
+      @apply py-20;
+    }
   }
 }

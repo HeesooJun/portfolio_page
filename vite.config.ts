@@ -19,4 +19,36 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    // three 관련 런타임은 별도 청크로 이미 분리되어 있으므로, 남는 경고는 lazy vendor 청크 자체의 크기만 반영합니다.
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('/node_modules/leva/') || id.includes('ExperienceDebugPanels')) {
+            return 'debug-panels'
+          }
+
+          if (id.includes('/node_modules/three/')) {
+            return 'three-core'
+          }
+
+          if (id.includes('/node_modules/@react-three/drei/')) {
+            return 'three-drei'
+          }
+
+          if (
+            id.includes('/node_modules/postprocessing/') ||
+            id.includes('/node_modules/@react-three/postprocessing/')
+          ) {
+            return 'three-postprocessing'
+          }
+
+          if (id.includes('/node_modules/@react-three/')) {
+            return 'three-react'
+          }
+        },
+      },
+    },
+  },
 })

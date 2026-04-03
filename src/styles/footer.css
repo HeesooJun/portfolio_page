@@ -1,11 +1,11 @@
-﻿@layer components {
+@layer components {
   .site_footer {
-    @apply border-t border-slate-900 py-12;
-    background-color: #000000;
+    @apply relative border-t border-white/8 py-12;
+    background: linear-gradient(180deg, rgba(6, 17, 32, 0.74) 0%, rgba(3, 9, 17, 0.96) 100%);
   }
 
   .site_footer__content {
-    @apply mx-auto flex max-w-5xl flex-col gap-4 px-4 text-sm text-slate-200 md:flex-row md:items-center md:justify-between;
+    @apply mx-auto flex max-w-6xl flex-col gap-4 px-4 text-sm text-slate-200 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8;
   }
 
   .site_footer__title {
@@ -13,14 +13,14 @@
   }
 
   .site_footer__links {
-    @apply flex flex-wrap gap-4 tracking-wide uppercase;
+    @apply flex flex-wrap gap-4 text-xs tracking-[0.18em] text-slate-400 uppercase;
   }
 
   .site_footer__link {
-    @apply transition-colors hover:text-(--accent);
+    @apply transition-colors hover:text-slate-100;
   }
 
   .site_footer__copyright {
-    @apply text-xs tracking-[0.2em] text-slate-400 uppercase;
+    @apply text-xs tracking-[0.2em] text-slate-500 uppercase;
   }
 }

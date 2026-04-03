@@ -16,27 +16,6 @@ const NAVIGATION_ICONS: Record<string, ReactNode> = {
       />
     </svg>
   ),
-  '#experience': (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="site_header__icon">
-      <path
-        d="M8 7V5.75A1.75 1.75 0 0 1 9.75 4h4.5A1.75 1.75 0 0 1 16 5.75V7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-      />
-      <rect
-        x="4"
-        y="7"
-        width="16"
-        height="11"
-        rx="2.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      />
-    </svg>
-  ),
   '#about': (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="site_header__icon">
       <circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
@@ -61,12 +40,24 @@ const NAVIGATION_ICONS: Record<string, ReactNode> = {
       />
     </svg>
   ),
+  '#projects': (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="site_header__icon">
+      <path
+        d="M5.5 7.5h13M5.5 12h13M5.5 16.5h8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
 }
 
 const NAVIGATION_ITEMS = [{ href: '#home', label: 'Home' }, ...HEADER_SECTION_LINKS]
 
 export default function Header() {
   const [activeHref, setActiveHref] = useState('#home')
+  const [isHeroActive, setIsHeroActive] = useState(true)
 
   useEffect(() => {
     const sections = NAVIGATION_ITEMS.map((item) =>
@@ -101,10 +92,36 @@ export default function Header() {
     }
   }, [])
 
+  useEffect(() => {
+    const heroSection = document.querySelector<HTMLElement>('#home')
+
+    if (!heroSection) {
+      return
+    }
+
+    const syncHeroVisibility = () => {
+      const heroBounds = heroSection.getBoundingClientRect()
+      const viewportMidpoint = window.innerHeight * 0.5
+
+      // 히어로의 중앙 구간에서는 플로팅 내비게이션이 먼저 보이지 않도록 화면 중앙 기준으로 노출 여부를 계산합니다.
+      setIsHeroActive(heroBounds.top <= viewportMidpoint && heroBounds.bottom >= viewportMidpoint)
+    }
+
+    syncHeroVisibility()
+
+    window.addEventListener('scroll', syncHeroVisibility, { passive: true })
+    window.addEventListener('resize', syncHeroVisibility)
+
+    return () => {
+      window.removeEventListener('scroll', syncHeroVisibility)
+      window.removeEventListener('resize', syncHeroVisibility)
+    }
+  }, [])
+
   return (
-    <header className="site_header">
+    <header className={`site_header ${isHeroActive ? 'site_header--hero_active' : ''}`}>
       <nav className="site_header__navigation" aria-label="주요 탐색">
-        {/* 텍스트를 세로로 읽게 하기보다 아이콘 중심 컨트롤러로 줄여서 화면 분위기를 해치지 않게 유지합니다. */}
+        {/* 히어로 안에서는 네비게이션이 사라지지 않고, 정보 구조를 보조하는 작은 컨트롤러로 남아 있어야 합니다. */}
         <div className="site_header__links">
           {NAVIGATION_ITEMS.map((link) => (
             <a
