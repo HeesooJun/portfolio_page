@@ -27,6 +27,11 @@ export type ExperienceScrollMetrics = {
   y: number
 }
 
+export type ExperienceAssetPipelineStatus = {
+  error: string | null
+  ready: boolean
+}
+
 type ExperienceStoreState = {
   gpuProfile: ExperienceGpuProfile
   hasWebglSupport: boolean
@@ -36,6 +41,7 @@ type ExperienceStoreState = {
   scenePhase: ExperienceScenePhase
   scroll: ExperienceScrollMetrics
   viewport: ExperienceViewport
+  assetPipeline: ExperienceAssetPipelineStatus
   setGpuProfile: (gpuProfile: ExperienceGpuProfile) => void
   setHasWebglSupport: (hasWebglSupport: boolean) => void
   setMotionPreference: (motionPreference: ExperienceMotionPreference) => void
@@ -44,6 +50,7 @@ type ExperienceStoreState = {
   setScenePhase: (scenePhase: ExperienceScenePhase) => void
   setScrollMetrics: (scroll: ExperienceScrollMetrics) => void
   setViewport: (viewport: ExperienceViewport) => void
+  setAssetPipelineStatus: (assetPipeline: ExperienceAssetPipelineStatus) => void
 }
 
 const DEFAULT_VIEWPORT: ExperienceViewport = {
@@ -65,6 +72,11 @@ const DEFAULT_SCROLL: ExperienceScrollMetrics = {
   y: 0,
 }
 
+const DEFAULT_ASSET_PIPELINE_STATUS: ExperienceAssetPipelineStatus = {
+  error: null,
+  ready: false,
+}
+
 export const useExperienceStore = create<ExperienceStoreState>((set) => ({
   gpuProfile: DEFAULT_GPU_PROFILE,
   hasWebglSupport: true,
@@ -74,6 +86,7 @@ export const useExperienceStore = create<ExperienceStoreState>((set) => ({
   scenePhase: 'boot',
   scroll: DEFAULT_SCROLL,
   viewport: DEFAULT_VIEWPORT,
+  assetPipeline: DEFAULT_ASSET_PIPELINE_STATUS,
   setGpuProfile: (gpuProfile) => set({ gpuProfile }),
   setHasWebglSupport: (hasWebglSupport) => set({ hasWebglSupport }),
   setMotionPreference: (motionPreference) => set({ motionPreference }),
@@ -82,6 +95,7 @@ export const useExperienceStore = create<ExperienceStoreState>((set) => ({
   setScenePhase: (scenePhase) => set({ scenePhase }),
   setScrollMetrics: (scroll) => set({ scroll }),
   setViewport: (viewport) => set({ viewport }),
+  setAssetPipelineStatus: (assetPipeline) => set({ assetPipeline }),
 }))
 
 export function getExperienceQualityPreset(qualityTier: ExperienceQualityTier) {

@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js'
 
 export const EXPERIENCE_ASSET_PATHS = {
-  dracoDecoderPath: '/vendor/draco/',
+  dracoDecoderPath: '/vendor/draco/gltf/',
   ktx2TranscoderPath: '/vendor/basis/',
 }
 

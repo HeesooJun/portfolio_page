@@ -11,6 +11,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "verify": "npm run lint && npm run typecheck && npm run build",
+    "asset:prepare-runtime": "node scripts/experience/prepare-runtime-assets.mjs",
     "asset:gltf": "gltf-transform",
     "asset:gltfjsx": "gltfjsx",
     "prepare": "husky"

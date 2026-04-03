@@ -3,6 +3,7 @@ export type ExperienceQualityTier = 'low' | 'medium' | 'high' | 'ultra'
 export type ExperienceQualityPreset = {
   dpr: [number, number]
   antialias: boolean
+  debugPanel: boolean
   postprocessing: boolean
   particles: number
   powerPreference: WebGLPowerPreference
@@ -20,6 +21,7 @@ export const EXPERIENCE_QUALITY_PRESETS: Record<ExperienceQualityTier, Experienc
   low: {
     dpr: [1, 1.2],
     antialias: false,
+    debugPanel: false,
     postprocessing: false,
     particles: 24,
     powerPreference: 'default',
@@ -29,6 +31,7 @@ export const EXPERIENCE_QUALITY_PRESETS: Record<ExperienceQualityTier, Experienc
   medium: {
     dpr: [1, 1.5],
     antialias: true,
+    debugPanel: true,
     postprocessing: false,
     particles: 48,
     powerPreference: 'high-performance',
@@ -38,6 +41,7 @@ export const EXPERIENCE_QUALITY_PRESETS: Record<ExperienceQualityTier, Experienc
   high: {
     dpr: [1, 1.8],
     antialias: true,
+    debugPanel: true,
     postprocessing: true,
     particles: 80,
     powerPreference: 'high-performance',
@@ -47,6 +51,7 @@ export const EXPERIENCE_QUALITY_PRESETS: Record<ExperienceQualityTier, Experienc
   ultra: {
     dpr: [1, 2],
     antialias: true,
+    debugPanel: true,
     postprocessing: true,
     particles: 120,
     powerPreference: 'high-performance',

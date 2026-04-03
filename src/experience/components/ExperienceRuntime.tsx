@@ -1,6 +1,7 @@
 import { lazy, Suspense, type PropsWithChildren } from 'react'
 
 import { useExperienceBootstrap } from '@/experience/hooks/useExperienceBootstrap'
+import ExperienceStatusBridge from '@/experience/components/ExperienceStatusBridge'
 
 const ExperienceCanvas = lazy(() => import('@/experience/components/ExperienceCanvas'))
 const ExperienceDebugPanels = lazy(() => import('@/experience/components/ExperienceDebugPanels'))
@@ -10,6 +11,7 @@ export default function ExperienceRuntime({ children }: PropsWithChildren) {
 
   return (
     <div className="experience_runtime">
+      <ExperienceStatusBridge />
       <div className="experience_runtime__canvas_layer">
         {/* Three/R3F 계층은 초기 DOM 콘텐츠보다 무겁기 때문에 첫 페인트를 막지 않도록 지연 로딩합니다. */}
         <Suspense fallback={null}>
