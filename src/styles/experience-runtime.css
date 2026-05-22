@@ -1,0 +1,38 @@
+@layer components {
+  .experience_runtime {
+    @apply relative isolate min-h-screen;
+  }
+
+  .experience_runtime__canvas_layer {
+    @apply pointer-events-none fixed inset-0 z-0 overflow-hidden;
+  }
+
+  .experience_runtime__canvas_shell {
+    @apply h-full w-full;
+  }
+
+  .experience_runtime__canvas {
+    @apply h-full w-full;
+  }
+
+  .experience_runtime__dom_layer {
+    @apply relative z-10 min-h-screen;
+  }
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}

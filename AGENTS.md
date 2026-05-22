@@ -14,6 +14,38 @@
 - 변경 원칙(수정이 허용된 이후):
   - 기존 코드 스타일과 패턴 준수, 불필요한 설정 변경 금지
   - 영향이 큰 변경은 사전 설명과 동의 후 진행
+  - 폴더 구조는 가능하면 역할과 책임 기준으로 구조화하며, 관련 파일은 한곳에 모아 관리
+  - 캡처, 스냅샷, 분석 메모, 임시 스크립트 같은 작업용 산출물은 저장소 루트에 두지 않고 반드시 `tmp/` 아래 목적별 하위 폴더에 정리
+  - 임시 파일명은 용도와 출처가 드러나게 작성하고, 예시는 `tmp/reference/...`, `tmp/captures/...`, `tmp/scratch/...` 구조를 우선 사용
+
+## 현재 기술 방향
+
+- 현재 프로젝트의 기본 개발 환경은 `Vite + React + TypeScript`입니다.
+- 패키지 매니저는 `npm`을 사용합니다.
+- Tailwind 유틸리티 작성은 Tailwind CSS 4 문법을 기준으로 하며, 동등한 canonical 유틸리티가 있으면 arbitrary value를 사용하지 않습니다.
+- Tailwind CSS 4를 사용할 때 CSS 변수 기반 유틸리티는 `text-(--token)`, `bg-(--token)`, `border-(--token)` 같은 canonical 문법을 우선 사용합니다.
+- Tailwind CSS를 사용하는 변경을 했으면 마무리 전에 Tailwind CSS 4 canonical 문법 준수 여부를 반드시 확인합니다.
+- canonical 유틸리티로 대체 가능한 arbitrary value 클래스는 수정 후 남기지 않습니다.
+- `package-lock.json`은 항상 커밋합니다.
+- 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
+- 하이엔드 인터랙션/3D 작업의 기본 축은 아래 스택을 기준으로 검토합니다.
+  - 스크롤 제어: `gsap`, `ScrollTrigger`, `lenis`
+  - 3D 씬 렌더링: `three`, `@react-three/fiber`, `@react-three/drei`
+  - 연출 저작: `@theatre/core`, `@theatre/studio`
+  - 후처리: `postprocessing`, `@react-three/postprocessing`
+  - 상태 연결: `zustand`
+  - 성능 대응: `detect-gpu`, `@react-three/offscreen`
+  - 자산 파이프라인: `gltfjsx`, `@gltf-transform/cli`, `meshoptimizer`, `draco3d`, `KTX2/Basis`
+  - 셰이더 개발: `vite-plugin-glsl`
+  - 개발 튜닝: `leva`
+- `@theatre/r3f`는 현재 저장소의 `React 19` + `@react-three/fiber 9` 조합과 peer dependency가 맞지 않아 즉시 도입하지 않고, 호환 버전이 확인되기 전까지는 보류합니다.
+- KTX2/Basis는 별도 런타임 패키지보다 `three/examples` 로더와 트랜스코더 경로 설정을 우선 사용합니다.
+
+## 비주얼 개발 방향
+
+- UI 디자인, 레이아웃, 색감, 사이드바 스타일 작업 시 `docs/design/reference/city_mood_reference.png` 이미지를 우선 레퍼런스로 사용합니다.
+- 구현은 레퍼런스 이미지를 그대로 복제하지 않고, 해당 이미지와 어울리는 분위기, 색감, 레이어감, 밀도를 해석하여 적용합니다.
+- 비주얼 의사결정에서는 화려한 장식보다 차분한 블루 계열, 겹쳐지는 레이어, 절제된 분위기를 우선합니다.
 
 ## 명명 규칙
 
@@ -21,6 +53,34 @@
 - CSS 클래스는 snake_case로 통일하고, CSS Modules에서는 styles.class_name 점 표기로 접근합니다.
 - 약어/축약은 지양하고 의미 중심으로 명명하며, 동일 개념에는 동일 용어를 일관되게 사용합니다.
 - 단, 재사용 하위 파트가 많으면 BEM을 사용합니다.
+
+## 주석 규칙
+
+- 새로 추가하거나 구조를 바꾸는 코드에는 한글 주석을 충분히 남깁니다.
+- 주석은 무엇을 하는지보다 왜 이렇게 구성했는지 설명하는 데 집중합니다.
+- 단순 대입이나 JSX 구조를 그대로 읽어주는 주석은 지양합니다.
+
+## 검증 규칙
+
+- 의미 있는 작업 단위가 끝날 때마다 검증 명령을 실행합니다.
+- 기본 검증 명령은 `npm run lint`, `npm run typecheck`, `npm run build`입니다.
+- 한 번에 검증할 때는 `npm run verify`를 사용합니다.
+- UI, 레이아웃, 모션을 수정한 뒤에는 구현 직후 결과 화면을 한 번 더 검토해 디자인적으로 어색한 지점이 없는지 확인합니다.
+- UI 체감 확인이 중요한 작업에서 Playwright MCP 사용을 시도했지만 해당 세션에서 사용할 수 없으면, 코드 수정 전에 그 사실을 먼저 사용자에게 보고합니다.
+- Tailwind CSS를 건드린 작업은 검증 전에 canonical 유틸리티 적용 여부를 다시 확인합니다.
+- `pre-commit` 훅에는 staged 파일 기준의 가벼운 검사만 둡니다.
+
+## 커밋 규칙
+
+- 변경 범위가 크면 중간 커밋으로 나눕니다.
+- 커밋 메시지는 `feat: ...`, `refactor: ...`, `chore: ...`, `docs: ...` 형식을 우선 사용합니다.
+- 한 커밋에는 하나의 목적만 담기도록 유지합니다.
+
+## 문서 최신화 원칙
+
+- 프로젝트 구조, 정책, 디자인 방향, 검증 기준, 명명 규칙처럼 `AGENTS.md`가 설명하는 기준이 변경되면 관련 내용을 함께 최신화합니다.
+- 코드 변경 이후 `AGENTS.md`에 적힌 내용과 실제 저장소 상태가 어긋나면 해당 작업 범위 안에서 즉시 수정합니다.
+- 반대로 `AGENTS.md`의 기준에 영향을 주지 않는 단순 구현 변경이나 미세 스타일 조정만으로는 문서를 불필요하게 수정하지 않습니다.
 
 ## SKILLS 사용 가이드
 
@@ -35,7 +95,7 @@
 
 - 웹디자인, UI 톤앤매너 정리, 레이아웃/인터랙션 방향 설계: `web-design-guidelines`
 - 2.5D 파랄랙스, 스크롤 기반 연출, 섹션 전환 모션: `scroll-experience`
-- React/Next.js 코드 작성, 리팩터링, 성능 최적화: `vercel-react-best-practices`
+- React/Vite 코드 작성, 리팩터링, 성능 최적화: `vercel-react-best-practices`
 - 브라우저 동작 검증, E2E, 회귀 확인, 스냅샷 점검: `playwright-cli`
 - 비주얼 에셋 생성(배경, 아이콘, 오브젝트): `imagegen`
 - 배포 또는 배포 테스트: `deploy-to-vercel`

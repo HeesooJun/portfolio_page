@@ -21,6 +21,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -44,4 +45,5 @@ next-env.d.ts
 # design reference assets
 exPage/
 public/exPage/
+tmp
 

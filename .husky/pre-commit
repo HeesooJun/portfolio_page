@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# staged 상태의 파일만 검사해 커밋 속도를 과하게 늦추지 않도록 유지합니다.
+npx lint-staged
