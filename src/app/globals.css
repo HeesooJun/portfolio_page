@@ -1,27 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import 'tailwindcss';
-@import '../styles/experience-runtime.css';
-@import '../styles/header.css';
-@import '../styles/hero-section.css';
-@import '../styles/footer.css';
-@import '../styles/projects-section.css';
-@import '../styles/about-section.css';
-@import '../styles/tech-section.css';
+@import '../styles/portfolio-shell.css';
 
 :root {
-  --accent: #7ab8ff;
-  --surface-base: #061120;
-  --surface-deep: #09182d;
-  --surface-panel: #10243f;
-  --surface-panel-strong: #142d4d;
-  --surface-fog: rgba(136, 172, 214, 0.3);
-  --line-soft: rgba(255, 255, 255, 0.12);
-  --line-strong: rgba(255, 255, 255, 0.22);
-  --text-primary: #f6f7fb;
-  --text-secondary: #b6c5d9;
-  --text-muted: #7f94ab;
-  --font-body: 'Manrope', 'Pretendard Variable', 'SUIT Variable', 'Noto Sans KR', sans-serif;
-  --font-display: 'Cormorant Garamond', 'Iowan Old Style', 'Times New Roman', serif;
+  --paper: #f4efe6;
+  --paper-soft: #eee7dc;
+  --ink: #171512;
+  --ink-muted: rgba(23, 21, 18, 0.58);
+  --ink-faint: rgba(23, 21, 18, 0.18);
+  --line: rgba(23, 21, 18, 0.2);
+  --font-body: 'Inter', 'Pretendard Variable', 'SUIT Variable', 'Noto Sans KR', sans-serif;
 }
 
 *,
@@ -31,19 +19,21 @@
 }
 
 html {
-  color-scheme: dark;
-  scroll-behavior: smooth;
+  color-scheme: light;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    radial-gradient(circle at top, rgba(73, 121, 181, 0.28) 0%, rgba(73, 121, 181, 0) 30%),
-    linear-gradient(180deg, #07111f 0%, #081425 34%, #050d19 100%);
-  color: var(--text-primary);
+  height: 100%;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -60,13 +50,12 @@ select {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid rgba(122, 184, 255, 0.72);
+  outline: 2px solid rgba(23, 21, 18, 0.72);
   outline-offset: 3px;
 }
 
 section {
   position: relative;
-  scroll-margin-top: 120px;
 }
 
 h1,
@@ -90,59 +79,11 @@ ol {
 }
 
 #root {
-  min-height: 100vh;
-  background: transparent;
-}
-
-.page_archive {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(8, 17, 31, 0.08) 0%, rgba(8, 17, 31, 0.72) 12%),
-    linear-gradient(180deg, #081423 0%, #071220 48%, #050d18 100%);
-}
-
-.page_archive::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.03) 0,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.025) 0,
-      rgba(255, 255, 255, 0.025) 1px,
-      transparent 1px
-    );
-  background-size: 120px 120px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-  opacity: 0.28;
-  pointer-events: none;
-}
-
-.page_archive::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 18% 0%, rgba(123, 171, 229, 0.15) 0%, transparent 34%),
-    radial-gradient(circle at 88% 12%, rgba(123, 171, 229, 0.12) 0%, transparent 30%);
-  pointer-events: none;
+  height: 100vh;
+  background: var(--paper);
 }
 
 ::selection {
-  background: rgba(122, 184, 255, 0.32);
-  color: #061120;
-}
-
-@media (min-width: 1024px) {
-  section {
-    scroll-margin-top: 48px;
-  }
+  background: var(--ink);
+  color: var(--paper);
 }
