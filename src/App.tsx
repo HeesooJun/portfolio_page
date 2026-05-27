@@ -72,6 +72,15 @@ type PortfolioView =
 
 const AUTOPLAY_SECONDS = 12
 
+function resolveRestartableImageSource(imageSource: string, playbackKey: number) {
+  if (!imageSource.toLowerCase().includes('.gif')) {
+    return imageSource
+  }
+
+  const separator = imageSource.includes('?') ? '&' : '?'
+  return `${imageSource}${separator}playback=${playbackKey}`
+}
+
 const PROJECTS: PortfolioProject[] = [
   {
     slug: 'heygent',
@@ -355,6 +364,7 @@ export default function App() {
   const [view, setView] = useState<PortfolioView>(() => resolveViewFromHash(window.location.hash))
   const [activeProjectIndex, setActiveProjectIndex] = useState(0)
   const [previousProjectIndex, setPreviousProjectIndex] = useState(0)
+  const [homePlaybackKey, setHomePlaybackKey] = useState(0)
   const [transitionDirection, setTransitionDirection] = useState<'next' | 'previous'>('next')
   const activeProject = PROJECTS[activeProjectIndex]
   const currentProject =
@@ -380,15 +390,14 @@ export default function App() {
   }, [])
 
   const selectProjectIndex = (nextIndex: number) => {
-    setActiveProjectIndex((currentIndex) => {
-      if (currentIndex === nextIndex) {
-        return currentIndex
-      }
+    if (activeProjectIndex === nextIndex) {
+      return
+    }
 
-      setPreviousProjectIndex(currentIndex)
-      setTransitionDirection(nextIndex > currentIndex ? 'next' : 'previous')
-      return nextIndex
-    })
+    setPreviousProjectIndex(activeProjectIndex)
+    setTransitionDirection(nextIndex > activeProjectIndex ? 'next' : 'previous')
+    setHomePlaybackKey((currentKey) => currentKey + 1)
+    setActiveProjectIndex(nextIndex)
   }
 
   useEffect(() => {
@@ -397,18 +406,18 @@ export default function App() {
     }
 
     const intervalId = window.setInterval(() => {
-      setActiveProjectIndex((currentIndex) => {
-        const nextIndex = (currentIndex + 1) % PROJECTS.length
-        setPreviousProjectIndex(currentIndex)
-        setTransitionDirection('next')
-        return nextIndex
-      })
+      const nextIndex = (activeProjectIndex + 1) % PROJECTS.length
+
+      setPreviousProjectIndex(activeProjectIndex)
+      setTransitionDirection('next')
+      setHomePlaybackKey((currentKey) => currentKey + 1)
+      setActiveProjectIndex(nextIndex)
     }, AUTOPLAY_SECONDS * 1000)
 
     return () => {
       window.clearInterval(intervalId)
     }
-  }, [view.name])
+  }, [activeProjectIndex, view.name])
 
   useEffect(() => {
     document.querySelector('.portfolio_shell__scroll')?.scrollTo({ top: 0 })
@@ -421,6 +430,7 @@ export default function App() {
         <HomeView
           activeProjectIndex={activeProjectIndex}
           previousProjectIndex={previousProjectIndex}
+          homePlaybackKey={homePlaybackKey}
           transitionDirection={transitionDirection}
           setActiveProjectIndex={selectProjectIndex}
         />
@@ -453,11 +463,13 @@ function SiteHeader({ view }: { view: PortfolioView }) {
 function HomeView({
   activeProjectIndex,
   previousProjectIndex,
+  homePlaybackKey,
   transitionDirection,
   setActiveProjectIndex,
 }: {
   activeProjectIndex: number
   previousProjectIndex: number
+  homePlaybackKey: number
   transitionDirection: 'next' | 'previous'
   setActiveProjectIndex: (index: number) => void
 }) {
@@ -467,37 +479,24 @@ function HomeView({
     <main className="portfolio_home" aria-label="Home">
       <div className="portfolio_home__media_stage">
         {PROJECTS.map((item, index) => (
-          <figure
+          <HomeMedia
             key={item.slug}
-            className="portfolio_home__media"
-            data-active={index === activeProjectIndex}
-            data-previous={index === previousProjectIndex}
-            data-direction={transitionDirection}
-            style={
-              {
-                '--home-backdrop-source': `url(${item.homeImage})`,
-                '--home-mobile-backdrop-source': `url(${item.homeMobileImage})`,
-                '--home-image-position': item.homePosition,
-                '--home-mobile-image-position': item.homeMobilePosition,
-              } as CSSProperties
-            }
-            aria-hidden={index !== activeProjectIndex}
-          >
-            <picture>
-              <source media="(max-width: 767px)" srcSet={item.homeMobileImage} />
-              <img className="portfolio_home__image" src={item.homeImage} alt="" />
-            </picture>
-          </figure>
+            item={item}
+            isActive={index === activeProjectIndex}
+            isPrevious={index === previousProjectIndex}
+            homePlaybackKey={homePlaybackKey}
+            transitionDirection={transitionDirection}
+          />
         ))}
       </div>
-      <section className="portfolio_home__center" aria-labelledby="home_project_title">
+      <div className="portfolio_home__center" aria-labelledby="home_project_title">
         {/* 데스크톱 홈 이미지는 main 자산이 타이틀 역할을 대신하므로 접근성 제목만 남깁니다. */}
         <h1 id="home_project_title" className="portfolio_home__title">
           {project.title}
         </h1>
         <p>{project.subtitle}</p>
         <a href={resolveProjectHref(project.slug)}>Discover project</a>
-      </section>
+      </div>
       <div className="portfolio_home__bottom">
         <div className="portfolio_home__count">
           <span>{romanize(activeProjectIndex)}</span>
@@ -532,6 +531,56 @@ function HomeView({
         ))}
       </section>
     </main>
+  )
+}
+
+function HomeMedia({
+  item,
+  isActive,
+  isPrevious,
+  homePlaybackKey,
+  transitionDirection,
+}: {
+  item: PortfolioProject
+  isActive: boolean
+  isPrevious: boolean
+  homePlaybackKey: number
+  transitionDirection: 'next' | 'previous'
+}) {
+  // 활성 GIF만 URL을 갱신해 브라우저가 이전 재생 시점을 재사용하지 못하게 합니다.
+  const imageSource = isActive
+    ? resolveRestartableImageSource(item.homeImage, homePlaybackKey)
+    : item.homeImage
+  const mobileImageSource = isActive
+    ? resolveRestartableImageSource(item.homeMobileImage, homePlaybackKey)
+    : item.homeMobileImage
+
+  return (
+    <figure
+      className="portfolio_home__media"
+      data-active={isActive}
+      data-previous={isPrevious}
+      data-direction={transitionDirection}
+      style={
+        {
+          '--home-backdrop-source': `url(${item.homeImage})`,
+          '--home-mobile-backdrop-source': `url(${item.homeMobileImage})`,
+          '--home-image-position': item.homePosition,
+          '--home-mobile-image-position': item.homeMobilePosition,
+        } as CSSProperties
+      }
+      aria-hidden={!isActive}
+    >
+      <picture>
+        <source media="(max-width: 767px)" srcSet={mobileImageSource} />
+        <img
+          key={isActive ? `${item.slug}-${homePlaybackKey}` : item.slug}
+          className="portfolio_home__image"
+          src={imageSource}
+          alt=""
+        />
+      </picture>
+    </figure>
   )
 }
 
