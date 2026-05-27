@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap');
 @import 'tailwindcss';
 @import '../styles/portfolio-shell.css';
+@import '../styles/portfolio-home.css';
+@import '../styles/portfolio-index.css';
+@import '../styles/portfolio-about.css';
+@import '../styles/project-detail/index.css';
 
 @font-face {
   font-family: 'Hahmlet';

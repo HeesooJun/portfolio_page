@@ -23,6 +23,7 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
         date={project.date}
         repository={project.repository}
         image={project.heroImage}
+        video={project.heroVideo}
         imageAlt={`${project.title} 대표 화면`}
         imagePosition={project.heroPosition}
       />

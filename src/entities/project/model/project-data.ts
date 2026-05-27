@@ -3,6 +3,7 @@ import heygentMainSceneVideo from '@/assets/main/heygent-main2.webm'
 import lifesaviorHomeImage from '@/assets/main/lifesavior-main-poster.webp'
 import lifesaviorHomeVideo from '@/assets/main/lifesavior-main.webm'
 import piviewHomeImage from '@/assets/main/piview-main.png'
+import piviewHomeVideo from '@/assets/main/piview-main2.webm'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
 import piviewProjectMainImage from '@/assets/project-main/piview.png'
@@ -48,6 +49,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeVideo: heygentMainSceneVideo,
     homeMobileVideo: heygentMainSceneVideo,
     heroImage: heygentProjectMainImage,
+    heroVideo: heygentMainSceneVideo,
     homePosition: 'center center',
     homeMobilePosition: '57% center',
     heroPosition: 'center center',
@@ -121,7 +123,10 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     tools: 'Spring Boot, Next.js, FastAPI, ChromaDB',
     homeImage: piviewHomeImage,
     homeMobileImage: piviewHomeImage,
+    homeVideo: piviewHomeVideo,
+    homeMobileVideo: piviewHomeVideo,
     heroImage: piviewProjectMainImage,
+    heroVideo: piviewHomeVideo,
     homePosition: 'center center',
     homeMobilePosition: '27% center',
     heroPosition: 'center center',
@@ -198,6 +203,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeVideo: lifesaviorHomeVideo,
     homeMobileVideo: lifesaviorHomeVideo,
     heroImage: lifesaviorProjectMainImage,
+    heroVideo: lifesaviorHomeVideo,
     homePosition: 'center center',
     homeMobilePosition: '28% center',
     heroPosition: 'center center',

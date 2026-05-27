@@ -30,7 +30,19 @@ export default function ProjectIndexPage({ activeProjectSlug }: ProjectIndexPage
         ))}
       </section>
       <aside className="portfolio_index__preview" aria-hidden="true">
-        <img src={previewProject.heroImage} alt="" />
+        {previewProject.homeVideo ? (
+          <video
+            key={previewProject.slug}
+            src={previewProject.homeVideo}
+            poster={previewProject.homeImage}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img src={previewProject.homeImage} alt="" />
+        )}
       </aside>
       <footer className="portfolio_index__footer">
         <span>Frontend portfolio</span>
