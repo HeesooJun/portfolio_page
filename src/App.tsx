@@ -438,6 +438,7 @@ export default function App() {
   const [previousProjectIndex, setPreviousProjectIndex] = useState(0)
   const [homePlaybackKey, setHomePlaybackKey] = useState(0)
   const [transitionDirection, setTransitionDirection] = useState<'next' | 'previous'>('next')
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false)
   const { isReady: isHomeMediaReady, resolveMediaSource } = useHomeMediaPreload(
     view.name === 'home',
   )
@@ -454,6 +455,7 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       setView(resolveViewFromHash(window.location.hash))
+      setIsHeaderHidden(false)
     }
 
     handleHashChange()
@@ -498,9 +500,42 @@ export default function App() {
     document.querySelector('.portfolio_shell__scroll')?.scrollTo({ top: 0 })
   }, [view])
 
+  useEffect(() => {
+    if (view.name === 'home') {
+      return
+    }
+
+    const scrollContainer = document.querySelector<HTMLElement>('.portfolio_shell__scroll')
+
+    if (!scrollContainer) {
+      return
+    }
+
+    let previousScrollTop = scrollContainer.scrollTop
+
+    const handleScroll = () => {
+      const currentScrollTop = scrollContainer.scrollTop
+      const scrollDelta = currentScrollTop - previousScrollTop
+
+      if (Math.abs(scrollDelta) < 8) {
+        return
+      }
+
+      // 홈 외 페이지는 내용 탐색이 주가 되므로, 아래로 읽을 때는 헤더를 숨기고 위로 돌아올 때만 다시 노출합니다.
+      setIsHeaderHidden(currentScrollTop > 32 && scrollDelta > 0)
+      previousScrollTop = currentScrollTop
+    }
+
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll)
+    }
+  }, [view])
+
   return (
     <div className={`portfolio_shell portfolio_shell--${view.name}`}>
-      <SiteHeader />
+      <SiteHeader isHidden={view.name === 'home' ? false : isHeaderHidden} />
       {view.name === 'home' ? (
         <HomeView
           activeProjectIndex={activeProjectIndex}
@@ -521,9 +556,9 @@ export default function App() {
   )
 }
 
-function SiteHeader() {
+function SiteHeader({ isHidden }: { isHidden: boolean }) {
   return (
-    <header className="portfolio_header">
+    <header className="portfolio_header" data-hidden={isHidden}>
       <a href="#home" className="portfolio_header__brand">
         <img className="portfolio_header__logo" src={nameLogoImage} alt="Heesoo Jun" />
       </a>
