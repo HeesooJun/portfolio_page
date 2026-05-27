@@ -148,7 +148,7 @@
   }
 
   .portfolio_home__center a {
-    @apply text-sm font-semibold text-white uppercase hover:opacity-70;
+    @apply text-sm font-normal text-white uppercase hover:opacity-70;
     font-family: 'Instrument Sans', Inter, sans-serif;
     letter-spacing: -0.02em;
     text-shadow: 0 0.75rem 2.4rem rgba(0, 0, 0, 0.42);

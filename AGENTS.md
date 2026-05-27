@@ -28,18 +28,8 @@
 - canonical 유틸리티로 대체 가능한 arbitrary value 클래스는 수정 후 남기지 않습니다.
 - `package-lock.json`은 항상 커밋합니다.
 - 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
-- 하이엔드 인터랙션/3D 작업의 기본 축은 아래 스택을 기준으로 검토합니다.
-  - 스크롤 제어: `gsap`, `ScrollTrigger`, `lenis`
-  - 3D 씬 렌더링: `three`, `@react-three/fiber`, `@react-three/drei`
-  - 연출 저작: `@theatre/core`, `@theatre/studio`
-  - 후처리: `postprocessing`, `@react-three/postprocessing`
-  - 상태 연결: `zustand`
-  - 성능 대응: `detect-gpu`, `@react-three/offscreen`
-  - 자산 파이프라인: `gltfjsx`, `@gltf-transform/cli`, `meshoptimizer`, `draco3d`, `KTX2/Basis`
-  - 셰이더 개발: `vite-plugin-glsl`
-  - 개발 튜닝: `leva`
-- `@theatre/r3f`는 현재 저장소의 `React 19` + `@react-three/fiber 9` 조합과 peer dependency가 맞지 않아 즉시 도입하지 않고, 호환 버전이 확인되기 전까지는 보류합니다.
-- KTX2/Basis는 별도 런타임 패키지보다 `three/examples` 로더와 트랜스코더 경로 설정을 우선 사용합니다.
+- 현재 사용하지 않는 3D/GSAP/Lenis/Theatre 실험 런타임은 저장소에서 제거한 상태입니다.
+- 향후 하이엔드 인터랙션이나 3D를 다시 도입할 때는 실제 요구사항과 호환성을 먼저 확인한 뒤 별도 작업 단위로 의존성과 구조를 추가합니다.
 
 ## 비주얼 개발 방향
 
