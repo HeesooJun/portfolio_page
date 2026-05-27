@@ -28,8 +28,8 @@ export const AUTOPLAY_SECONDS = 12
 // 프로젝트 설명 블록은 안정적으로 유지하고, 메인/목록 노출 순서만 여기서 조정합니다.
 const PROJECT_DISPLAY_ORDER: Record<string, number> = {
   lifesavior: 0,
-  heygent: 1,
-  piview: 2,
+  piview: 1,
+  heygent: 2,
 }
 
 const PROJECT_ENTRIES: PortfolioProject[] = [
