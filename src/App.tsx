@@ -1,8 +1,24 @@
-import { useEffect, useMemo, useState } from 'react'
+import { type CSSProperties, useEffect, useMemo, useState } from 'react'
 
-import heygentImage from '@/assets/project-main/heygent.png'
-import lifesaviorImage from '@/assets/project-main/lifesavior.png'
-import piviewImage from '@/assets/project-main/piview.png'
+import heygentMainSceneImage from '@/assets/main/heygent-main2.gif'
+import lifesaviorHomeImage from '@/assets/main/lifesavior-main.gif'
+import piviewHomeImage from '@/assets/main/piview-main.png'
+import heygentProjectMainImage from '@/assets/project-main/heygent.png'
+import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
+import piviewProjectMainImage from '@/assets/project-main/piview.png'
+import heygentDashboardImage from '@/assets/project-evidence/heygent/dashboard.gif'
+import heygentLocalBridgeImage from '@/assets/project-evidence/heygent/local-bridge.gif'
+import heygentOfficeImage from '@/assets/project-evidence/heygent/office-visualization.png'
+import heygentWorkboardImage from '@/assets/project-evidence/heygent/work-board.png'
+import heygentWorkboardInputImage from '@/assets/project-evidence/heygent/workboard-input.gif'
+import lifesaviorBrandImage from '@/assets/project-evidence/lifesavior/brand-mockup.png'
+import lifesaviorInterfaceImage from '@/assets/project-evidence/lifesavior/ui-mockup.png'
+import lifesaviorLogoImage from '@/assets/project-evidence/lifesavior/ptt-logo.png'
+import piviewAnalysisImage from '@/assets/project-evidence/piview/ai-analysis.gif'
+import piviewOcrImage from '@/assets/project-evidence/piview/ocr.gif'
+import piviewProductAiImage from '@/assets/project-evidence/piview/product-ai.gif'
+import piviewSkinAnalysisImage from '@/assets/project-evidence/piview/ai-skin-analysis.png'
+import piviewCompareImage from '@/assets/project-evidence/piview/product-compare.png'
 
 interface ProjectMeta {
   label: string
@@ -14,16 +30,33 @@ interface ProjectCaseStudy {
   text: string
 }
 
+type ProjectEvidenceKind = 'wide' | 'pair' | 'phone'
+
+interface ProjectEvidence {
+  src: string
+  alt: string
+  caption: string
+  kind: ProjectEvidenceKind
+  objectPosition?: string
+}
+
 interface PortfolioProject {
   slug: string
   title: string
   subtitle: string
+  mobileDescription: string
   year: string
   type: string
   date: string
   role: string
   tools: string
-  image: string
+  homeImage: string
+  homeMobileImage: string
+  heroImage: string
+  homePosition: string
+  homeMobilePosition: string
+  heroPosition: string
+  evidence: ProjectEvidence[]
   repository: string
   summary: string
   contribution: string
@@ -44,12 +77,51 @@ const PROJECTS: PortfolioProject[] = [
     slug: 'heygent',
     title: 'HeyGent',
     subtitle: '멀티 디바이스 AI 오케스트레이션',
+    mobileDescription:
+      '사용자의 요청을 AI가 작업으로 나누고, 웹 화면, 모바일 앱, 갤럭시 워치, IoT 디스플레이, 로컬 브릿지까지 연결하는 멀티 디바이스 AI 작업 실행 플랫폼입니다.',
     year: '2026',
     type: 'AI Orchestration / Web / Mobile / IoT',
     date: '2026.04 - 2026.05',
     role: 'AI Lead / Orchestration / FE Integration / Docs',
     tools: 'Spring Boot, FastAPI, React, Android, MQTT',
-    image: heygentImage,
+    homeImage: heygentMainSceneImage,
+    homeMobileImage: heygentMainSceneImage,
+    heroImage: heygentProjectMainImage,
+    homePosition: 'center center',
+    homeMobilePosition: '57% center',
+    heroPosition: 'center center',
+    evidence: [
+      {
+        src: heygentOfficeImage,
+        alt: 'HeyGent 오피스 공간 시각화 화면',
+        caption: 'Connected office visualization',
+        kind: 'wide',
+      },
+      {
+        src: heygentDashboardImage,
+        alt: 'HeyGent 대시보드 실행 화면',
+        caption: 'Live task dashboard',
+        kind: 'pair',
+      },
+      {
+        src: heygentWorkboardImage,
+        alt: 'HeyGent 작업 보드 화면',
+        caption: 'Agent work board',
+        kind: 'pair',
+      },
+      {
+        src: heygentLocalBridgeImage,
+        alt: 'HeyGent 로컬 브리지 실행 장면',
+        caption: 'Local bridge flow',
+        kind: 'pair',
+      },
+      {
+        src: heygentWorkboardInputImage,
+        alt: 'HeyGent 작업 보드 입력 장면',
+        caption: 'Workboard input loop',
+        kind: 'wide',
+      },
+    ],
     repository: 'github.com/HeesooJun/S-Free',
     summary:
       '사용자의 요청을 여러 작업 단위로 나누고, 웹과 모바일 화면에 실행 상태를 실시간으로 되돌려 주는 AI 작업 실행 플랫폼입니다.',
@@ -79,12 +151,51 @@ const PROJECTS: PortfolioProject[] = [
     slug: 'piview',
     title: 'PiView',
     subtitle: '스킨케어 큐레이션과 추천 검색',
+    mobileDescription:
+      '피부 타입 분석부터 화장품 추천, 루틴 관리까지 이어지는 스마트 뷰티 플랫폼입니다.',
     year: '2026',
     type: 'Big Data / Recommendation / AI Chatbot',
     date: '2026.02 - 2026.03',
     role: 'AI / Backend Integration',
     tools: 'Spring Boot, Next.js, FastAPI, ChromaDB',
-    image: piviewImage,
+    homeImage: piviewHomeImage,
+    homeMobileImage: piviewHomeImage,
+    heroImage: piviewProjectMainImage,
+    homePosition: 'center center',
+    homeMobilePosition: '27% center',
+    heroPosition: 'center center',
+    evidence: [
+      {
+        src: piviewAnalysisImage,
+        alt: 'PiView AI 분석 흐름',
+        caption: 'AI skin analysis flow',
+        kind: 'phone',
+      },
+      {
+        src: piviewSkinAnalysisImage,
+        alt: 'PiView 피부 분석 결과 화면',
+        caption: 'Skin result screen',
+        kind: 'phone',
+      },
+      {
+        src: piviewCompareImage,
+        alt: 'PiView 상품 비교 화면',
+        caption: 'Product comparison',
+        kind: 'phone',
+      },
+      {
+        src: piviewOcrImage,
+        alt: 'PiView OCR 분석 흐름',
+        caption: 'OCR routine capture',
+        kind: 'phone',
+      },
+      {
+        src: piviewProductAiImage,
+        alt: 'PiView 상품 AI 분석 흐름',
+        caption: 'Product AI explanation',
+        kind: 'phone',
+      },
+    ],
     repository: 'github.com/HeesooJun/S-bigdata',
     summary:
       '피부 상태와 설문 응답을 바탕으로 제품을 분석하고, 검색과 추천, 루틴 관리를 하나의 흐름으로 묶은 스킨케어 플랫폼입니다.',
@@ -114,12 +225,39 @@ const PROJECTS: PortfolioProject[] = [
     slug: 'lifesavior',
     title: 'Lifesavior',
     subtitle: '오프라인 구조 지원 서비스',
+    mobileDescription:
+      '재난 상황에서 인터넷과 기지국이 끊겨도 BLE로 연결된 주변 단말을 거쳐 구조 신호를 전달하는 오프라인 구조 지원 앱입니다.',
     year: '2026',
     type: 'Android / Offline Rescue / BLE Mesh',
     date: '2026.02 - 2026.05',
     role: 'Mobile rescue flow / Offline communication',
     tools: 'Kotlin, Jetpack Compose, BLE, UWB',
-    image: lifesaviorImage,
+    homeImage: lifesaviorHomeImage,
+    homeMobileImage: lifesaviorHomeImage,
+    heroImage: lifesaviorProjectMainImage,
+    homePosition: 'center center',
+    homeMobilePosition: '28% center',
+    heroPosition: 'center center',
+    evidence: [
+      {
+        src: lifesaviorBrandImage,
+        alt: 'Lifesavior 브랜드 목업',
+        caption: 'Rescue brand system',
+        kind: 'wide',
+      },
+      {
+        src: lifesaviorInterfaceImage,
+        alt: 'Lifesavior 구조자와 피구조자 앱 화면',
+        caption: 'Responder interface',
+        kind: 'pair',
+      },
+      {
+        src: lifesaviorLogoImage,
+        alt: 'Lifesavior PTT 로고 화면',
+        caption: 'Emergency identity',
+        kind: 'pair',
+      },
+    ],
     repository: 'github.com/HeesooJun/S-mobile',
     summary:
       '인터넷이 끊긴 재난 상황에서도 BLE 기반 주변 단말을 거쳐 구조 신호를 전달하고 구조자가 우선순위를 판단하도록 돕는 앱입니다.',
@@ -205,13 +343,19 @@ function navigateTo(hash: string) {
   window.location.hash = hash
 }
 
+function resolveProjectHref(slug: string) {
+  return `#project/${slug}`
+}
+
 function romanize(index: number) {
-  return ['I', 'II', 'III'][index] ?? `${index + 1}`
+  return ['I', 'II', 'III', 'IV', 'V', 'VI'][index] ?? `${index + 1}`
 }
 
 export default function App() {
   const [view, setView] = useState<PortfolioView>(() => resolveViewFromHash(window.location.hash))
   const [activeProjectIndex, setActiveProjectIndex] = useState(0)
+  const [previousProjectIndex, setPreviousProjectIndex] = useState(0)
+  const [transitionDirection, setTransitionDirection] = useState<'next' | 'previous'>('next')
   const activeProject = PROJECTS[activeProjectIndex]
   const currentProject =
     view.name === 'project'
@@ -235,13 +379,30 @@ export default function App() {
     }
   }, [])
 
+  const selectProjectIndex = (nextIndex: number) => {
+    setActiveProjectIndex((currentIndex) => {
+      if (currentIndex === nextIndex) {
+        return currentIndex
+      }
+
+      setPreviousProjectIndex(currentIndex)
+      setTransitionDirection(nextIndex > currentIndex ? 'next' : 'previous')
+      return nextIndex
+    })
+  }
+
   useEffect(() => {
     if (view.name !== 'home') {
       return
     }
 
     const intervalId = window.setInterval(() => {
-      setActiveProjectIndex((currentIndex) => (currentIndex + 1) % PROJECTS.length)
+      setActiveProjectIndex((currentIndex) => {
+        const nextIndex = (currentIndex + 1) % PROJECTS.length
+        setPreviousProjectIndex(currentIndex)
+        setTransitionDirection('next')
+        return nextIndex
+      })
     }, AUTOPLAY_SECONDS * 1000)
 
     return () => {
@@ -259,7 +420,9 @@ export default function App() {
       {view.name === 'home' ? (
         <HomeView
           activeProjectIndex={activeProjectIndex}
-          setActiveProjectIndex={setActiveProjectIndex}
+          previousProjectIndex={previousProjectIndex}
+          transitionDirection={transitionDirection}
+          setActiveProjectIndex={selectProjectIndex}
         />
       ) : null}
       {view.name === 'index' ? <IndexView activeProjectSlug={currentProject.slug} /> : null}
@@ -274,17 +437,14 @@ export default function App() {
 function SiteHeader({ view }: { view: PortfolioView }) {
   return (
     <header className="portfolio_header">
-      <button type="button" className="portfolio_header__brand" onClick={() => navigateTo('home')}>
+      <a href="#home" className="portfolio_header__brand">
         <span>HS</span>
+        <span>/</span>
         <span>{getViewLabel(view)}</span>
-      </button>
+      </a>
       <nav className="portfolio_header__nav" aria-label="Portfolio navigation">
-        <button type="button" onClick={() => navigateTo('index')}>
-          Index
-        </button>
-        <button type="button" onClick={() => navigateTo('about')}>
-          About
-        </button>
+        <a href="#index">Index</a>
+        <a href="#about">About</a>
       </nav>
     </header>
   )
@@ -292,9 +452,13 @@ function SiteHeader({ view }: { view: PortfolioView }) {
 
 function HomeView({
   activeProjectIndex,
+  previousProjectIndex,
+  transitionDirection,
   setActiveProjectIndex,
 }: {
   activeProjectIndex: number
+  previousProjectIndex: number
+  transitionDirection: 'next' | 'previous'
   setActiveProjectIndex: (index: number) => void
 }) {
   const project = PROJECTS[activeProjectIndex]
@@ -303,44 +467,70 @@ function HomeView({
     <main className="portfolio_home" aria-label="Home">
       <div className="portfolio_home__media_stage">
         {PROJECTS.map((item, index) => (
-          <img
+          <figure
             key={item.slug}
-            src={item.image}
-            alt=""
-            className={`portfolio_home__image ${
-              index === activeProjectIndex ? 'portfolio_home__image--active' : ''
-            }`}
+            className="portfolio_home__media"
+            data-active={index === activeProjectIndex}
+            data-previous={index === previousProjectIndex}
+            data-direction={transitionDirection}
+            style={
+              {
+                '--home-backdrop-source': `url(${item.homeImage})`,
+                '--home-mobile-backdrop-source': `url(${item.homeMobileImage})`,
+                '--home-image-position': item.homePosition,
+                '--home-mobile-image-position': item.homeMobilePosition,
+              } as CSSProperties
+            }
             aria-hidden={index !== activeProjectIndex}
-          />
+          >
+            <picture>
+              <source media="(max-width: 767px)" srcSet={item.homeMobileImage} />
+              <img className="portfolio_home__image" src={item.homeImage} alt="" />
+            </picture>
+          </figure>
         ))}
       </div>
       <section className="portfolio_home__center" aria-labelledby="home_project_title">
-        <p className="portfolio_home__kicker">Selected project</p>
-        <h1 id="home_project_title">{project.title}</h1>
-        <button type="button" onClick={() => navigateTo(`project/${project.slug}`)}>
-          Discover project
-        </button>
+        {/* 데스크톱 홈 이미지는 main 자산이 타이틀 역할을 대신하므로 접근성 제목만 남깁니다. */}
+        <h1 id="home_project_title" className="portfolio_home__title">
+          {project.title}
+        </h1>
+        <p>{project.subtitle}</p>
+        <a href={resolveProjectHref(project.slug)}>Discover project</a>
       </section>
       <div className="portfolio_home__bottom">
         <div className="portfolio_home__count">
           <span>{romanize(activeProjectIndex)}</span>
-          <span>{romanize(PROJECTS.length - 1)}</span>
-        </div>
-        <div className="portfolio_home__progress" key={project.slug} aria-hidden="true">
-          <span />
         </div>
         <div className="portfolio_home__controls" aria-label="Project controls">
           {PROJECTS.map((item, index) => (
             <button
               key={item.slug}
               type="button"
-              aria-label={`${item.title} 보기`}
-              className={index === activeProjectIndex ? 'portfolio_home__dot--active' : ''}
+              aria-label={`${item.title} project`}
+              aria-pressed={index === activeProjectIndex}
+              className={index === activeProjectIndex ? 'portfolio_home__bar--active' : ''}
               onClick={() => setActiveProjectIndex(index)}
-            />
+            >
+              <span key={index === activeProjectIndex ? item.slug : undefined} />
+            </button>
           ))}
         </div>
+        <span className="portfolio_home__total">{romanize(PROJECTS.length - 1)}</span>
       </div>
+      <section className="portfolio_home__mobile_list" aria-label="Project list">
+        {PROJECTS.map((item) => (
+          <article key={item.slug} className="portfolio_home__mobile_project">
+            {/* 모바일은 레퍼런스처럼 모든 프로젝트를 세로로 보여주므로 원본 비율을 유지합니다. */}
+            <img src={item.homeImage} alt={`${item.title} 대표 화면`} />
+            <div>
+              <h2>{item.title}</h2>
+              <p>{item.mobileDescription}</p>
+              <a href={resolveProjectHref(item.slug)}>DISCOVER PROJECT</a>
+            </div>
+          </article>
+        ))}
+      </section>
     </main>
   )
 }
@@ -351,29 +541,24 @@ function IndexView({ activeProjectSlug }: { activeProjectSlug: string }) {
 
   return (
     <main className="portfolio_shell__scroll portfolio_index" aria-label="Project index">
-      <section className="portfolio_index__intro">
-        <p>Index</p>
-        <h1>Selected Projects</h1>
-      </section>
       <section className="portfolio_index__list" aria-label="Project list">
         {PROJECTS.map((project, index) => (
-          <button
+          <a
             key={project.slug}
-            type="button"
+            href={resolveProjectHref(project.slug)}
             className="portfolio_index__row"
             onMouseEnter={() => setPreviewSlug(project.slug)}
             onFocus={() => setPreviewSlug(project.slug)}
-            onClick={() => navigateTo(`project/${project.slug}`)}
           >
             <span>{String(index + 1).padStart(2, '0')}</span>
             <strong>{project.title}</strong>
             <span>{project.type}</span>
             <span>{project.year}</span>
-          </button>
+          </a>
         ))}
       </section>
       <aside className="portfolio_index__preview" aria-hidden="true">
-        <img src={previewProject.image} alt="" />
+        <img src={previewProject.heroImage} alt="" />
       </aside>
       <footer className="portfolio_index__footer">
         <span>Frontend portfolio</span>
@@ -389,9 +574,7 @@ function AboutView() {
     <main className="portfolio_shell__scroll portfolio_about" aria-label="About">
       <section className="portfolio_about__statement">
         <p>About</p>
-        <h1>
-          화면의 첫인상과 실제 기능의 흐름이 같은 방향을 향하도록 설계하는 프론트엔드 개발자입니다.
-        </h1>
+        <h1>화면의 첫인상과 실제 기능의 흐름을 같은 방향으로 설계합니다.</h1>
       </section>
       <section className="portfolio_about__body">
         <p>
@@ -437,10 +620,13 @@ function ProjectDetailView({
           <p>{project.type}</p>
           <h1>{project.title}</h1>
         </div>
-        <p>{project.summary}</p>
       </section>
       <section className="portfolio_detail__meta" aria-label="Project metadata">
         <dl>
+          <div>
+            <dt>Summary</dt>
+            <dd>{project.summary}</dd>
+          </div>
           <div>
             <dt>Role</dt>
             <dd>{project.role}</dd>
@@ -449,18 +635,36 @@ function ProjectDetailView({
             <dt>Date</dt>
             <dd>{project.date}</dd>
           </div>
-          <div>
-            <dt>Tools</dt>
-            <dd>{project.tools}</dd>
-          </div>
         </dl>
       </section>
       <section className="portfolio_detail__visual">
-        <img src={project.image} alt={`${project.title} 대표 화면`} />
+        <img
+          src={project.heroImage}
+          alt={`${project.title} 대표 화면`}
+          style={{ objectPosition: project.heroPosition }}
+        />
       </section>
-      <section className="portfolio_detail__narrative">
+      <section className="portfolio_detail__story">
         <p>{project.subtitle}</p>
         <h2>{project.contribution}</h2>
+      </section>
+      <section className="portfolio_detail__evidence" aria-label={`${project.title} evidence`}>
+        {project.evidence.map((asset) => (
+          <figure
+            key={`${asset.caption}-${asset.src}`}
+            className={`portfolio_detail__evidence_item portfolio_detail__evidence_item--${asset.kind}`}
+          >
+            <img src={asset.src} alt={asset.alt} style={{ objectPosition: asset.objectPosition }} />
+            <figcaption>{asset.caption}</figcaption>
+          </figure>
+        ))}
+      </section>
+      <section className="portfolio_detail__narrative">
+        <p>Process</p>
+        <h2>
+          대표 화면을 먼저 보여주고, 이어지는 구간에서는 실제 기능의 증거와 설계 판단을 천천히
+          확인하도록 구성했습니다.
+        </h2>
       </section>
       <section className="portfolio_detail__case_grid">
         {project.caseStudy.map((item) => (
@@ -471,7 +675,7 @@ function ProjectDetailView({
         ))}
       </section>
       <section className="portfolio_detail__wide_media">
-        <img src={project.image} alt="" />
+        <img src={project.evidence[0]?.src ?? project.heroImage} alt="" />
       </section>
       <section className="portfolio_detail__metrics">
         {project.meta.map((item) => (
