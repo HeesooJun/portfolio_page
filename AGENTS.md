@@ -28,18 +28,8 @@
 - canonical 유틸리티로 대체 가능한 arbitrary value 클래스는 수정 후 남기지 않습니다.
 - `package-lock.json`은 항상 커밋합니다.
 - 애니메이션 작업보다 빌드 도구와 QC 체계를 우선 정비합니다.
-- 하이엔드 인터랙션/3D 작업의 기본 축은 아래 스택을 기준으로 검토합니다.
-  - 스크롤 제어: `gsap`, `ScrollTrigger`, `lenis`
-  - 3D 씬 렌더링: `three`, `@react-three/fiber`, `@react-three/drei`
-  - 연출 저작: `@theatre/core`, `@theatre/studio`
-  - 후처리: `postprocessing`, `@react-three/postprocessing`
-  - 상태 연결: `zustand`
-  - 성능 대응: `detect-gpu`, `@react-three/offscreen`
-  - 자산 파이프라인: `gltfjsx`, `@gltf-transform/cli`, `meshoptimizer`, `draco3d`, `KTX2/Basis`
-  - 셰이더 개발: `vite-plugin-glsl`
-  - 개발 튜닝: `leva`
-- `@theatre/r3f`는 현재 저장소의 `React 19` + `@react-three/fiber 9` 조합과 peer dependency가 맞지 않아 즉시 도입하지 않고, 호환 버전이 확인되기 전까지는 보류합니다.
-- KTX2/Basis는 별도 런타임 패키지보다 `three/examples` 로더와 트랜스코더 경로 설정을 우선 사용합니다.
+- 현재 사용하지 않는 3D/GSAP/Lenis/Theatre 실험 런타임은 저장소에서 제거한 상태입니다.
+- 향후 하이엔드 인터랙션이나 3D를 다시 도입할 때는 실제 요구사항과 호환성을 먼저 확인한 뒤 별도 작업 단위로 의존성과 구조를 추가합니다.
 
 ## 비주얼 개발 방향
 
@@ -84,25 +74,3 @@
 - 프로젝트 구조, 정책, 디자인 방향, 검증 기준, 명명 규칙처럼 `AGENTS.md`가 설명하는 기준이 변경되면 관련 내용을 함께 최신화합니다.
 - 코드 변경 이후 `AGENTS.md`에 적힌 내용과 실제 저장소 상태가 어긋나면 해당 작업 범위 안에서 즉시 수정합니다.
 - 반대로 `AGENTS.md`의 기준에 영향을 주지 않는 단순 구현 변경이나 미세 스타일 조정만으로는 문서를 불필요하게 수정하지 않습니다.
-
-## SKILLS 사용 가이드
-
-- 작업에 맞는 최소 개수의 스킬만 선택합니다.
-- 스킬을 사용하는 경우 작업 시작 시 첫 줄에 `Using skill: <skill-name>` 형식으로 선언합니다.
-- 여러 스킬이 필요하면 사용 순서를 한 줄로 먼저 밝힙니다.
-- 스킬이 로컬에 없거나 접근할 수 없으면 그 사실을 먼저 알리고, 설치 또는 대체 방법을 제안한 뒤 진행합니다.
-- 신뢰도가 낮거나 출처가 불명확한 스킬은 기본 가이드에 넣지 않습니다.
-- 기본값은 배포 미수행입니다. 사용자가 `배포해줘`, `배포 테스트해줘`처럼 명시적으로 요청한 경우에만 배포 관련 스킬을 사용합니다.
-
-### 작업 유형별 추천 스킬
-
-- 웹디자인, UI 톤앤매너 정리, 레이아웃/인터랙션 방향 설계: `web-design-guidelines`
-- 2.5D 파랄랙스, 스크롤 기반 연출, 섹션 전환 모션: `scroll-experience`
-- React/Vite 코드 작성, 리팩터링, 성능 최적화: `vercel-react-best-practices`
-- 브라우저 동작 검증, E2E, 회귀 확인, 스냅샷 점검: `playwright-cli`
-- 비주얼 에셋 생성(배경, 아이콘, 오브젝트): `imagegen`
-- 배포 또는 배포 테스트: `deploy-to-vercel`
-
-### 레이아웃 판단 기준
-
-- 헤더, 사이드바, 플로팅 내비게이션 같은 구조 선택은 전용 스킬보다 `web-design-guidelines`를 기준으로 화면 구성과 콘텐츠 흐름에 맞게 판단합니다.

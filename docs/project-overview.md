@@ -10,15 +10,18 @@
 ## 주요 구조
 
 - `src/main.tsx`: React 진입점과 전역 스타일 연결
-- `src/App.tsx`: Header → Hero → Projects → About → Tech → Footer 순서로 단일 페이지 조합
-- 섹션 컴포넌트(`src/app/section/*`): 정적 배열 데이터로 카드와 리스트 렌더링
-- 스타일(`src/styles/*.css`): Tailwind `@layer components`로 정의, 공통 포인트 컬러 `--accent: #2563eb` 사용
+- `src/app/App.tsx`: hash 기반 뷰 전환, 홈 자동 전환, 헤더 노출 상태를 조합하는 앱 루트
+- `src/widgets/*`: `PortfolioShell`, `SiteHeader`처럼 화면 전역 레이아웃을 담당하는 큰 블록
+- `src/pages/*`: home, project index, project detail, about 화면 단위 UI
+- `src/entities/project/model/*`: 프로젝트 타입과 실제 프로젝트 데이터
+- `src/shared/*`: 화면 간 공통으로 쓰는 라우팅/표기 유틸리티
+- 스타일은 현재 `src/styles/portfolio-shell.css`에 Tailwind `@layer components`로 통합되어 있습니다.
 
 ## 콘텐츠 상태 메모
 
-- Hero 소개 문구와 프로젝트 설명은 정적 콘텐츠 기반입니다.
-- 자산: `src/assets/HeroSection.png` 포함, 색상 팔레트 기록은 `docs/color.md`에 있음
-- 현재 빌드 산출물 기준 가장 큰 자산은 Hero 배경 이미지이며, 추후 최적화 후보입니다.
+- 프로젝트 설명과 상세 페이지 내용은 `src/entities/project/model/project-data.ts`의 정적 데이터 기반입니다.
+- 현재 실사용 자산은 `src/assets/main`, `src/assets/project-main`, `src/assets/project-evidence`, `src/assets/name-logo3.png`에 모아 둡니다.
+- 사용하지 않는 3D/GSAP/Lenis/Theatre 실험 런타임과 예전 섹션 구조는 제거했습니다.
 
 ## 실행
 

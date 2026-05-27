@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: ['.next/**', 'dist/**', 'node_modules/**', '.husky/**'],
+    ignores: ['.next/**', 'dist/**', 'node_modules/**', '.husky/**', 'tmp/**'],
   },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended, eslintConfigPrettier],
