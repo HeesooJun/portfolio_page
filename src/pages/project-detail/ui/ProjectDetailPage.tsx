@@ -1,6 +1,8 @@
 import type { PortfolioProject } from '@/entities/project/model/project-types'
 import { navigateTo } from '@/shared/lib/portfolio-routing'
 
+import ProjectIntroReveal from './blocks/ProjectIntroReveal'
+
 interface ProjectDetailPageProps {
   project: PortfolioProject
   nextProject: PortfolioProject
@@ -12,35 +14,16 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
       className="portfolio_shell__scroll portfolio_detail"
       aria-label={`${project.title} detail`}
     >
-      <section className="portfolio_detail__hero">
-        <div>
-          <p>{project.type}</p>
-          <h1>{project.title}</h1>
-        </div>
-      </section>
-      <section className="portfolio_detail__meta" aria-label="Project metadata">
-        <dl>
-          <div>
-            <dt>Summary</dt>
-            <dd>{project.summary}</dd>
-          </div>
-          <div>
-            <dt>Role</dt>
-            <dd>{project.role}</dd>
-          </div>
-          <div>
-            <dt>Date</dt>
-            <dd>{project.date}</dd>
-          </div>
-        </dl>
-      </section>
-      <section className="portfolio_detail__visual">
-        <img
-          src={project.heroImage}
-          alt={`${project.title} 대표 화면`}
-          style={{ objectPosition: project.heroPosition }}
-        />
-      </section>
+      <ProjectIntroReveal
+        type={project.type}
+        title={project.title}
+        summary={project.summary}
+        role={project.role}
+        date={project.date}
+        image={project.heroImage}
+        imageAlt={`${project.title} 대표 화면`}
+        imagePosition={project.heroPosition}
+      />
       <section className="portfolio_detail__story">
         <p>{project.subtitle}</p>
         <h2>{project.contribution}</h2>
