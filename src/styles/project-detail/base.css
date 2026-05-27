@@ -1,0 +1,13 @@
+﻿@layer components {
+  .portfolio_detail {
+    --paper: #f7f4f2;
+    --ink: #271b16;
+    --ink-muted: rgba(39, 27, 22, 0.58);
+    --ink-faint: rgba(39, 27, 22, 0.16);
+    --line: rgba(39, 27, 22, 0.18);
+    font-family: 'Hahmlet', Georgia, serif;
+    font-weight: 400;
+    background: var(--paper);
+    color: var(--ink);
+  }
+}

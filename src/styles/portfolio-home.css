@@ -1,0 +1,281 @@
+﻿@layer components {
+  .portfolio_home {
+    @apply relative h-screen w-screen overflow-hidden;
+    background: #10131b;
+  }
+
+  .portfolio_home__media_stage {
+    @apply absolute inset-0;
+  }
+
+  .portfolio_home__loader {
+    @apply absolute inset-0 z-10 grid place-items-center text-xs font-semibold text-white uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .portfolio_home__media {
+    @apply pointer-events-none absolute -inset-8 m-0 opacity-0;
+    background: #10131b;
+    transform: scale(1.04) translate3d(2rem, 0, 0);
+    transition:
+      opacity 900ms ease,
+      transform 1200ms ease;
+  }
+
+  .portfolio_home__media[data-active='true'] {
+    @apply opacity-100;
+    transform: scale(1);
+  }
+
+  .portfolio_home__media[data-previous='true'][data-active='false'] {
+    transform: scale(1.02) translate3d(-2rem, 0, 0);
+  }
+
+  .portfolio_home__media[data-direction='previous'] {
+    transform: scale(1.04) translate3d(-2rem, 0, 0);
+  }
+
+  .portfolio_home__media::before {
+    content: '';
+    @apply absolute inset-0;
+    background-image: var(--home-backdrop-source);
+    background-position: var(--home-image-position, center center);
+    background-size: cover;
+    filter: blur(1.2rem) saturate(0.92);
+    opacity: 0.34;
+    transform: scale(1.08);
+  }
+
+  .portfolio_home__image,
+  .portfolio_home__video {
+    @apply absolute inset-0 block h-full w-full object-cover;
+    object-position: var(--home-image-position, center center);
+    filter: saturate(0.98) contrast(0.98);
+  }
+
+  .portfolio_home__media picture {
+    @apply absolute inset-0 block;
+  }
+
+  .portfolio_home::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, transparent 34%, rgba(0, 0, 0, 0.2) 100%),
+      radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 76%);
+  }
+
+  .portfolio_home__center {
+    @apply z-10 flex flex-col items-center text-center text-white;
+    position: absolute;
+    left: 50%;
+    bottom: clamp(5rem, 9vh, 6.75rem);
+    transform: translateX(-50%);
+  }
+
+  .portfolio_home__title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .portfolio_home__center p {
+    @apply hidden;
+  }
+
+  .portfolio_home__center a {
+    @apply text-sm font-normal text-white uppercase hover:opacity-70;
+    font-family: 'Instrument Sans', Inter, sans-serif;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0.75rem 2.4rem rgba(0, 0, 0, 0.42);
+    transition: opacity 180ms ease;
+  }
+
+  .portfolio_home__bottom {
+    @apply absolute right-5 bottom-5 left-5 z-10 grid grid-cols-[auto_1fr_auto] items-center gap-5 text-xs font-semibold text-white sm:right-7 sm:bottom-7 sm:left-7;
+  }
+
+  .portfolio_home__count {
+    @apply flex gap-3 text-2xl font-normal;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .portfolio_home__total {
+    @apply justify-self-end text-2xl font-normal;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .portfolio_home__progress {
+    @apply h-px overflow-hidden bg-white/35;
+  }
+
+  .portfolio_home__progress span {
+    @apply block h-full w-full origin-left bg-white;
+    animation: portfolio_home_progress 12s linear forwards;
+  }
+
+  .portfolio_home__controls {
+    @apply mx-auto flex w-full max-w-[32rem] gap-8;
+  }
+
+  .portfolio_home__controls button {
+    @apply relative min-h-9 flex-1 cursor-pointer border-0 bg-transparent p-0;
+  }
+
+  .portfolio_home__controls button > span {
+    @apply absolute top-1/2 left-0 block h-px w-full origin-left bg-white/50;
+  }
+
+  .portfolio_home__controls .portfolio_home__bar--active > span {
+    @apply bg-white;
+    animation: portfolio_home_progress 12s linear forwards;
+  }
+
+  .portfolio_home__mobile_list {
+    @apply hidden;
+  }
+}
+
+@keyframes portfolio_home_progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.portfolio_home__controls button:focus-visible {
+  outline: none;
+}
+
+.portfolio_home__controls button:focus-visible > span {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 767px) {
+  @layer components {
+    .portfolio_home__image,
+    .portfolio_home__video {
+      @apply h-full w-full object-contain;
+      object-position: var(--home-mobile-image-position, center center);
+    }
+
+    .portfolio_home__media::before {
+      background-image: var(--home-mobile-backdrop-source);
+      background-position: var(--home-mobile-image-position, center center);
+      filter: blur(1.4rem) saturate(0.92);
+      opacity: 0.42;
+      transform: scale(1.08);
+    }
+
+    .portfolio_home {
+      @apply h-screen overflow-y-auto;
+      background: var(--paper);
+    }
+
+    .portfolio_home::after {
+      display: none;
+    }
+
+    .portfolio_home__media_stage {
+      @apply hidden;
+    }
+
+    .portfolio_home__center {
+      @apply hidden;
+    }
+
+    .portfolio_home__title {
+      @apply mb-5 max-w-[86vw] text-[clamp(2.5rem,11vw,3.8rem)] leading-none font-normal;
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      letter-spacing: 0;
+      text-shadow: none;
+    }
+
+    .portfolio_home__center p {
+      @apply mb-8 block max-w-[17rem] text-base leading-relaxed;
+      color: var(--ink);
+    }
+
+    .portfolio_home__center a {
+      color: var(--ink);
+      text-shadow: none;
+    }
+
+    .portfolio_home__bottom {
+      @apply hidden;
+    }
+
+    .portfolio_home__mobile_list {
+      @apply block pt-24 pb-16;
+    }
+
+    .portfolio_home__mobile_project {
+      @apply mb-20;
+    }
+
+    .portfolio_home__mobile_project img,
+    .portfolio_home__mobile_project video {
+      @apply block h-auto w-full;
+    }
+
+    .portfolio_home__mobile_project div {
+      @apply flex min-h-72 flex-col pt-12 pr-5 pl-8;
+    }
+
+    .portfolio_home__mobile_project h2 {
+      @apply text-[clamp(2.2rem,10vw,3.8rem)] leading-none font-normal;
+      font-family: Georgia, 'Times New Roman', serif;
+      letter-spacing: 0;
+    }
+
+    .portfolio_home__mobile_project p {
+      @apply mt-12 max-w-none text-base leading-relaxed;
+      color: var(--ink);
+      word-break: keep-all;
+    }
+
+    .portfolio_home__mobile_project a {
+      @apply mt-auto inline-block pt-12 text-sm font-semibold uppercase;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    .portfolio_home__controls {
+      @apply max-w-none gap-2;
+    }
+
+    .portfolio_home__controls button {
+      @apply min-h-11;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer components {
+    .portfolio_home__media,
+    .portfolio_home__center a {
+      transition: none;
+    }
+
+    .portfolio_home__controls .portfolio_home__bar--active > span {
+      animation: none;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import heygentMainSceneVideo from '@/assets/main/heygent-main2.webm'
 import lifesaviorHomeImage from '@/assets/main/lifesavior-main-poster.webp'
 import lifesaviorHomeVideo from '@/assets/main/lifesavior-main.webm'
 import piviewHomeImage from '@/assets/main/piview-main.png'
+import piviewHomeVideo from '@/assets/main/piview-main2.webm'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
 import piviewProjectMainImage from '@/assets/project-main/piview.png'
@@ -24,7 +25,14 @@ import type { PortfolioProject } from './project-types'
 
 export const AUTOPLAY_SECONDS = 12
 
-export const PROJECTS: PortfolioProject[] = [
+// 프로젝트 설명 블록은 안정적으로 유지하고, 메인/목록 노출 순서만 여기서 조정합니다.
+const PROJECT_DISPLAY_ORDER: Record<string, number> = {
+  lifesavior: 0,
+  piview: 1,
+  heygent: 2,
+}
+
+const PROJECT_ENTRIES: PortfolioProject[] = [
   {
     slug: 'heygent',
     title: 'HeyGent',
@@ -41,6 +49,7 @@ export const PROJECTS: PortfolioProject[] = [
     homeVideo: heygentMainSceneVideo,
     homeMobileVideo: heygentMainSceneVideo,
     heroImage: heygentProjectMainImage,
+    heroVideo: heygentMainSceneVideo,
     homePosition: 'center center',
     homeMobilePosition: '57% center',
     heroPosition: 'center center',
@@ -114,7 +123,10 @@ export const PROJECTS: PortfolioProject[] = [
     tools: 'Spring Boot, Next.js, FastAPI, ChromaDB',
     homeImage: piviewHomeImage,
     homeMobileImage: piviewHomeImage,
+    homeVideo: piviewHomeVideo,
+    homeMobileVideo: piviewHomeVideo,
     heroImage: piviewProjectMainImage,
+    heroVideo: piviewHomeVideo,
     homePosition: 'center center',
     homeMobilePosition: '27% center',
     heroPosition: 'center center',
@@ -191,6 +203,7 @@ export const PROJECTS: PortfolioProject[] = [
     homeVideo: lifesaviorHomeVideo,
     homeMobileVideo: lifesaviorHomeVideo,
     heroImage: lifesaviorProjectMainImage,
+    heroVideo: lifesaviorHomeVideo,
     homePosition: 'center center',
     homeMobilePosition: '28% center',
     heroPosition: 'center center',
@@ -240,6 +253,12 @@ export const PROJECTS: PortfolioProject[] = [
     ],
   },
 ]
+
+export const PROJECTS: PortfolioProject[] = PROJECT_ENTRIES.sort(
+  (currentProject, nextProject) =>
+    (PROJECT_DISPLAY_ORDER[currentProject.slug] ?? Number.MAX_SAFE_INTEGER) -
+    (PROJECT_DISPLAY_ORDER[nextProject.slug] ?? Number.MAX_SAFE_INTEGER),
+)
 
 export const HOME_PRELOAD_SOURCES = Array.from(
   new Set(
