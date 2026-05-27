@@ -86,8 +86,8 @@
 
     .portfolio_detail_intro__inner {
       width: auto;
-      margin-right: 12.4vw;
-      margin-left: 12.4vw;
+      margin-right: 12vw;
+      margin-left: 12vw;
     }
 
     .portfolio_detail_intro__copy h1 {
@@ -113,17 +113,17 @@
 
     .portfolio_detail_intro__meta dl {
       grid-template-columns: repeat(3, 13.75rem);
-      column-gap: 1rem;
+      column-gap: 3.25rem;
       row-gap: 3.5rem;
     }
 
     .portfolio_detail_intro__meta div:first-child {
       grid-column: 1 / -1;
-      max-width: 37.8125rem;
+      max-width: 45rem;
     }
 
     .portfolio_detail_intro__meta div:first-child dd {
-      max-width: 42rem;
+      max-width: 45rem;
     }
   }
 }
