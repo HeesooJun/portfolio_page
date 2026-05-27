@@ -1,35 +1,38 @@
 interface ProjectIntroRevealProps {
-  type: string
   title: string
   summary: string
   role: string
   date: string
+  repository: string
   image: string
   imageAlt: string
   imagePosition: string
 }
 
 export default function ProjectIntroReveal({
-  type,
   title,
   summary,
   role,
   date,
+  repository,
   image,
   imageAlt,
   imagePosition,
 }: ProjectIntroRevealProps) {
+  const roles = role
+    .split('/')
+    .map((item) => item.trim())
+    .filter(Boolean)
   const metaItems = [
-    { label: 'Summary', value: summary },
-    { label: 'Role', value: role },
-    { label: 'Date', value: date },
+    { label: 'About', value: [summary] },
+    { label: roles.length > 1 ? 'Roles' : 'Role', value: roles },
+    { label: 'Date', value: [date] },
   ]
 
   return (
     <section className="portfolio_detail_intro" aria-labelledby="project_detail_title">
       <div className="portfolio_detail_intro__inner">
         <div className="portfolio_detail_intro__copy">
-          <p>{type}</p>
           <h1 id="project_detail_title">{title}</h1>
         </div>
         <div className="portfolio_detail_intro__meta" aria-label="Project metadata">
@@ -37,9 +40,21 @@ export default function ProjectIntroReveal({
             {metaItems.map((item) => (
               <div key={item.label}>
                 <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
+                <dd>
+                  {item.value.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </dd>
               </div>
             ))}
+            <div>
+              <dt>Links</dt>
+              <dd>
+                <a href={`https://${repository}`} target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+              </dd>
+            </div>
           </dl>
         </div>
       </div>

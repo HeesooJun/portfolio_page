@@ -24,7 +24,14 @@ import type { PortfolioProject } from './project-types'
 
 export const AUTOPLAY_SECONDS = 12
 
-export const PROJECTS: PortfolioProject[] = [
+// 프로젝트 설명 블록은 안정적으로 유지하고, 메인/목록 노출 순서만 여기서 조정합니다.
+const PROJECT_DISPLAY_ORDER: Record<string, number> = {
+  lifesavior: 0,
+  heygent: 1,
+  piview: 2,
+}
+
+const PROJECT_ENTRIES: PortfolioProject[] = [
   {
     slug: 'heygent',
     title: 'HeyGent',
@@ -240,6 +247,12 @@ export const PROJECTS: PortfolioProject[] = [
     ],
   },
 ]
+
+export const PROJECTS: PortfolioProject[] = PROJECT_ENTRIES.sort(
+  (currentProject, nextProject) =>
+    (PROJECT_DISPLAY_ORDER[currentProject.slug] ?? Number.MAX_SAFE_INTEGER) -
+    (PROJECT_DISPLAY_ORDER[nextProject.slug] ?? Number.MAX_SAFE_INTEGER),
+)
 
 export const HOME_PRELOAD_SOURCES = Array.from(
   new Set(
