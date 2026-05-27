@@ -1,7 +1,9 @@
-import { type CSSProperties, useEffect, useMemo, useState } from 'react'
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-import heygentMainSceneImage from '@/assets/main/heygent-main2.gif'
-import lifesaviorHomeImage from '@/assets/main/lifesavior-main.gif'
+import heygentMainSceneImage from '@/assets/main/heygent-main2-poster.webp'
+import heygentMainSceneVideo from '@/assets/main/heygent-main2.webm'
+import lifesaviorHomeImage from '@/assets/main/lifesavior-main-poster.webp'
+import lifesaviorHomeVideo from '@/assets/main/lifesavior-main.webm'
 import piviewHomeImage from '@/assets/main/piview-main.png'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
@@ -19,6 +21,7 @@ import piviewOcrImage from '@/assets/project-evidence/piview/ocr.gif'
 import piviewProductAiImage from '@/assets/project-evidence/piview/product-ai.gif'
 import piviewSkinAnalysisImage from '@/assets/project-evidence/piview/ai-skin-analysis.png'
 import piviewCompareImage from '@/assets/project-evidence/piview/product-compare.png'
+import nameLogoImage from '@/assets/name-logo3.png'
 
 interface ProjectMeta {
   label: string
@@ -31,6 +34,7 @@ interface ProjectCaseStudy {
 }
 
 type ProjectEvidenceKind = 'wide' | 'pair' | 'phone'
+type MediaSourceResolver = (source: string) => string
 
 interface ProjectEvidence {
   src: string
@@ -52,6 +56,8 @@ interface PortfolioProject {
   tools: string
   homeImage: string
   homeMobileImage: string
+  homeVideo?: string
+  homeMobileVideo?: string
   heroImage: string
   homePosition: string
   homeMobilePosition: string
@@ -72,15 +78,6 @@ type PortfolioView =
 
 const AUTOPLAY_SECONDS = 12
 
-function resolveRestartableImageSource(imageSource: string, playbackKey: number) {
-  if (!imageSource.toLowerCase().includes('.gif')) {
-    return imageSource
-  }
-
-  const separator = imageSource.includes('?') ? '&' : '?'
-  return `${imageSource}${separator}playback=${playbackKey}`
-}
-
 const PROJECTS: PortfolioProject[] = [
   {
     slug: 'heygent',
@@ -95,6 +92,8 @@ const PROJECTS: PortfolioProject[] = [
     tools: 'Spring Boot, FastAPI, React, Android, MQTT',
     homeImage: heygentMainSceneImage,
     homeMobileImage: heygentMainSceneImage,
+    homeVideo: heygentMainSceneVideo,
+    homeMobileVideo: heygentMainSceneVideo,
     heroImage: heygentProjectMainImage,
     homePosition: 'center center',
     homeMobilePosition: '57% center',
@@ -243,6 +242,8 @@ const PROJECTS: PortfolioProject[] = [
     tools: 'Kotlin, Jetpack Compose, BLE, UWB',
     homeImage: lifesaviorHomeImage,
     homeMobileImage: lifesaviorHomeImage,
+    homeVideo: lifesaviorHomeVideo,
+    homeMobileVideo: lifesaviorHomeVideo,
     heroImage: lifesaviorProjectMainImage,
     homePosition: 'center center',
     homeMobilePosition: '28% center',
@@ -294,6 +295,17 @@ const PROJECTS: PortfolioProject[] = [
   },
 ]
 
+const HOME_PRELOAD_SOURCES = Array.from(
+  new Set(
+    PROJECTS.flatMap((project) => [
+      project.homeImage,
+      project.homeMobileImage,
+      project.homeVideo,
+      project.homeMobileVideo,
+    ]).filter((source): source is string => Boolean(source)),
+  ),
+)
+
 const ABOUT_COLUMNS = [
   {
     title: 'Experience',
@@ -331,23 +343,6 @@ function resolveViewFromHash(hash: string): PortfolioView {
   return { name: 'home' }
 }
 
-function getViewLabel(view: PortfolioView) {
-  if (view.name === 'project') {
-    const project = PROJECTS.find((item) => item.slug === view.slug)
-    return project?.title ?? 'Project'
-  }
-
-  if (view.name === 'index') {
-    return 'Index'
-  }
-
-  if (view.name === 'about') {
-    return 'About'
-  }
-
-  return 'Home'
-}
-
 function navigateTo(hash: string) {
   window.location.hash = hash
 }
@@ -360,12 +355,92 @@ function romanize(index: number) {
   return ['I', 'II', 'III', 'IV', 'V', 'VI'][index] ?? `${index + 1}`
 }
 
+async function createPreloadedObjectUrl(source: string) {
+  const response = await fetch(source, { cache: 'force-cache' })
+
+  if (!response.ok) {
+    throw new Error(`홈 미디어를 불러오지 못했습니다: ${source}`)
+  }
+
+  const blob = await response.blob()
+
+  return URL.createObjectURL(blob)
+}
+
+let homePreloadPromise: Promise<ReadonlyArray<readonly [string, string]>> | null = null
+
+function preloadHomeMediaSources() {
+  homePreloadPromise ??= Promise.all(
+    HOME_PRELOAD_SOURCES.map(async (source) => {
+      const objectUrl = await createPreloadedObjectUrl(source)
+
+      return [source, objectUrl] as const
+    }),
+  )
+
+  return homePreloadPromise
+}
+
+function useHomeMediaPreload(shouldPreload: boolean) {
+  const preloadStartedRef = useRef(false)
+  const [isReady, setIsReady] = useState(false)
+  const [preloadedSources, setPreloadedSources] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    if (!shouldPreload || isReady || preloadStartedRef.current) {
+      return
+    }
+
+    let isCancelled = false
+
+    preloadStartedRef.current = true
+
+    void preloadHomeMediaSources()
+      .then((entries) => {
+        if (isCancelled) {
+          return
+        }
+
+        // 홈 첫 화면은 영상과 포스터가 한꺼번에 준비된 뒤 노출되어야 깜빡임과 추가 네트워크 요청이 줄어듭니다.
+        setPreloadedSources(Object.fromEntries(entries))
+        setIsReady(true)
+      })
+      .catch((error: unknown) => {
+        console.error(error)
+
+        if (!isCancelled) {
+          // 일부 미디어 로딩이 실패해도 원본 URL로 폴백해 사용자가 빈 화면에 갇히지 않게 합니다.
+          setIsReady(true)
+        }
+      })
+
+    return () => {
+      isCancelled = true
+      preloadStartedRef.current = false
+    }
+  }, [isReady, shouldPreload])
+
+  useEffect(() => {
+    return () => {
+      Object.values(preloadedSources).forEach((objectUrl) => URL.revokeObjectURL(objectUrl))
+    }
+  }, [preloadedSources])
+
+  return {
+    isReady: !shouldPreload || isReady,
+    resolveMediaSource: (source: string) => preloadedSources[source] ?? source,
+  }
+}
+
 export default function App() {
   const [view, setView] = useState<PortfolioView>(() => resolveViewFromHash(window.location.hash))
   const [activeProjectIndex, setActiveProjectIndex] = useState(0)
   const [previousProjectIndex, setPreviousProjectIndex] = useState(0)
   const [homePlaybackKey, setHomePlaybackKey] = useState(0)
   const [transitionDirection, setTransitionDirection] = useState<'next' | 'previous'>('next')
+  const { isReady: isHomeMediaReady, resolveMediaSource } = useHomeMediaPreload(
+    view.name === 'home',
+  )
   const activeProject = PROJECTS[activeProjectIndex]
   const currentProject =
     view.name === 'project'
@@ -425,12 +500,14 @@ export default function App() {
 
   return (
     <div className={`portfolio_shell portfolio_shell--${view.name}`}>
-      <SiteHeader view={view} />
+      <SiteHeader />
       {view.name === 'home' ? (
         <HomeView
           activeProjectIndex={activeProjectIndex}
           previousProjectIndex={previousProjectIndex}
           homePlaybackKey={homePlaybackKey}
+          isMediaReady={isHomeMediaReady}
+          resolveMediaSource={resolveMediaSource}
           transitionDirection={transitionDirection}
           setActiveProjectIndex={selectProjectIndex}
         />
@@ -444,13 +521,11 @@ export default function App() {
   )
 }
 
-function SiteHeader({ view }: { view: PortfolioView }) {
+function SiteHeader() {
   return (
     <header className="portfolio_header">
       <a href="#home" className="portfolio_header__brand">
-        <span>HS</span>
-        <span>/</span>
-        <span>{getViewLabel(view)}</span>
+        <img className="portfolio_header__logo" src={nameLogoImage} alt="Heesoo Jun" />
       </a>
       <nav className="portfolio_header__nav" aria-label="Portfolio navigation">
         <a href="#index">Index</a>
@@ -464,16 +539,30 @@ function HomeView({
   activeProjectIndex,
   previousProjectIndex,
   homePlaybackKey,
+  isMediaReady,
+  resolveMediaSource,
   transitionDirection,
   setActiveProjectIndex,
 }: {
   activeProjectIndex: number
   previousProjectIndex: number
   homePlaybackKey: number
+  isMediaReady: boolean
+  resolveMediaSource: MediaSourceResolver
   transitionDirection: 'next' | 'previous'
   setActiveProjectIndex: (index: number) => void
 }) {
   const project = PROJECTS[activeProjectIndex]
+
+  if (!isMediaReady) {
+    return (
+      <main className="portfolio_home portfolio_home--loading" aria-label="Home">
+        <div className="portfolio_home__loader" role="status" aria-live="polite">
+          <span>Loading</span>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className="portfolio_home" aria-label="Home">
@@ -485,6 +574,7 @@ function HomeView({
             isActive={index === activeProjectIndex}
             isPrevious={index === previousProjectIndex}
             homePlaybackKey={homePlaybackKey}
+            resolveMediaSource={resolveMediaSource}
             transitionDirection={transitionDirection}
           />
         ))}
@@ -495,7 +585,7 @@ function HomeView({
           {project.title}
         </h1>
         <p>{project.subtitle}</p>
-        <a href={resolveProjectHref(project.slug)}>Discover project</a>
+        <a href={resolveProjectHref(project.slug)}>DISCOVER PROJECT</a>
       </div>
       <div className="portfolio_home__bottom">
         <div className="portfolio_home__count">
@@ -521,7 +611,20 @@ function HomeView({
         {PROJECTS.map((item) => (
           <article key={item.slug} className="portfolio_home__mobile_project">
             {/* 모바일은 레퍼런스처럼 모든 프로젝트를 세로로 보여주므로 원본 비율을 유지합니다. */}
-            <img src={item.homeImage} alt={`${item.title} 대표 화면`} />
+            {item.homeVideo ? (
+              <video
+                src={resolveMediaSource(item.homeMobileVideo ?? item.homeVideo)}
+                poster={resolveMediaSource(item.homeMobileImage)}
+                muted
+                loop
+                playsInline
+                autoPlay
+                preload="auto"
+                aria-label={`${item.title} 대표 화면`}
+              />
+            ) : (
+              <img src={resolveMediaSource(item.homeImage)} alt={`${item.title} 대표 화면`} />
+            )}
             <div>
               <h2>{item.title}</h2>
               <p>{item.mobileDescription}</p>
@@ -539,21 +642,47 @@ function HomeMedia({
   isActive,
   isPrevious,
   homePlaybackKey,
+  resolveMediaSource,
   transitionDirection,
 }: {
   item: PortfolioProject
   isActive: boolean
   isPrevious: boolean
   homePlaybackKey: number
+  resolveMediaSource: MediaSourceResolver
   transitionDirection: 'next' | 'previous'
 }) {
-  // 활성 GIF만 URL을 갱신해 브라우저가 이전 재생 시점을 재사용하지 못하게 합니다.
-  const imageSource = isActive
-    ? resolveRestartableImageSource(item.homeImage, homePlaybackKey)
-    : item.homeImage
-  const mobileImageSource = isActive
-    ? resolveRestartableImageSource(item.homeMobileImage, homePlaybackKey)
-    : item.homeMobileImage
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const imageSource = resolveMediaSource(item.homeImage)
+  const mobileImageSource = resolveMediaSource(item.homeMobileImage)
+  const videoSource = item.homeVideo ? resolveMediaSource(item.homeVideo) : null
+  const mobileVideoSource = item.homeMobileVideo ? resolveMediaSource(item.homeMobileVideo) : null
+
+  useEffect(() => {
+    const videoElement = videoRef.current
+
+    if (!isActive || !videoElement) {
+      return
+    }
+
+    const restartPlayback = () => {
+      videoElement.currentTime = 0
+      void videoElement.play().catch(() => {
+        // 브라우저 자동재생 정책이 막는 경우에도 포스터가 남아 있으므로 화면은 유지됩니다.
+      })
+    }
+
+    if (videoElement.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      restartPlayback()
+      return
+    }
+
+    videoElement.addEventListener('loadedmetadata', restartPlayback, { once: true })
+
+    return () => {
+      videoElement.removeEventListener('loadedmetadata', restartPlayback)
+    }
+  }, [homePlaybackKey, isActive, videoSource])
 
   return (
     <figure
@@ -563,23 +692,35 @@ function HomeMedia({
       data-direction={transitionDirection}
       style={
         {
-          '--home-backdrop-source': `url(${item.homeImage})`,
-          '--home-mobile-backdrop-source': `url(${item.homeMobileImage})`,
+          '--home-backdrop-source': `url(${imageSource})`,
+          '--home-mobile-backdrop-source': `url(${mobileImageSource})`,
           '--home-image-position': item.homePosition,
           '--home-mobile-image-position': item.homeMobilePosition,
         } as CSSProperties
       }
       aria-hidden={!isActive}
     >
-      <picture>
-        <source media="(max-width: 767px)" srcSet={mobileImageSource} />
-        <img
-          key={isActive ? `${item.slug}-${homePlaybackKey}` : item.slug}
-          className="portfolio_home__image"
-          src={imageSource}
-          alt=""
-        />
-      </picture>
+      {videoSource ? (
+        <video
+          ref={videoRef}
+          className="portfolio_home__video"
+          poster={imageSource}
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          {mobileVideoSource ? (
+            <source media="(max-width: 767px)" src={mobileVideoSource} type="video/webm" />
+          ) : null}
+          <source src={videoSource} type="video/webm" />
+        </video>
+      ) : (
+        <picture>
+          <source media="(max-width: 767px)" srcSet={mobileImageSource} />
+          <img className="portfolio_home__image" src={imageSource} alt="" />
+        </picture>
+      )}
     </figure>
   )
 }
