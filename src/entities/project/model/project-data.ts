@@ -7,7 +7,9 @@ import piviewHomeVideo from '@/assets/main/piview-main2.webm'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
 import piviewProjectMainImage from '@/assets/project-main/piview.png'
+import heygentContextImage from '@/assets/project-context/heygent.png'
 import lifesaviorContextImage from '@/assets/project-context/Lifesavior.png'
+import piviewContextImage from '@/assets/project-context/piview.png'
 import heygentLogoImage from '@/assets/logo/heygent.png'
 import lifesaviorLogoImage from '@/assets/logo/lifesavior-charcoal.png'
 import piviewBrownLogoImage from '@/assets/logo/piview-brown.png'
@@ -55,6 +57,8 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     heroImage: heygentProjectMainImage,
     heroVideo: heygentMainSceneVideo,
     detailLogoImage: heygentLogoImage,
+    contextImage: heygentContextImage,
+    contextImageAlt: 'HeyGent 웹, 모바일, IoT 디바이스 연동 화면',
     homePosition: 'center center',
     homeMobilePosition: '57% center',
     heroPosition: 'center center',
@@ -93,8 +97,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     repository: 'github.com/HeesooJun/S-Free',
     summary:
       '사용자의 요청을 여러 작업 단위로 나누고, 웹과 모바일 화면에 실행 상태를 실시간으로 되돌려 주는 AI 작업 실행 플랫폼입니다.',
-    contribution:
-      'TaskRun과 StepRun 실행 모델을 설계하고, WebSocket 이벤트 흐름과 에이전트 작업 보드의 상태 표현을 연결했습니다.',
+    contribution: 'AI 작업을 실행 흐름으로 바꾸기',
     meta: [
       { label: 'Platform', value: 'Web · Mobile · IoT' },
       { label: 'Focus', value: 'Task orchestration' },
@@ -133,6 +136,8 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     heroImage: piviewProjectMainImage,
     heroVideo: piviewHomeVideo,
     detailLogoImage: piviewBrownLogoImage,
+    contextImage: piviewContextImage,
+    contextImageAlt: 'PiView 검색과 케어 화면을 보여주는 모바일 목업',
     homePosition: 'center center',
     homeMobilePosition: '27% center',
     heroPosition: 'center center',
@@ -171,8 +176,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     repository: 'github.com/HeesooJun/S-bigdata',
     summary:
       '피부 상태와 설문 응답을 바탕으로 제품을 분석하고, 검색과 추천, 루틴 관리를 하나의 흐름으로 묶은 스킨케어 플랫폼입니다.',
-    contribution:
-      '피부 분석, 추천 검색, RAG 챗봇, 상품 비교 로직을 연결해 사용자가 왜 이 제품을 봐야 하는지 설명되는 흐름을 만들었습니다.',
+    contribution: '추천 이유가 설명되는 스킨케어 흐름',
     meta: [
       { label: 'Platform', value: 'Web' },
       { label: 'Focus', value: 'Recommendation flow' },

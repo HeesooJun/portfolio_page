@@ -17,7 +17,7 @@
 
   .portfolio_detail_intro__copy p {
     @apply max-w-xl text-sm leading-snug font-semibold uppercase;
-    color: var(--ink-muted);
+    color: var(--ink);
   }
 
   .portfolio_detail_intro__copy h1 {
@@ -72,8 +72,11 @@
   }
 
   .portfolio_detail_intro__meta dt {
-    @apply text-sm leading-snug font-semibold uppercase;
-    color: var(--ink-muted);
+    @apply uppercase;
+    font-size: clamp(1.25rem, 1.171875vw, 1.5rem);
+    line-height: 1.618;
+    font-weight: 700;
+    color: var(--ink);
   }
 
   .portfolio_detail_intro__meta div:first-child dt {
@@ -81,12 +84,18 @@
   }
 
   .portfolio_detail_intro__meta dt {
-    @apply text-xl leading-[1.618] font-semibold uppercase;
+    @apply uppercase;
+    font-size: clamp(1.25rem, 1.171875vw, 1.5rem);
+    line-height: 1.618;
+    font-weight: 700;
     color: var(--ink);
   }
 
   .portfolio_detail_intro__meta dd {
-    @apply grid max-w-xl gap-0 text-xl leading-[1.618] font-normal;
+    @apply grid max-w-xl gap-0;
+    font-size: clamp(1.25rem, 1.171875vw, 1.5rem);
+    line-height: 1.618;
+    font-weight: 500;
     color: var(--ink);
     word-break: keep-all;
   }

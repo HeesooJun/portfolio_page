@@ -73,7 +73,7 @@
     font-size: 0.875rem;
     line-height: 1;
     font-weight: 700;
-    color: rgb(39 27 22 / 88%);
+    color: var(--ink);
   }
 
   .portfolio_detail__context_copy > p:first-child {
@@ -121,7 +121,7 @@
     font-size: 0.875rem;
     line-height: 1;
     font-weight: 700;
-    color: rgb(39 27 22 / 88%);
+    color: var(--ink);
   }
 
   .portfolio_detail__context--with_media
@@ -135,7 +135,7 @@
     line-height: 1.85;
     font-weight: 500;
     box-sizing: border-box;
-    color: rgb(39 27 22 / 70%);
+    color: var(--ink);
   }
 
   .portfolio_detail__case_list {
