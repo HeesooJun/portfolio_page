@@ -61,15 +61,19 @@
 
   .portfolio_detail__context--with_media .portfolio_detail__context_copy {
     display: grid;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto 1fr;
+    row-gap: clamp(1.9rem, 4vh, 2.75rem);
     max-width: 28rem;
     min-height: clamp(28rem, 61vh, 37.5rem);
     padding-top: clamp(0.25rem, 1.6vh, 1rem);
-    font-family: 'Instrument Sans', var(--font-body);
+    font-family: 'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
   }
 
   .portfolio_detail__context--with_media .portfolio_detail__story_eyebrow {
-    color: var(--ink);
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: 700;
+    color: rgb(39 27 22 / 88%);
   }
 
   .portfolio_detail__context_copy > p:first-child {
@@ -101,7 +105,7 @@
   }
 
   .portfolio_detail__context--with_media .portfolio_detail__context_subtitle {
-    @apply sr-only;
+    display: none;
   }
 
   .portfolio_detail__context--with_media .portfolio_detail__context_copy h2 {
@@ -111,7 +115,18 @@
     font-weight: 600;
   }
 
-  .portfolio_detail__context--with_media .portfolio_detail__context_body {
+  .portfolio_detail__context--with_media
+    .portfolio_detail__context_copy
+    > .portfolio_detail__story_eyebrow:first-child {
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: 700;
+    color: rgb(39 27 22 / 88%);
+  }
+
+  .portfolio_detail__context--with_media
+    .portfolio_detail__context_copy
+    > .portfolio_detail__context_body {
     align-self: end;
     max-width: 26rem;
     margin-top: 0;
@@ -120,7 +135,7 @@
     line-height: 1.85;
     font-weight: 500;
     box-sizing: border-box;
-    color: var(--ink);
+    color: rgb(39 27 22 / 70%);
   }
 
   .portfolio_detail__case_list {
