@@ -9,7 +9,7 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project, nextProject }: ProjectDetailPageProps) {
-  const [leadEvidence, ...supportingEvidence] = project.evidence
+  const supportingEvidence = project.evidence.slice(1)
 
   return (
     <main
@@ -27,36 +27,37 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
         imageAlt={`${project.title} 대표 화면`}
         imagePosition={project.heroPosition}
       />
-      {leadEvidence ? (
-        <section
-          className="portfolio_detail__lead_media"
-          aria-label={`${project.title} lead media`}
-        >
-          <figure className="portfolio_detail__evidence_item portfolio_detail__evidence_item--scene-1">
-            <img
-              src={leadEvidence.src}
-              alt={leadEvidence.alt}
-              style={{ objectPosition: leadEvidence.objectPosition }}
-            />
-            <figcaption>{leadEvidence.caption}</figcaption>
-          </figure>
-        </section>
-      ) : null}
+      <section className="portfolio_detail__lead_media" aria-label={`${project.title} lead media`}>
+        <figure className="portfolio_detail__lead_figure">
+          {/* 상세 인트로 영상과 증거 이미지 사이의 호흡을 만들기 위해 고정 대표 이미지를 독립 컷처럼 배치합니다. */}
+          <img
+            src={project.heroImage}
+            alt={`${project.title} 대표 고정 이미지`}
+            style={{ objectPosition: project.heroPosition }}
+          />
+        </figure>
+      </section>
       <section className="portfolio_detail__statement">
         <p>{project.subtitle}</p>
         <h2>{project.contribution}</h2>
       </section>
-      <section className="portfolio_detail__evidence" aria-label={`${project.title} evidence`}>
-        {supportingEvidence.map((asset, index) => (
-          <figure
-            key={`${asset.caption}-${asset.src}`}
-            className={`portfolio_detail__evidence_item portfolio_detail__evidence_item--${asset.kind} portfolio_detail__evidence_item--scene-${((index + 1) % 4) + 1}`}
-          >
-            <img src={asset.src} alt={asset.alt} style={{ objectPosition: asset.objectPosition }} />
-            <figcaption>{asset.caption}</figcaption>
-          </figure>
-        ))}
-      </section>
+      {supportingEvidence.length > 0 ? (
+        <section className="portfolio_detail__evidence" aria-label={`${project.title} evidence`}>
+          {supportingEvidence.map((asset, index) => (
+            <figure
+              key={`${asset.caption}-${asset.src}`}
+              className={`portfolio_detail__evidence_item portfolio_detail__evidence_item--${asset.kind} portfolio_detail__evidence_item--scene-${((index + 1) % 4) + 1}`}
+            >
+              <img
+                src={asset.src}
+                alt={asset.alt}
+                style={{ objectPosition: asset.objectPosition }}
+              />
+              <figcaption>{asset.caption}</figcaption>
+            </figure>
+          ))}
+        </section>
+      ) : null}
       <section className="portfolio_detail__narrative">
         <p>Concept</p>
         <h2>

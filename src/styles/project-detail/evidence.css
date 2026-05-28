@@ -18,7 +18,21 @@
   }
 
   .portfolio_detail__lead_media {
-    @apply my-40;
+    margin-top: clamp(10rem, 18vh, 16rem);
+    margin-bottom: clamp(8rem, 15vh, 13rem);
+  }
+
+  .portfolio_detail__lead_figure {
+    /* 히어로 영상과 같은 풀블리드 반복을 피하고, 프로젝트 대표 이미지를 별도 전시 컷처럼 읽히게 둡니다. */
+    width: min(72rem, 78vw);
+    margin: 0 auto;
+    padding: clamp(0.875rem, 1.8vw, 1.5rem);
+    background: #ffffff;
+    box-shadow: 0 2rem 5rem rgb(18 28 45 / 12%);
+  }
+
+  .portfolio_detail__lead_figure img {
+    @apply block h-auto w-full object-contain object-center;
   }
 
   .portfolio_detail__evidence_item--scene-2 {

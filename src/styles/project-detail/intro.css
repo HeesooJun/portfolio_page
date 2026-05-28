@@ -23,7 +23,6 @@
 
   .portfolio_detail_intro__meta {
     @apply mt-auto pt-40;
-    font-family: 'Instrument Sans', Inter, sans-serif;
     letter-spacing: 0;
   }
 
