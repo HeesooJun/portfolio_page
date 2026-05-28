@@ -60,7 +60,7 @@
   @layer components {
     .portfolio_detail_intro__visual {
       margin-top: 15rem;
-      height: clamp(54rem, 96.4vh, 62rem);
+      height: clamp(70rem, 112vh, 86rem);
     }
 
     .portfolio_detail_intro__visual_media {
@@ -100,7 +100,7 @@
 
     .portfolio_detail_intro__visual {
       margin-top: 3.5rem;
-      height: clamp(30rem, 64.6vh, 37rem);
+      height: clamp(42rem, 92vh, 54rem);
     }
 
     .portfolio_detail_intro__visual_media {
@@ -132,6 +132,7 @@
   @layer components {
     .portfolio_detail_intro__visual {
       margin-top: 6rem;
+      height: clamp(44rem, 94vh, 56rem);
     }
   }
 }
@@ -268,6 +269,7 @@
     .portfolio_detail__context,
     .portfolio_detail__case_section,
     .portfolio_detail__case_section--reverse,
+    .portfolio_detail__context--with_media,
     .portfolio_detail__proof_strip,
     .portfolio_detail__outcome {
       grid-template-columns: 1fr;
@@ -284,6 +286,30 @@
     .portfolio_detail__context_copy h2,
     .portfolio_detail__case_copy h2 {
       line-height: 1.05;
+    }
+
+    .portfolio_detail__context--with_media {
+      margin-top: 5rem;
+    }
+
+    .portfolio_detail__context_media {
+      padding: 0.75rem;
+    }
+
+    .portfolio_detail__context_media img {
+      height: auto;
+    }
+
+    .portfolio_detail__context--with_media .portfolio_detail__context_copy {
+      max-width: none;
+      padding-top: 0;
+    }
+
+    .portfolio_detail__context--with_media .portfolio_detail__context_copy > p:last-child {
+      max-width: none;
+      margin-top: 2rem;
+      font-size: 1.125rem;
+      line-height: 1.75;
     }
 
     .portfolio_detail__case_media,
@@ -307,14 +333,20 @@
     }
 
     .portfolio_detail__lead_media {
+      margin-right: -1rem;
       margin-top: 5rem;
       margin-bottom: 5rem;
+      margin-left: -1rem;
     }
 
     .portfolio_detail__lead_figure {
       width: 100%;
-      padding: 0.75rem;
-      box-shadow: 0 1.25rem 3rem rgb(18 28 45 / 10%);
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .portfolio_detail__lead_figure img {
+      height: auto;
     }
 
     .portfolio_detail__evidence_item--scene-1,

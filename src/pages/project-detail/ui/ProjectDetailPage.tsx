@@ -78,28 +78,46 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
         imageAlt={`${project.title} 대표 화면`}
         imagePosition={project.heroPosition}
       />
-      <section className="portfolio_detail__lead_media" aria-label={`${project.title} lead media`}>
-        <figure className="portfolio_detail__lead_figure">
-          {/* 상세 인트로 영상과 증거 이미지 사이의 호흡을 만들기 위해 고정 대표 이미지를 독립 컷처럼 배치합니다. */}
-          <img
-            src={project.heroImage}
-            alt={`${project.title} 대표 고정 이미지`}
-            style={{ objectPosition: project.heroPosition }}
-          />
-        </figure>
-      </section>
       <section
         ref={storyRootRef}
         className="portfolio_detail__story"
         aria-label={`${project.title} story`}
       >
-        <section className="portfolio_detail__context" data-story-reveal>
-          <p className="portfolio_detail__story_eyebrow">Context</p>
+        <section
+          className={`portfolio_detail__context ${
+            project.contextImage ? 'portfolio_detail__context--with_media' : ''
+          }`}
+          data-story-reveal
+        >
+          {project.contextImage ? (
+            <figure className="portfolio_detail__context_media">
+              <img
+                src={project.contextImage}
+                alt={project.contextImageAlt ?? `${project.title} context image`}
+              />
+            </figure>
+          ) : null}
           <div className="portfolio_detail__context_copy">
-            <p>{project.subtitle}</p>
+            <p className="portfolio_detail__story_eyebrow">Context</p>
+            <p className="portfolio_detail__context_subtitle">{project.subtitle}</p>
             <h2>{project.contribution}</h2>
-            <p>{project.summary}</p>
+            <p className="portfolio_detail__context_body">{project.summary}</p>
           </div>
+        </section>
+
+        <section
+          className="portfolio_detail__lead_media"
+          aria-label={`${project.title} lead media`}
+          data-story-reveal
+        >
+          <figure className="portfolio_detail__lead_figure">
+            {/* 레퍼런스의 영상 장면을 대체하는 대표 컷이므로 context 이후에 풀블리드로 이어 붙입니다. */}
+            <img
+              src={project.heroImage}
+              alt={`${project.title} 대표 고정 이미지`}
+              style={{ objectPosition: project.heroPosition }}
+            />
+          </figure>
         </section>
 
         <div className="portfolio_detail__case_list">

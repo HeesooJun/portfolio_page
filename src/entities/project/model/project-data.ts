@@ -7,6 +7,7 @@ import piviewHomeVideo from '@/assets/main/piview-main2.webm'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
 import piviewProjectMainImage from '@/assets/project-main/piview.png'
+import lifesaviorContextImage from '@/assets/project-context/Lifesavior.png'
 import heygentLogoImage from '@/assets/logo/heygent.png'
 import lifesaviorLogoImage from '@/assets/logo/lifesavior-charcoal.png'
 import piviewBrownLogoImage from '@/assets/logo/piview-brown.png'
@@ -210,6 +211,8 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     heroImage: lifesaviorProjectMainImage,
     heroVideo: lifesaviorHomeVideo,
     detailLogoImage: lifesaviorLogoImage,
+    contextImage: lifesaviorContextImage,
+    contextImageAlt: 'Life Savior 구조 신호 전송과 탐색 화면',
     homePosition: 'center center',
     homeMobilePosition: '28% center',
     heroPosition: 'center center',
@@ -236,8 +239,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     repository: 'github.com/HeesooJun/S-mobile',
     summary:
       '인터넷이 끊긴 재난 상황에서도 BLE 기반 주변 단말을 거쳐 구조 신호를 전달하고 구조자가 우선순위를 판단하도록 돕는 앱입니다.',
-    contribution:
-      '피구조자와 구조자 앱 흐름을 분리하고, SOS 전송, 주변 탐색, 거리 추정, 긴급 모드 화면을 실제 현장 사용 기준으로 정리했습니다.',
+    contribution: '오프라인에서도 이어지는 구조 신호',
     meta: [
       { label: 'Platform', value: 'Android' },
       { label: 'Focus', value: 'Offline emergency UX' },
