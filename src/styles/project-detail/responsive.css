@@ -250,9 +250,56 @@
       transform: translate3d(0, calc(var(--project-detail-visual-shift) * 0.6), 0);
     }
 
-    .portfolio_detail__statement,
-    .portfolio_detail__narrative {
-      @apply my-20 grid-cols-1;
+    .portfolio_detail__story {
+      gap: 5.5rem;
+      margin-top: 5rem;
+      margin-bottom: 5.5rem;
+    }
+
+    .portfolio_detail__context,
+    .portfolio_detail__case_section,
+    .portfolio_detail__proof_strip,
+    .portfolio_detail__outcome {
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .portfolio_detail__context,
+    .portfolio_detail__case_section,
+    .portfolio_detail__case_section--reverse,
+    .portfolio_detail__proof_strip,
+    .portfolio_detail__outcome {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      min-height: 0;
+    }
+
+    .portfolio_detail__case_section--reverse .portfolio_detail__case_copy,
+    .portfolio_detail__case_section--reverse .portfolio_detail__case_media {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .portfolio_detail__context_copy h2,
+    .portfolio_detail__case_copy h2 {
+      line-height: 1.05;
+    }
+
+    .portfolio_detail__case_media,
+    .portfolio_detail__case_media--phone {
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    .portfolio_detail__case_media img,
+    .portfolio_detail__case_media--phone img {
+      height: auto;
+    }
+
+    .portfolio_detail__proof_strip > div,
+    .portfolio_detail__outcome_grid {
+      grid-template-columns: 1fr;
     }
 
     .portfolio_detail__evidence {
@@ -302,6 +349,17 @@
 
     .portfolio_detail_intro__visual_media {
       transform: none;
+    }
+
+    [data-story-reveal] .portfolio_detail__story_eyebrow,
+    [data-story-reveal] .portfolio_detail__context_copy,
+    [data-story-reveal] .portfolio_detail__case_copy,
+    [data-story-reveal] .portfolio_detail__case_media,
+    [data-story-reveal].portfolio_detail__proof_strip > div,
+    [data-story-reveal] .portfolio_detail__outcome_grid {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 }

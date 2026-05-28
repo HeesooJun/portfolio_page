@@ -2,24 +2,28 @@ import { useEffect, useRef } from 'react'
 
 interface ProjectIntroRevealProps {
   title: string
+  slug: string
   summary: string
   role: string
   date: string
   repository: string
   image: string
   video?: string
+  titleLogo?: string
   imageAlt: string
   imagePosition: string
 }
 
 export default function ProjectIntroReveal({
   title,
+  slug,
   summary,
   role,
   date,
   repository,
   image,
   video,
+  titleLogo,
   imageAlt,
   imagePosition,
 }: ProjectIntroRevealProps) {
@@ -84,7 +88,17 @@ export default function ProjectIntroReveal({
     <section className="portfolio_detail_intro" aria-labelledby="project_detail_title">
       <div className="portfolio_detail_intro__inner">
         <div className="portfolio_detail_intro__copy">
-          <h1 id="project_detail_title">{title}</h1>
+          <h1 id="project_detail_title">
+            {titleLogo ? (
+              <img
+                className={`portfolio_detail_intro__title_logo portfolio_detail_intro__title_logo--${slug}`}
+                src={titleLogo}
+                alt={title}
+              />
+            ) : (
+              title
+            )}
+          </h1>
         </div>
         <div className="portfolio_detail_intro__meta" aria-label="Project metadata">
           <dl>

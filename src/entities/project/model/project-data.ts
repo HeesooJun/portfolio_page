@@ -7,6 +7,9 @@ import piviewHomeVideo from '@/assets/main/piview-main2.webm'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
 import piviewProjectMainImage from '@/assets/project-main/piview.png'
+import heygentLogoImage from '@/assets/logo/heygent.png'
+import lifesaviorLogoImage from '@/assets/logo/lifesavior-charcoal.png'
+import piviewBrownLogoImage from '@/assets/logo/piview-brown.png'
 import heygentDashboardImage from '@/assets/project-evidence/heygent/dashboard.gif'
 import heygentLocalBridgeImage from '@/assets/project-evidence/heygent/local-bridge.gif'
 import heygentOfficeImage from '@/assets/project-evidence/heygent/office-visualization.png'
@@ -14,7 +17,7 @@ import heygentWorkboardImage from '@/assets/project-evidence/heygent/work-board.
 import heygentWorkboardInputImage from '@/assets/project-evidence/heygent/workboard-input.gif'
 import lifesaviorBrandImage from '@/assets/project-evidence/lifesavior/brand-mockup.png'
 import lifesaviorInterfaceImage from '@/assets/project-evidence/lifesavior/ui-mockup.png'
-import lifesaviorLogoImage from '@/assets/project-evidence/lifesavior/ptt-logo.png'
+import lifesaviorEvidenceLogoImage from '@/assets/project-evidence/lifesavior/ptt-logo.png'
 import piviewAnalysisImage from '@/assets/project-evidence/piview/ai-analysis.gif'
 import piviewOcrImage from '@/assets/project-evidence/piview/ocr.gif'
 import piviewProductAiImage from '@/assets/project-evidence/piview/product-ai.gif'
@@ -50,6 +53,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeMobileVideo: heygentMainSceneVideo,
     heroImage: heygentProjectMainImage,
     heroVideo: heygentMainSceneVideo,
+    detailLogoImage: heygentLogoImage,
     homePosition: 'center center',
     homeMobilePosition: '57% center',
     heroPosition: 'center center',
@@ -127,6 +131,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeMobileVideo: piviewHomeVideo,
     heroImage: piviewProjectMainImage,
     heroVideo: piviewHomeVideo,
+    detailLogoImage: piviewBrownLogoImage,
     homePosition: 'center center',
     homeMobilePosition: '27% center',
     heroPosition: 'center center',
@@ -204,6 +209,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeMobileVideo: lifesaviorHomeVideo,
     heroImage: lifesaviorProjectMainImage,
     heroVideo: lifesaviorHomeVideo,
+    detailLogoImage: lifesaviorLogoImage,
     homePosition: 'center center',
     homeMobilePosition: '28% center',
     heroPosition: 'center center',
@@ -221,7 +227,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
         kind: 'pair',
       },
       {
-        src: lifesaviorLogoImage,
+        src: lifesaviorEvidenceLogoImage,
         alt: 'Lifesavior PTT 로고 화면',
         caption: 'Emergency identity',
         kind: 'pair',

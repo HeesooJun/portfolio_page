@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 import type { PortfolioProject } from '@/entities/project/model/project-types'
 import { navigateTo } from '@/shared/lib/portfolio-routing'
 
@@ -9,7 +11,54 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project, nextProject }: ProjectDetailPageProps) {
+  const storyRootRef = useRef<HTMLElement | null>(null)
   const supportingEvidence = project.evidence.slice(1)
+  const caseSections = project.caseStudy.map((item, index) => ({
+    ...item,
+    media: supportingEvidence[index],
+  }))
+  const remainingEvidence = supportingEvidence.slice(project.caseStudy.length)
+
+  useEffect(() => {
+    const storyRoot = storyRootRef.current
+
+    if (!storyRoot) {
+      return
+    }
+
+    const revealTargets = Array.from(storyRoot.querySelectorAll<HTMLElement>('[data-story-reveal]'))
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealTargets.forEach((target) => target.classList.add('is-visible'))
+      return
+    }
+
+    const scrollRoot = storyRoot.closest('.portfolio_shell__scroll')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return
+          }
+
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        })
+      },
+      {
+        // 프로젝트 상세는 내부 스크롤 컨테이너를 쓰기 때문에 실제 관찰 기준도 같은 요소로 맞춥니다.
+        root: scrollRoot instanceof HTMLElement ? scrollRoot : null,
+        rootMargin: '0px 0px -12% 0px',
+        threshold: 0.14,
+      },
+    )
+
+    revealTargets.forEach((target) => observer.observe(target))
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [project.slug])
 
   return (
     <main
@@ -17,6 +66,7 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
       aria-label={`${project.title} detail`}
     >
       <ProjectIntroReveal
+        slug={project.slug}
         title={project.title}
         summary={project.summary}
         role={project.role}
@@ -24,6 +74,7 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
         repository={project.repository}
         image={project.heroImage}
         video={project.heroVideo}
+        titleLogo={project.detailLogoImage}
         imageAlt={`${project.title} 대표 화면`}
         imagePosition={project.heroPosition}
       />
@@ -37,49 +88,81 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
           />
         </figure>
       </section>
-      <section className="portfolio_detail__statement">
-        <p>{project.subtitle}</p>
-        <h2>{project.contribution}</h2>
-      </section>
-      {supportingEvidence.length > 0 ? (
-        <section className="portfolio_detail__evidence" aria-label={`${project.title} evidence`}>
-          {supportingEvidence.map((asset, index) => (
-            <figure
-              key={`${asset.caption}-${asset.src}`}
-              className={`portfolio_detail__evidence_item portfolio_detail__evidence_item--${asset.kind} portfolio_detail__evidence_item--scene-${((index + 1) % 4) + 1}`}
-            >
-              <img
-                src={asset.src}
-                alt={asset.alt}
-                style={{ objectPosition: asset.objectPosition }}
-              />
-              <figcaption>{asset.caption}</figcaption>
-            </figure>
-          ))}
-        </section>
-      ) : null}
-      <section className="portfolio_detail__narrative">
-        <p>Concept</p>
-        <h2>
-          실제 프로젝트 화면을 크게 통과하면서 역할, 기능, 판단 근거가 하나의 장면처럼 이어지게
-          구성했습니다.
-        </h2>
-      </section>
-      <section className="portfolio_detail__case_grid">
-        {project.caseStudy.map((item) => (
-          <article key={item.title}>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
-      </section>
-      <section className="portfolio_detail__metrics">
-        {project.meta.map((item) => (
-          <div key={item.label}>
-            <span>{item.label}</span>
-            <strong>{item.value}</strong>
+      <section
+        ref={storyRootRef}
+        className="portfolio_detail__story"
+        aria-label={`${project.title} story`}
+      >
+        <section className="portfolio_detail__context" data-story-reveal>
+          <p className="portfolio_detail__story_eyebrow">Context</p>
+          <div className="portfolio_detail__context_copy">
+            <p>{project.subtitle}</p>
+            <h2>{project.contribution}</h2>
+            <p>{project.summary}</p>
           </div>
-        ))}
+        </section>
+
+        <div className="portfolio_detail__case_list">
+          {caseSections.map((item, index) => (
+            <article
+              key={item.title}
+              className={`portfolio_detail__case_section ${
+                index % 2 === 1 ? 'portfolio_detail__case_section--reverse' : ''
+              }`}
+              data-story-reveal
+            >
+              <div className="portfolio_detail__case_copy">
+                <p className="portfolio_detail__story_eyebrow">
+                  Decision {String(index + 1).padStart(2, '0')}
+                </p>
+                <h2>{item.title}</h2>
+                <p>{item.text}</p>
+              </div>
+              {item.media ? (
+                <figure
+                  className={`portfolio_detail__case_media portfolio_detail__case_media--${item.media.kind}`}
+                >
+                  <img
+                    src={item.media.src}
+                    alt={item.media.alt}
+                    style={{ objectPosition: item.media.objectPosition }}
+                  />
+                  <figcaption>{item.media.caption}</figcaption>
+                </figure>
+              ) : null}
+            </article>
+          ))}
+        </div>
+
+        {remainingEvidence.length > 0 ? (
+          <section className="portfolio_detail__proof_strip" data-story-reveal>
+            <p className="portfolio_detail__story_eyebrow">Proof</p>
+            <div>
+              {remainingEvidence.map((asset) => (
+                <figure key={`${asset.caption}-${asset.src}`}>
+                  <img
+                    src={asset.src}
+                    alt={asset.alt}
+                    style={{ objectPosition: asset.objectPosition }}
+                  />
+                  <figcaption>{asset.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section className="portfolio_detail__outcome" data-story-reveal>
+          <p className="portfolio_detail__story_eyebrow">Outcome</p>
+          <div className="portfolio_detail__outcome_grid">
+            {project.meta.map((item) => (
+              <div key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
       </section>
       <button
         type="button"
