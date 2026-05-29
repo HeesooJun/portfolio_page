@@ -10,6 +10,8 @@ import piviewProjectMainImage from '@/assets/project-main/piview.png'
 import heygentContextImage from '@/assets/project-context/heygent.png'
 import lifesaviorContextImage from '@/assets/project-context/Lifesavior.png'
 import piviewContextImage from '@/assets/project-context/piview.png'
+import lifesaviorRescuerPttImage from '@/assets/project-persona/lifesavior/rescuer-ptt.png'
+import lifesaviorSurvivorPttImage from '@/assets/project-persona/lifesavior/survivior-ptt.png'
 import heygentLogoImage from '@/assets/logo/heygent.png'
 import lifesaviorLogoImage from '@/assets/logo/lifesavior-charcoal.png'
 import piviewBrownLogoImage from '@/assets/logo/piview-brown.png'
@@ -217,6 +219,16 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     detailLogoImage: lifesaviorLogoImage,
     contextImage: lifesaviorContextImage,
     contextImageAlt: 'Life Savior 구조 신호 전송과 탐색 화면',
+    personaImages: [
+      {
+        src: lifesaviorSurvivorPttImage,
+        alt: '저전력을 고려한 생존자 연결 화면',
+      },
+      {
+        src: lifesaviorRescuerPttImage,
+        alt: '거리와 통화 상태를 확인하는 구조자 화면',
+      },
+    ],
     homePosition: 'center center',
     homeMobilePosition: '28% center',
     heroPosition: 'center center',
@@ -251,12 +263,12 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     ],
     caseStudy: [
       {
-        title: '연결이 없는 상황을 기본값으로 두기',
-        text: '긴급 화면은 네트워크가 없다는 전제를 먼저 두고, 구조 신호와 상태 피드백이 끊기지 않도록 구성했습니다.',
+        title: '사용자별 최적화된 UI/UX 제공',
+        text: '생존자는 배터리가 오래 버텨야 하므로 저전력을 가장 신경 쓴 어두운 화면과 최소 조작 구조로 설계했습니다. 구조자는 현장에서 거리와 상태를 헷갈리지 않고 바로 판단해야 하므로 밝은 화면과 확실한 대비를 우선했습니다.',
       },
       {
-        title: '구조자와 피구조자의 화면을 분리하기',
-        text: '피구조자는 SOS와 상태 전달에 집중하고, 구조자는 주변 사람 목록과 거리, 위험도를 빠르게 판단하도록 화면을 나눴습니다.',
+        title: '연결이 없는 상황을 기본값으로 두기',
+        text: '긴급 화면은 네트워크가 없다는 전제를 먼저 두고, 구조 신호와 상태 피드백이 끊기지 않도록 구성했습니다.',
       },
       {
         title: '신뢰 가능한 패킷 흐름 만들기',

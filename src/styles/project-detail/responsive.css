@@ -137,6 +137,67 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  @layer components {
+    .portfolio_detail__case_section--persona {
+      display: block;
+      min-height: 71rem;
+      padding: 0;
+    }
+
+    .portfolio_detail__case_section--persona .portfolio_detail__case_copy {
+      display: contents;
+    }
+
+    .portfolio_detail__persona_eyebrow {
+      top: 3rem;
+      left: 2rem;
+      font-size: 0.75rem;
+      line-height: 1.618;
+    }
+
+    .portfolio_detail__case_section--persona .portfolio_detail__case_copy h2 {
+      top: 5.1875rem;
+      left: 2rem;
+      width: 31.5rem;
+      max-width: 31.5rem;
+      font-size: 1.875rem;
+      line-height: 1;
+    }
+
+    .portfolio_detail__case_section--persona .portfolio_detail__case_copy > p:last-child {
+      top: 9.0625rem;
+      left: 2rem;
+      width: calc(100% - 4rem);
+      max-width: 48.125rem;
+      margin-left: 0;
+      font-size: 0.875rem;
+      line-height: 1.618;
+    }
+
+    .portfolio_detail__persona_scene {
+      position: absolute;
+      inset: 0;
+      display: block;
+      margin: 0;
+    }
+
+    .portfolio_detail__persona_frame--1 {
+      top: 19.75rem;
+      left: 6rem;
+      width: 26.25rem;
+      height: auto;
+    }
+
+    .portfolio_detail__persona_frame--2 {
+      top: 46.8125rem;
+      left: calc(100% - 20.5rem);
+      width: 17.25rem;
+      height: auto;
+    }
+  }
+}
+
 @media (min-width: 768px) and (max-width: 899px) {
   @layer components {
     .portfolio_shell--project .portfolio_shell__scroll {
@@ -283,6 +344,63 @@
       grid-row: auto;
     }
 
+    .portfolio_detail__case_section--persona {
+      display: block;
+      min-height: 54rem;
+      padding: 0;
+    }
+
+    .portfolio_detail__case_section--persona .portfolio_detail__case_copy {
+      display: contents;
+    }
+
+    .portfolio_detail__persona_eyebrow {
+      top: 3rem;
+      left: 1rem;
+      font-size: 0.75rem;
+      line-height: 1.618;
+    }
+
+    .portfolio_detail__case_section--persona .portfolio_detail__case_copy h2 {
+      top: 5.1875rem;
+      left: 1rem;
+      width: calc(100% - 2rem);
+      max-width: 20.375rem;
+      font-size: 1.875rem;
+      line-height: 1;
+    }
+
+    .portfolio_detail__case_section--persona .portfolio_detail__case_copy > p:last-child {
+      top: 10.9375rem;
+      left: 1rem;
+      width: calc(100% - 2rem);
+      max-width: 20.375rem;
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.618;
+    }
+
+    .portfolio_detail__persona_scene {
+      position: absolute;
+      inset: 0;
+      display: block;
+      margin: 0;
+    }
+
+    .portfolio_detail__persona_frame--1 {
+      top: 27.3125rem;
+      left: 2.25rem;
+      width: 10.75rem;
+      height: auto;
+    }
+
+    .portfolio_detail__persona_frame--2 {
+      top: 40.25rem;
+      left: calc(100% - 8.9rem);
+      width: 7.75rem;
+      height: auto;
+    }
+
     .portfolio_detail__context_copy h2,
     .portfolio_detail__case_copy h2 {
       line-height: 1.05;
@@ -371,6 +489,26 @@
   }
 }
 
+@media (min-width: 520px) and (max-width: 767px) {
+  @layer components {
+    .portfolio_detail__case_section--persona {
+      min-height: 58rem;
+    }
+
+    .portfolio_detail__persona_frame--1 {
+      top: 26.5rem;
+      left: 4rem;
+      width: 14rem;
+    }
+
+    .portfolio_detail__persona_frame--2 {
+      top: 40.25rem;
+      left: calc(100% - 14.5rem);
+      width: 10.5rem;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   @layer components {
     .portfolio_detail_intro__visual {
@@ -387,6 +525,7 @@
     [data-story-reveal] .portfolio_detail__context_copy,
     [data-story-reveal] .portfolio_detail__case_copy,
     [data-story-reveal] .portfolio_detail__case_media,
+    [data-story-reveal] .portfolio_detail__persona_frame,
     [data-story-reveal].portfolio_detail__proof_strip > div,
     [data-story-reveal] .portfolio_detail__outcome_grid {
       opacity: 1;

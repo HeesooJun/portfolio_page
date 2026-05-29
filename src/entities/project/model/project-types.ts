@@ -20,6 +20,11 @@ export interface ProjectEvidence {
   objectPosition?: string
 }
 
+export interface ProjectPersonaImage {
+  src: string
+  alt: string
+}
+
 export interface PortfolioProject {
   slug: string
   title: string
@@ -39,6 +44,7 @@ export interface PortfolioProject {
   detailLogoImage?: string
   contextImage?: string
   contextImageAlt?: string
+  personaImages?: ProjectPersonaImage[]
   homePosition: string
   homeMobilePosition: string
   heroPosition: string

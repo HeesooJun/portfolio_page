@@ -13,6 +13,7 @@ interface ProjectDetailPageProps {
 export default function ProjectDetailPage({ project, nextProject }: ProjectDetailPageProps) {
   const storyRootRef = useRef<HTMLElement | null>(null)
   const supportingEvidence = project.evidence.slice(1)
+  const personaImages = project.personaImages
   const caseSections = project.caseStudy.map((item, index) => ({
     ...item,
     media: supportingEvidence[index],
@@ -126,17 +127,42 @@ export default function ProjectDetailPage({ project, nextProject }: ProjectDetai
               key={item.title}
               className={`portfolio_detail__case_section ${
                 index % 2 === 1 ? 'portfolio_detail__case_section--reverse' : ''
+              } ${
+                project.slug === 'lifesavior' && index === 0 && personaImages
+                  ? 'portfolio_detail__case_section--persona'
+                  : ''
               }`}
               data-story-reveal
             >
               <div className="portfolio_detail__case_copy">
-                <p className="portfolio_detail__story_eyebrow">
-                  Decision {String(index + 1).padStart(2, '0')}
-                </p>
+                {project.slug === 'lifesavior' && index === 0 && personaImages ? (
+                  <p className="portfolio_detail__persona_eyebrow">UI/UX</p>
+                ) : null}
                 <h2>{item.title}</h2>
                 <p>{item.text}</p>
               </div>
-              {item.media ? (
+              {project.slug === 'lifesavior' && index === 0 && personaImages ? (
+                <div
+                  className="portfolio_detail__persona_scene"
+                  aria-label="생존자와 구조자 UI 비교"
+                >
+                  {/* 세로 앱 화면은 비율을 유지해야 설명 근거가 살아나므로, 프레임보다 실제 화면 크기를 우선합니다. */}
+                  {personaImages.map((image, personaIndex) => (
+                    <figure
+                      key={image.src}
+                      className={`portfolio_detail__persona_frame portfolio_detail__persona_frame--${
+                        personaIndex + 1
+                      }`}
+                    >
+                      <img
+                        className="portfolio_detail__persona_frame_screen"
+                        src={image.src}
+                        alt={image.alt}
+                      />
+                    </figure>
+                  ))}
+                </div>
+              ) : item.media ? (
                 <figure
                   className={`portfolio_detail__case_media portfolio_detail__case_media--${item.media.kind}`}
                 >

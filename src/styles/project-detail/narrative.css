@@ -164,6 +164,63 @@
     grid-row: 1;
   }
 
+  .portfolio_detail__case_section--persona {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 69.1875rem;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .portfolio_detail__case_section--persona .portfolio_detail__case_copy {
+    display: contents;
+    max-width: none;
+  }
+
+  .portfolio_detail__persona_eyebrow {
+    position: absolute;
+    top: 12rem;
+    left: 11.18vw;
+    z-index: 2;
+    font-family: 'Instrument Sans', Inter, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.618;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .portfolio_detail__case_section--persona .portfolio_detail__case_copy h2 {
+    position: absolute;
+    top: 14.9375rem;
+    left: 11.18vw;
+    z-index: 2;
+    width: 27.3125rem;
+    margin-top: 0;
+    font-family: Hahmlet, 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .portfolio_detail__case_section--persona .portfolio_detail__case_copy > p:last-child {
+    position: absolute;
+    top: 29.4375rem;
+    left: 19.1vw;
+    z-index: 2;
+    width: 20.25rem;
+    max-width: 20.25rem;
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.618;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
   .portfolio_detail__case_copy {
     max-width: var(--reference-copy-width);
   }
@@ -212,6 +269,49 @@
 
   .portfolio_detail__case_media--pair img {
     object-fit: contain;
+  }
+
+  .portfolio_detail__persona_scene {
+    position: absolute;
+    inset: 0;
+  }
+
+  .portfolio_detail__persona_frame {
+    position: absolute;
+    margin: 0;
+    overflow: visible;
+    aspect-ratio: 543 / 724;
+    background: #ffffff;
+    padding: 0.75rem;
+    box-shadow: none;
+  }
+
+  .portfolio_detail__persona_frame--1,
+  .portfolio_detail__persona_frame--2 {
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .portfolio_detail__persona_frame_screen {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .portfolio_detail__persona_frame--1 {
+    top: 17.625rem;
+    left: 66vw;
+    width: 19.75rem;
+    height: auto;
+  }
+
+  .portfolio_detail__persona_frame--2 {
+    top: 38.6875rem;
+    left: 59.5vw;
+    width: 14.5rem;
+    height: auto;
   }
 
   .portfolio_detail__case_media figcaption,
@@ -299,9 +399,20 @@
     will-change: opacity, transform;
   }
 
+  [data-story-reveal] .portfolio_detail__persona_frame {
+    opacity: 0;
+    transform: translate3d(0, 3.5rem, 0);
+    transition:
+      opacity 850ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
   [data-story-reveal] .portfolio_detail__context_copy,
   [data-story-reveal] .portfolio_detail__context_media,
   [data-story-reveal] .portfolio_detail__case_media,
+  [data-story-reveal] .portfolio_detail__persona_frame--2,
+  [data-story-reveal] .portfolio_detail__persona_frame--3,
   [data-story-reveal] .portfolio_detail__lead_figure,
   [data-story-reveal].portfolio_detail__proof_strip > div,
   [data-story-reveal] .portfolio_detail__outcome_grid {
@@ -316,6 +427,11 @@
   [data-story-reveal].is-visible .portfolio_detail__lead_figure,
   [data-story-reveal].is-visible.portfolio_detail__proof_strip > div,
   [data-story-reveal].is-visible .portfolio_detail__outcome_grid {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  [data-story-reveal].is-visible .portfolio_detail__persona_frame {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
