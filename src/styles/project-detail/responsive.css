@@ -11,7 +11,7 @@
     }
 
     .portfolio_detail_intro__visual {
-      margin-top: 9.5rem;
+      margin-top: 14.85rem;
     }
 
     .portfolio_detail_intro__visual_media {
@@ -59,8 +59,8 @@
 @media (min-width: 1500px) {
   @layer components {
     .portfolio_detail_intro__visual {
-      margin-top: 15rem;
-      height: clamp(54rem, 96.4vh, 62rem);
+      margin-top: 13.15rem;
+      height: clamp(70rem, 112vh, 86rem);
     }
 
     .portfolio_detail_intro__visual_media {
@@ -99,8 +99,8 @@
     }
 
     .portfolio_detail_intro__visual {
-      margin-top: 3.5rem;
-      height: clamp(30rem, 64.6vh, 37rem);
+      margin-top: 5.15rem;
+      height: clamp(42rem, 92vh, 54rem);
     }
 
     .portfolio_detail_intro__visual_media {
@@ -132,6 +132,7 @@
   @layer components {
     .portfolio_detail_intro__visual {
       margin-top: 6rem;
+      height: clamp(44rem, 94vh, 56rem);
     }
   }
 }
@@ -250,9 +251,81 @@
       transform: translate3d(0, calc(var(--project-detail-visual-shift) * 0.6), 0);
     }
 
-    .portfolio_detail__statement,
-    .portfolio_detail__narrative {
-      @apply my-20 grid-cols-1;
+    .portfolio_detail__story {
+      gap: 5.5rem;
+      margin-top: 5rem;
+      margin-bottom: 5.5rem;
+    }
+
+    .portfolio_detail__context,
+    .portfolio_detail__case_section,
+    .portfolio_detail__proof_strip,
+    .portfolio_detail__outcome {
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .portfolio_detail__context,
+    .portfolio_detail__case_section,
+    .portfolio_detail__case_section--reverse,
+    .portfolio_detail__context--with_media,
+    .portfolio_detail__proof_strip,
+    .portfolio_detail__outcome {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      min-height: 0;
+    }
+
+    .portfolio_detail__case_section--reverse .portfolio_detail__case_copy,
+    .portfolio_detail__case_section--reverse .portfolio_detail__case_media {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .portfolio_detail__context_copy h2,
+    .portfolio_detail__case_copy h2 {
+      line-height: 1.05;
+    }
+
+    .portfolio_detail__context--with_media {
+      margin-top: 5rem;
+    }
+
+    .portfolio_detail__context_media {
+      padding: 0.75rem;
+    }
+
+    .portfolio_detail__context_media img {
+      height: auto;
+    }
+
+    .portfolio_detail__context--with_media .portfolio_detail__context_copy {
+      max-width: none;
+      padding-top: 0;
+    }
+
+    .portfolio_detail__context--with_media .portfolio_detail__context_copy > p:last-child {
+      max-width: none;
+      margin-top: 2rem;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+
+    .portfolio_detail__case_media,
+    .portfolio_detail__case_media--phone {
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    .portfolio_detail__case_media img,
+    .portfolio_detail__case_media--phone img {
+      height: auto;
+    }
+
+    .portfolio_detail__proof_strip > div,
+    .portfolio_detail__outcome_grid {
+      grid-template-columns: 1fr;
     }
 
     .portfolio_detail__evidence {
@@ -260,7 +333,20 @@
     }
 
     .portfolio_detail__lead_media {
-      @apply my-20;
+      margin-right: -1rem;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      margin-left: -1rem;
+    }
+
+    .portfolio_detail__lead_figure {
+      width: 100%;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .portfolio_detail__lead_figure img {
+      height: auto;
     }
 
     .portfolio_detail__evidence_item--scene-1,
@@ -295,6 +381,17 @@
 
     .portfolio_detail_intro__visual_media {
       transform: none;
+    }
+
+    [data-story-reveal] .portfolio_detail__story_eyebrow,
+    [data-story-reveal] .portfolio_detail__context_copy,
+    [data-story-reveal] .portfolio_detail__case_copy,
+    [data-story-reveal] .portfolio_detail__case_media,
+    [data-story-reveal].portfolio_detail__proof_strip > div,
+    [data-story-reveal] .portfolio_detail__outcome_grid {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 }

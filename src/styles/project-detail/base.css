@@ -5,7 +5,10 @@
     --ink-muted: rgba(39, 27, 22, 0.58);
     --ink-faint: rgba(39, 27, 22, 0.16);
     --line: rgba(39, 27, 22, 0.18);
-    font-family: 'Hahmlet', Georgia, serif;
+    --reference-gutter: clamp(2rem, 11.25vw, 11rem);
+    --reference-copy-width: clamp(23rem, 31.7vw, 28.5rem);
+    --reference-column-gap: clamp(4rem, 7.8vw, 7rem);
+    font-family: 'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
     font-weight: 400;
     background: var(--paper);
     color: var(--ink);

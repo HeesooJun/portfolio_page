@@ -36,6 +36,9 @@ export interface PortfolioProject {
   homeMobileVideo?: string
   heroImage: string
   heroVideo?: string
+  detailLogoImage?: string
+  contextImage?: string
+  contextImageAlt?: string
   homePosition: string
   homeMobilePosition: string
   heroPosition: string

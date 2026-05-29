@@ -18,7 +18,24 @@
   }
 
   .portfolio_detail__lead_media {
-    @apply my-40;
+    margin-top: clamp(7rem, 13vh, 11rem);
+    margin-right: calc(50% - 50vw);
+    margin-bottom: clamp(5.5rem, 11vh, 8.5rem);
+    margin-left: calc(50% - 50vw);
+  }
+
+  .portfolio_detail__lead_figure {
+    /* 레퍼런스의 영상 구간은 생략하고, 대표 이미지를 다음 장면처럼 풀블리드로 연결합니다. */
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .portfolio_detail__lead_figure img {
+    @apply block h-auto w-full object-contain object-center;
   }
 
   .portfolio_detail__evidence_item--scene-2 {

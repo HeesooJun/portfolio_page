@@ -7,6 +7,12 @@ import piviewHomeVideo from '@/assets/main/piview-main2.webm'
 import heygentProjectMainImage from '@/assets/project-main/heygent.png'
 import lifesaviorProjectMainImage from '@/assets/project-main/lifesavior.png'
 import piviewProjectMainImage from '@/assets/project-main/piview.png'
+import heygentContextImage from '@/assets/project-context/heygent.png'
+import lifesaviorContextImage from '@/assets/project-context/Lifesavior.png'
+import piviewContextImage from '@/assets/project-context/piview.png'
+import heygentLogoImage from '@/assets/logo/heygent.png'
+import lifesaviorLogoImage from '@/assets/logo/lifesavior-charcoal.png'
+import piviewBrownLogoImage from '@/assets/logo/piview-brown.png'
 import heygentDashboardImage from '@/assets/project-evidence/heygent/dashboard.gif'
 import heygentLocalBridgeImage from '@/assets/project-evidence/heygent/local-bridge.gif'
 import heygentOfficeImage from '@/assets/project-evidence/heygent/office-visualization.png'
@@ -14,7 +20,7 @@ import heygentWorkboardImage from '@/assets/project-evidence/heygent/work-board.
 import heygentWorkboardInputImage from '@/assets/project-evidence/heygent/workboard-input.gif'
 import lifesaviorBrandImage from '@/assets/project-evidence/lifesavior/brand-mockup.png'
 import lifesaviorInterfaceImage from '@/assets/project-evidence/lifesavior/ui-mockup.png'
-import lifesaviorLogoImage from '@/assets/project-evidence/lifesavior/ptt-logo.png'
+import lifesaviorEvidenceLogoImage from '@/assets/project-evidence/lifesavior/ptt-logo.png'
 import piviewAnalysisImage from '@/assets/project-evidence/piview/ai-analysis.gif'
 import piviewOcrImage from '@/assets/project-evidence/piview/ocr.gif'
 import piviewProductAiImage from '@/assets/project-evidence/piview/product-ai.gif'
@@ -50,6 +56,9 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeMobileVideo: heygentMainSceneVideo,
     heroImage: heygentProjectMainImage,
     heroVideo: heygentMainSceneVideo,
+    detailLogoImage: heygentLogoImage,
+    contextImage: heygentContextImage,
+    contextImageAlt: 'HeyGent 웹, 모바일, IoT 디바이스 연동 화면',
     homePosition: 'center center',
     homeMobilePosition: '57% center',
     heroPosition: 'center center',
@@ -88,8 +97,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     repository: 'github.com/HeesooJun/S-Free',
     summary:
       '사용자의 요청을 여러 작업 단위로 나누고, 웹과 모바일 화면에 실행 상태를 실시간으로 되돌려 주는 AI 작업 실행 플랫폼입니다.',
-    contribution:
-      'TaskRun과 StepRun 실행 모델을 설계하고, WebSocket 이벤트 흐름과 에이전트 작업 보드의 상태 표현을 연결했습니다.',
+    contribution: 'AI 작업을 실행 흐름으로 바꾸기',
     meta: [
       { label: 'Platform', value: 'Web · Mobile · IoT' },
       { label: 'Focus', value: 'Task orchestration' },
@@ -127,6 +135,9 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeMobileVideo: piviewHomeVideo,
     heroImage: piviewProjectMainImage,
     heroVideo: piviewHomeVideo,
+    detailLogoImage: piviewBrownLogoImage,
+    contextImage: piviewContextImage,
+    contextImageAlt: 'PiView 검색과 케어 화면을 보여주는 모바일 목업',
     homePosition: 'center center',
     homeMobilePosition: '27% center',
     heroPosition: 'center center',
@@ -165,8 +176,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     repository: 'github.com/HeesooJun/S-bigdata',
     summary:
       '피부 상태와 설문 응답을 바탕으로 제품을 분석하고, 검색과 추천, 루틴 관리를 하나의 흐름으로 묶은 스킨케어 플랫폼입니다.',
-    contribution:
-      '피부 분석, 추천 검색, RAG 챗봇, 상품 비교 로직을 연결해 사용자가 왜 이 제품을 봐야 하는지 설명되는 흐름을 만들었습니다.',
+    contribution: '추천 이유가 설명되는 스킨케어 흐름',
     meta: [
       { label: 'Platform', value: 'Web' },
       { label: 'Focus', value: 'Recommendation flow' },
@@ -204,6 +214,9 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     homeMobileVideo: lifesaviorHomeVideo,
     heroImage: lifesaviorProjectMainImage,
     heroVideo: lifesaviorHomeVideo,
+    detailLogoImage: lifesaviorLogoImage,
+    contextImage: lifesaviorContextImage,
+    contextImageAlt: 'Life Savior 구조 신호 전송과 탐색 화면',
     homePosition: 'center center',
     homeMobilePosition: '28% center',
     heroPosition: 'center center',
@@ -221,7 +234,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
         kind: 'pair',
       },
       {
-        src: lifesaviorLogoImage,
+        src: lifesaviorEvidenceLogoImage,
         alt: 'Lifesavior PTT 로고 화면',
         caption: 'Emergency identity',
         kind: 'pair',
@@ -230,8 +243,7 @@ const PROJECT_ENTRIES: PortfolioProject[] = [
     repository: 'github.com/HeesooJun/S-mobile',
     summary:
       '인터넷이 끊긴 재난 상황에서도 BLE 기반 주변 단말을 거쳐 구조 신호를 전달하고 구조자가 우선순위를 판단하도록 돕는 앱입니다.',
-    contribution:
-      '피구조자와 구조자 앱 흐름을 분리하고, SOS 전송, 주변 탐색, 거리 추정, 긴급 모드 화면을 실제 현장 사용 기준으로 정리했습니다.',
+    contribution: '오프라인에서도 이어지는 구조 신호',
     meta: [
       { label: 'Platform', value: 'Android' },
       { label: 'Focus', value: 'Offline emergency UX' },
